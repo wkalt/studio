@@ -16,6 +16,10 @@
     "name": "Foxglove Technologies",
     "email": "support@foxglove.dev"
   },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": ">= 14.0.0"
+  },
   "scripts": {
     "clean": "rimraf .webpack dist app/storybook-static",
     "start": "electron .webpack",
