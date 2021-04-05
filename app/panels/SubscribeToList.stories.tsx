@@ -26,6 +26,7 @@ storiesOf("<SubscribeToList>", module).add("shows a topic list", () => {
             {
               receiveTime: { sec: 1, nsec: 0 },
               topic: "/my/topic",
+              datatype: "test",
               message: {},
             },
           ],

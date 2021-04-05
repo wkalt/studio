@@ -17,6 +17,7 @@ describe("RosOutPanel", () => {
   describe("getShouldDisplayMsg", () => {
     const msg = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 123, nsec: 456 },
       message: {
         msg: "Couldn't find int 83757.",

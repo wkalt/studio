@@ -245,6 +245,7 @@ export default class Ros1Player implements Player {
         if (this._bobjectTopics.has(topicName)) {
           this._bobjects.push({
             topic: topicName,
+            datatype,
             receiveTime,
             message: wrapJsObject(this._providerDatatypes, datatype, message),
           });
@@ -253,6 +254,7 @@ export default class Ros1Player implements Player {
         if (this._parsedTopics.has(topicName)) {
           this._parsedMessages.push({
             topic: topicName,
+            datatype,
             receiveTime,
             message: message as never,
           });

@@ -80,6 +80,7 @@ const fixture = {
   frame: {
     "/some/topic/with/state": systemStateMessages.map((message, idx) => ({
       topic: "/some/topic/with/state",
+      datatype: "test",
       receiveTime: message.header.stamp,
       message: { ...message, data: { value: idx } },
     })),

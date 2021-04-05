@@ -29,6 +29,7 @@ export const fixture = {
     "/msgs/big_topic": [
       {
         topic: "/msgs/big_topic",
+        datatype: "msgs/big_topic",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           LotsOfStuff: {
@@ -52,6 +53,7 @@ export const fixture = {
     "/foo": [
       {
         topic: "/foo",
+        datatype: "std_msgs/String",
         receiveTime: { sec: 122, nsec: 456789011 },
         message: {
           some_array: ["a", "b", "c"],
@@ -61,6 +63,7 @@ export const fixture = {
       },
       {
         topic: "/foo",
+        datatype: "std_msgs/String",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           some_array: ["a", "b", "c", "d", "e", "f"],
@@ -71,6 +74,7 @@ export const fixture = {
     [`${SECOND_SOURCE_PREFIX}/foo`]: [
       {
         topic: `${SECOND_SOURCE_PREFIX}/foo`,
+        datatype: "std_msgs/String",
         receiveTime: { sec: 123, nsec: 456789011 },
         message: {
           some_array: ["a", "f", "n", "o", "p"],
@@ -82,6 +86,7 @@ export const fixture = {
     "/baz/num": [
       {
         topic: "/baz/num",
+        datatype: "baz/num",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: { value: 3425363211 },
       },
@@ -89,6 +94,7 @@ export const fixture = {
     "/baz/text": [
       {
         topic: "/baz/text",
+        datatype: "baz/text",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           value: new Array(10).fill("string").join(" "),
@@ -103,6 +109,7 @@ export const fixture = {
     "/baz/array": [
       {
         topic: "/baz/array",
+        datatype: "baz/array",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: { value: [false] },
       },
@@ -110,6 +117,7 @@ export const fixture = {
     "/baz/array/obj": [
       {
         topic: "/baz/array/obj",
+        datatype: "baz/array/obj",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: { value: [{ a: "b", c: "d", e: "f" }] },
       },
@@ -117,6 +125,7 @@ export const fixture = {
     "/geometry/types": [
       {
         topic: "/geometry/types",
+        datatype: "geometry/types",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           point2d: {
@@ -222,6 +231,7 @@ export const enumFixture = {
     "/baz/enum": [
       {
         topic: "/baz/enum",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           value: 2,
@@ -271,6 +281,7 @@ export const enumAdvancedFixture = {
     "/baz/enum_advanced": [
       {
         topic: "/baz/enum_advanced",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: exampleMessage,
       },
@@ -289,6 +300,7 @@ export const withMissingData = {
     "/baz/missing_data": [
       {
         topic: "/baz/missing_data",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           value: undefined,
@@ -308,6 +320,7 @@ export const topicsToDiffFixture: Fixture = {
     "/baz/enum_advanced": [
       {
         topic: "/baz/enum_advanced",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 456789012 },
         message: {
           ...exampleMessage,
@@ -320,6 +333,7 @@ export const topicsToDiffFixture: Fixture = {
       {
         ...enumAdvancedFixture.frame["/baz/enum_advanced"][0]!,
         topic: "/another/baz/enum_advanced",
+        datatype: "test",
         message: {
           ...exampleMessage,
           state: 2,
@@ -343,6 +357,7 @@ export const topicsWithIdsToDiffFixture = {
       {
         receiveTime: enumAdvancedFixture.frame["/baz/enum_advanced"][0]!.receiveTime,
         topic: "/baz/enum_advanced_array",
+        datatype: "test",
         message: {
           value: [
             {
@@ -360,6 +375,7 @@ export const topicsWithIdsToDiffFixture = {
       {
         receiveTime: enumAdvancedFixture.frame["/baz/enum_advanced"][0]!.receiveTime,
         topic: "/another/baz/enum_advanced_array",
+        datatype: "test",
         message: {
           value: [
             { ...exampleMessage, state: 5, id: 2 },
@@ -380,16 +396,19 @@ export const multipleNumberMessagesFixture = {
     "/baz/enum": [
       {
         topic: "/multiple_number_messages",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 1 },
         message: { value: 1 },
       },
       {
         topic: "/multiple_number_messages",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 2 },
         message: { value: 2 },
       },
       {
         topic: "/multiple_number_messages",
+        datatype: "test",
         receiveTime: { sec: 123, nsec: 3 },
         message: { value: 3 },
       },

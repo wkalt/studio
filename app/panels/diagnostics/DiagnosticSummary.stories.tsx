@@ -25,6 +25,7 @@ export function makeDiagnosticMessage(
 ): TypedMessage<DiagnosticStatusArrayMsg> {
   return {
     topic: "/diagnostics",
+    datatype: "test",
     receiveTime: { sec: 2, nsec: 0 },
     message: {
       header: { frame_id: "", stamp: { sec: 1, nsec: 500_000_000 } },

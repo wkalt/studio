@@ -91,6 +91,7 @@ const getBobjectMessage = async (
   }
   return {
     topic: msg.topic,
+    datatype,
     receiveTime: msg.receiveTime,
     message: wrapJsObject(datatypes, datatype, msg.message),
   };
@@ -340,6 +341,7 @@ export default class UserNodePlayer implements Player {
         }
         return {
           topic: outputTopic,
+          datatype: outputDatatype,
           receiveTime: message.receiveTime,
           message: result.message,
         };

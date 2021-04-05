@@ -44,6 +44,7 @@ const fixture = {
     "/my_arr": [
       {
         topic: "/my_arr",
+        datatype: "test",
         receiveTime: { sec: 1, nsec: 0 },
         message: { array: makeArrayData() },
       },

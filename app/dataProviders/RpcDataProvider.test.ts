@@ -19,17 +19,20 @@ import Rpc, { createLinkedChannels } from "@foxglove-studio/app/util/Rpc";
 import RpcDataProvider from "./RpcDataProvider";
 import RpcDataProviderRemote from "./RpcDataProviderRemote";
 
+const TOPIC = "/some_topic";
+const datatype = "test";
+
 const data = {
   messages: {
     rosBinaryMessages: [
-      { topic: "/some_topic", receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(0) },
-      { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(0) },
-      { topic: "/some_topic", receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(0) },
+      { topic: TOPIC, datatype, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(0) },
+      { topic: TOPIC, datatype, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(0) },
+      { topic: TOPIC, datatype, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(0) },
     ],
     parsedMessages: undefined,
     bobjects: undefined,
   },
-  topics: [{ name: "/some_topic", datatype: "some_datatype" }],
+  topics: [{ name: TOPIC, datatype: "some_datatype" }],
   messageDefinitionsByTopic: { some_datatype: "dummy" },
   providesParsedMessages: false,
 };
@@ -45,7 +48,7 @@ describe("RpcDataProvider", () => {
     expect(await provider.initialize(mockExtensionPoint().extensionPoint)).toEqual({
       start: { nsec: 0, sec: 100 },
       end: { nsec: 0, sec: 102 },
-      topics: [{ datatype: "some_datatype", name: "/some_topic" }],
+      topics: [{ datatype: "some_datatype", name: TOPIC }],
       messageDefinitions: {
         type: "raw",
         messageDefinitionsByTopic: { some_datatype: "dummy" },

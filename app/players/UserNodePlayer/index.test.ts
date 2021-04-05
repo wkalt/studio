@@ -104,6 +104,7 @@ const basicPlayerState: PlayerStateActiveData = {
 
 const parsedFirst = {
   topic: "/np_input",
+  datatype: "test",
   receiveTime: { sec: 0, nsec: 1 },
   message: {
     payload: "bar",
@@ -112,6 +113,7 @@ const parsedFirst = {
 
 const parsedSecond = {
   topic: "/np_input",
+  datatype: "test",
   receiveTime: { sec: 0, nsec: 100 },
   message: {
     payload: "baz",
@@ -1424,6 +1426,7 @@ describe("UserNodePlayer", () => {
             {
               message: { payload: "" },
               topic: "/np_input",
+              datatype: "test",
               receiveTime: { sec: 0, nsec: 0 },
             },
           ]),

@@ -30,6 +30,7 @@ const messageAtLevel = (level: number): Message => ({
     header: { stamp: { sec: 1547062466, nsec: 1674890 } },
   },
   topic: "/foo",
+  datatype: "test",
   receiveTime: { sec: 1547062466, nsec: 1674890 },
 });
 

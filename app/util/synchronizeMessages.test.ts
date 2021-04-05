@@ -18,6 +18,7 @@ import synchronizeMessages, { getSynchronizingReducers } from "./synchronizeMess
 function message(topic: string, stamp?: Time) {
   return {
     topic,
+    datatype: "test_msgs/Message",
     receiveTime: { sec: 0, nsec: 0 },
     message: { header: { stamp } },
   };

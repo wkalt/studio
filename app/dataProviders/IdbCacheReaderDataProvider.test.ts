@@ -21,10 +21,11 @@ import IdbCacheReaderDataProvider from "./IdbCacheReaderDataProvider";
 import IdbCacheWriterDataProvider from "./IdbCacheWriterDataProvider";
 
 function generateMessages(): TypedMessage<ArrayBuffer>[] {
+  const datatype = "test";
   return [
-    { topic: "/foo", receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(1) },
-    { topic: "/foo", receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(2) },
-    { topic: "/foo", receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(3) },
+    { topic: "/foo", datatype, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(1) },
+    { topic: "/foo", datatype, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(2) },
+    { topic: "/foo", datatype, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(3) },
   ];
 }
 

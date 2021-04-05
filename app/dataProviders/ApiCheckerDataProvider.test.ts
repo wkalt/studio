@@ -16,11 +16,12 @@ import { mockExtensionPoint } from "@foxglove-studio/app/dataProviders/mockExten
 import sendNotification from "@foxglove-studio/app/util/sendNotification";
 
 function getProvider(isRoot: boolean = false) {
+  const datatype = "test";
   const memoryDataProvider = new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/some_topic", receiveTime: { sec: 100, nsec: 0 }, message: 0 as any },
-        { topic: "/some_topic", receiveTime: { sec: 105, nsec: 0 }, message: 1 as any },
+        { topic: "/some_topic", datatype, receiveTime: { sec: 100, nsec: 0 }, message: 0 as any },
+        { topic: "/some_topic", datatype, receiveTime: { sec: 105, nsec: 0 }, message: 1 as any },
       ],
       bobjects: undefined,
       rosBinaryMessages: undefined,

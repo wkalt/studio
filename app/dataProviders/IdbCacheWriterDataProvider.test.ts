@@ -34,12 +34,13 @@ function sortMessages(messages: Message[]) {
 }
 
 function generateMessages(topics: string[]): TypedMessage<ArrayBuffer>[] {
+  const datatype = "test";
   return sortMessages(
     flatten(
       topics.map((topic) => [
-        { topic, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(0) },
-        { topic, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(1) },
-        { topic, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(2) },
+        { topic, datatype, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(0) },
+        { topic, datatype, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(1) },
+        { topic, datatype, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(2) },
       ]),
     ),
   );

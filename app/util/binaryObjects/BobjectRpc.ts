@@ -160,7 +160,12 @@ export class BobjectRpcReceiver {
     this._receiveFunctions[action] = async (transferData) => {
       const message = this._formatMessage(format, transferData);
       return callback(
-        { topic: transferData.topic, receiveTime: transferData.receiveTime, message },
+        {
+          topic: transferData.topic,
+          datatype: transferData.datatype,
+          receiveTime: transferData.receiveTime,
+          message,
+        },
         transferData.additionalTransferables,
       );
     };

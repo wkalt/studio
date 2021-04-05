@@ -60,11 +60,13 @@ describe("parsedMessageCache", () => {
   it("evicts parsed messages based on original message size", async () => {
     const smallMessage = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 100, nsec: 0 },
       message: new ArrayBuffer(10),
     };
     const bigMessage = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 105, nsec: 0 },
       message: new ArrayBuffer(CACHE_SIZE_BYTES + 1),
     };
@@ -82,11 +84,13 @@ describe("parsedMessageCache", () => {
   it("evicts parsed bobjects based on original message size", async () => {
     const smallMessage = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 100, nsec: 0 },
       message: getObject({}, "time", new ArrayBuffer(10), ""),
     };
     const bigMessage = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 105, nsec: 0 },
       message: getObject({}, "time", new ArrayBuffer(CACHE_SIZE_BYTES + 1), ""),
     };
@@ -107,6 +111,7 @@ describe("parsedMessageCache", () => {
     expect(cast<BinaryHeader>(binaryHeader).frame_id()).toBe("");
     const binaryMessage = {
       topic: "/some_topic",
+      datatype: "test",
       receiveTime: { sec: 105, nsec: 0 },
       message: binaryHeader,
     };

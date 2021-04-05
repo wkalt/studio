@@ -56,6 +56,7 @@ const message = (
   receiveTimeSeconds: number | undefined,
 ): Message => ({
   topic: "/foo",
+  datatype: "test",
   receiveTime:
     receiveTimeSeconds == undefined ? undefined : ({ sec: receiveTimeSeconds, nsec: 1 } as any),
   message: {

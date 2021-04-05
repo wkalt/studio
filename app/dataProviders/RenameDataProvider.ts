@@ -122,6 +122,7 @@ export default class RenameDataProvider implements DataProvider {
     // Only map fields that we know are correctly mapped. Don't just splat in `...message` here
     // because we might miss an important mapping!
     topic: `${this._prefix}${message.topic}`,
+    datatype: message.datatype,
     receiveTime: message.receiveTime,
     message: message.message,
   });

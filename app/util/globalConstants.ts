@@ -51,6 +51,7 @@ export const WEBVIZ_MARKER_ARRAY_DATATYPE = "visualization_msgs/WebvizMarkerArra
 export const FUTURE_VIZ_MSGS_DATATYPE = "future_visualization_msgs/WebvizMarkerArray";
 export const TF_DATATYPE = "tf/tfMessage";
 export const TF2_DATATYPE = "tf2_msgs/TFMessage";
+export const TF_STAMPED_DATATYPE = "geometry_msgs/TransformStamped";
 export const VELODYNE_SCAN_DATATYPE = "velodyne_msgs/VelodyneScan";
 export const VISUALIZATION_MSGS_MARKER_DATATYPE = "visualization_msgs/Marker";
 export const VISUALIZATION_MSGS_MARKER_ARRAY_DATATYPE = "visualization_msgs/MarkerArray";

@@ -36,6 +36,7 @@ const fixtureData: FixtureExampleData = {
     "/viz_markers": [
       {
         topic: "/viz_markers",
+        datatype: "visualization_msgs/MarkerArray",
         receiveTime: { sec: 1534827954, nsec: 199901839 },
         message: {
           markers: [],

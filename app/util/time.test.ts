@@ -277,6 +277,7 @@ describe("time.getTimestampForMessage", () => {
   it("uses headerStamp when available", () => {
     const messageBase = {
       topic: "/foo",
+      datatype: "foo_msgs/Foo",
       receiveTime: { sec: 1000, nsec: 0 },
     };
 

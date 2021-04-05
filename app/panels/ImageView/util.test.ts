@@ -188,6 +188,7 @@ describe("ImageView", () => {
 
     const marker = {
       topic: "foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: {},
     };

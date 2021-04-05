@@ -28,13 +28,14 @@ function sortMessages(messages: Message[]) {
 }
 
 function generateMessages(): TypedMessage<ArrayBuffer>[] {
+  const datatype = "test";
   return sortMessages([
-    { topic: "/foo", receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(10) },
-    { topic: "/foo", receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(10) },
-    { topic: "/foo", receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(10) },
-    { topic: "/bar", receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(10) },
-    { topic: "/bar", receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(10) },
-    { topic: "/bar", receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 100, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 101, nsec: 0 }, message: new ArrayBuffer(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(10) },
   ]);
 }
 

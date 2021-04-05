@@ -42,13 +42,25 @@ import { SECOND_SOURCE_PREFIX } from "@foxglove-studio/app/util/globalConstants"
 import sendNotification from "@foxglove-studio/app/util/sendNotification";
 import { fromMillis } from "@foxglove-studio/app/util/time";
 
+const datatype = "test";
+
 // reusable providers
 function provider1(initiallyLoaded = false) {
   return new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/some_topic1", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
-        { topic: "/some_topic1", receiveTime: { sec: 103, nsec: 0 }, message: { value: 3 } },
+        {
+          topic: "/some_topic1",
+          datatype,
+          receiveTime: { sec: 101, nsec: 0 },
+          message: { value: 1 },
+        },
+        {
+          topic: "/some_topic1",
+          datatype,
+          receiveTime: { sec: 103, nsec: 0 },
+          message: { value: 3 },
+        },
       ],
       bobjects: undefined,
       rosBinaryMessages: undefined,
@@ -64,8 +76,18 @@ function provider1Duplicate() {
   return new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/some_topic1", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
-        { topic: "/some_topic1", receiveTime: { sec: 103, nsec: 0 }, message: { value: 3 } },
+        {
+          topic: "/some_topic1",
+          datatype,
+          receiveTime: { sec: 101, nsec: 0 },
+          message: { value: 1 },
+        },
+        {
+          topic: "/some_topic1",
+          datatype,
+          receiveTime: { sec: 103, nsec: 0 },
+          message: { value: 3 },
+        },
       ],
       bobjects: undefined,
       rosBinaryMessages: undefined,
@@ -80,7 +102,12 @@ function provider2() {
   return new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/some_topic2", receiveTime: { sec: 102, nsec: 0 }, message: { value: 2 } },
+        {
+          topic: "/some_topic2",
+          datatype,
+          receiveTime: { sec: 102, nsec: 0 },
+          message: { value: 2 },
+        },
       ],
       bobjects: undefined,
       rosBinaryMessages: undefined,
@@ -95,9 +122,24 @@ function provider3() {
   return new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/some_topic3", receiveTime: { sec: 100, nsec: 0 }, message: { value: 3 } },
-        { topic: "/some_topic3", receiveTime: { sec: 102, nsec: 0 }, message: { value: 3 } },
-        { topic: "/some_topic3", receiveTime: { sec: 104, nsec: 0 }, message: { value: 3 } },
+        {
+          topic: "/some_topic3",
+          datatype,
+          receiveTime: { sec: 100, nsec: 0 },
+          message: { value: 3 },
+        },
+        {
+          topic: "/some_topic3",
+          datatype,
+          receiveTime: { sec: 102, nsec: 0 },
+          message: { value: 3 },
+        },
+        {
+          topic: "/some_topic3",
+          datatype,
+          receiveTime: { sec: 104, nsec: 0 },
+          message: { value: 3 },
+        },
       ],
       bobjects: undefined,
       rosBinaryMessages: undefined,
@@ -113,7 +155,7 @@ function provider4() {
   return new MemoryDataProvider({
     messages: {
       parsedMessages: [
-        { topic: "/parsed", receiveTime: { sec: 102, nsec: 0 }, message: { value: 3 } },
+        { topic: "/parsed", datatype, receiveTime: { sec: 102, nsec: 0 }, message: { value: 3 } },
       ],
       bobjects: [
         {
@@ -123,7 +165,12 @@ function provider4() {
         } as BobjectMessage,
       ],
       rosBinaryMessages: [
-        { topic: "/rosbinary", receiveTime: { sec: 102, nsec: 0 }, message: new ArrayBuffer(1) },
+        {
+          topic: "/rosbinary",
+          datatype,
+          receiveTime: { sec: 102, nsec: 0 },
+          message: new ArrayBuffer(1),
+        },
       ],
     },
     topics: [
@@ -173,7 +220,12 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -185,7 +237,12 @@ describe("CombinedDataProvider", () => {
       const p2 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -207,7 +264,12 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -229,7 +291,12 @@ describe("CombinedDataProvider", () => {
       const p2 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -261,7 +328,12 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -275,7 +347,12 @@ describe("CombinedDataProvider", () => {
       const p2 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic2", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic2",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -296,7 +373,12 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -310,7 +392,12 @@ describe("CombinedDataProvider", () => {
       const p2 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic2", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic2",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -330,6 +417,7 @@ describe("CombinedDataProvider", () => {
       const datatypes = { some_datatype: { fields: [{ name: "value", type: "int32" }] } };
       const message = {
         topic: "/some_topic",
+        datatype,
         receiveTime: { sec: 101, nsec: 0 },
         message: { value: 1 },
       };
@@ -404,7 +492,12 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -419,7 +512,12 @@ describe("CombinedDataProvider", () => {
       const p2 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic_2", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+            {
+              topic: "/some_topic_2",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: 1 },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -434,7 +532,12 @@ describe("CombinedDataProvider", () => {
       const p3 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic_3", receiveTime: { sec: 101, nsec: 0 }, message: { value: "h" } },
+            {
+              topic: "/some_topic_3",
+              datatype,
+              receiveTime: { sec: 101, nsec: 0 },
+              message: { value: "h" },
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -541,8 +644,18 @@ describe("CombinedDataProvider", () => {
       const p1 = new MemoryDataProvider({
         messages: {
           parsedMessages: [
-            { topic: "/some_topic", receiveTime: { sec: 100, nsec: 0 }, message: undefined as any },
-            { topic: "/some_topic", receiveTime: { sec: 130, nsec: 0 }, message: undefined as any },
+            {
+              topic: "/some_topic",
+              datatype: "test",
+              receiveTime: { sec: 100, nsec: 0 },
+              message: undefined as any,
+            },
+            {
+              topic: "/some_topic",
+              datatype: "test",
+              receiveTime: { sec: 130, nsec: 0 },
+              message: undefined as any,
+            },
           ],
           bobjects: undefined,
           rosBinaryMessages: undefined,
@@ -557,11 +670,13 @@ describe("CombinedDataProvider", () => {
           parsedMessages: [
             {
               topic: "/some_topic2",
+              datatype: "test",
               receiveTime: { sec: 170, nsec: 0 },
               message: undefined as any,
             },
             {
               topic: "/some_topic2",
+              datatype: "test",
               receiveTime: { sec: 200, nsec: 0 },
               message: undefined as any,
             },

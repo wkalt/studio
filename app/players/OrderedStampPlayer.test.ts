@@ -17,6 +17,7 @@ import { TimeUtil } from "rosbag";
 import FakePlayer from "@foxglove-studio/app/components/MessagePipeline/FakePlayer";
 import UserNodePlayer from "@foxglove-studio/app/players/UserNodePlayer";
 import {
+  Message,
   PlayerCapabilities,
   PlayerState,
   PlayerStateActiveData,
@@ -32,9 +33,10 @@ function makeMessage(
   headerStamp: number | undefined,
   receiveTime: number,
   topic: string = "/dummy_topic",
-) {
+): Message {
   return {
     topic,
+    datatype: "test",
     message: {
       header: {
         stamp: headerStamp == undefined ? undefined : fromSec(headerStamp),
@@ -51,6 +53,7 @@ function makeBobject(
 ) {
   return {
     topic,
+    datatype: "test",
     receiveTime: fromSec(receiveTime),
     message: wrapJsObject(basicDatatypes, "geometry_msgs/PoseStamped", {
       header: {

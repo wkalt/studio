@@ -190,6 +190,7 @@ export type Topic = {
 // A ROS-like message.
 export type TypedMessage<T> = Readonly<{
   topic: string;
+  datatype: string;
   receiveTime: Time;
 
   // The actual message format. This is currently not very tightly defined, but it's typically
@@ -219,6 +220,7 @@ export type Bobject = any;
 // Split from `TypedMessage` because Readonly<> disagrees with the opaque Bobject type and mixed.
 export type OpaqueMessage<T> = Readonly<{
   topic: string;
+  datatype: string;
   receiveTime: Time;
   message: T;
 }>;

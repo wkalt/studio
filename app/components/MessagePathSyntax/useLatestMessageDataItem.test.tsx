@@ -25,16 +25,19 @@ const datatypes = {
 const messages: Message[] = [
   {
     topic: "/topic",
+    datatype: "test",
     receiveTime: { sec: 0, nsec: 0 },
     message: { value: 0 },
   },
   {
     topic: "/topic",
+    datatype: "test",
     receiveTime: { sec: 1, nsec: 0 },
     message: { value: 1 },
   },
   {
     topic: "/topic",
+    datatype: "test",
     receiveTime: { sec: 2, nsec: 0 },
     message: { value: 2 },
   },

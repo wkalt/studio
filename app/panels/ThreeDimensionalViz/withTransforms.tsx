@@ -18,9 +18,11 @@ import Transforms from "@foxglove-studio/app/panels/ThreeDimensionalViz/Transfor
 import { Frame, Message } from "@foxglove-studio/app/players/types";
 import { TF } from "@foxglove-studio/app/types/Messages";
 import { isBobject, deepParse } from "@foxglove-studio/app/util/binaryObjects";
-import { TRANSFORM_STATIC_TOPIC, TRANSFORM_TOPIC } from "@foxglove-studio/app/util/globalConstants";
-
-import { getGlobalHooks } from "../../loadWebviz";
+import {
+  TF2_DATATYPE,
+  TF_DATATYPE,
+  TF_STAMPED_DATATYPE,
+} from "@foxglove-studio/app/util/globalConstants";
 
 type State = { transforms: Transforms };
 type TfMessage = { transforms: TF[] };
@@ -48,40 +50,27 @@ function withTransforms<Props extends any>(ChildComponent: React.ComponentType<P
         transforms = new Transforms();
       }
 
-      // Find any references to previously unseen frames in the set of incoming messages
       // Note the naming confusion between `frame` (a map of topic names to messages received on
       // that topic) and transform frames (coordinate frames)
       for (const topic in frame) {
         for (const msg of frame[topic] as Message[]) {
-          const frameId = msg.message.header?.frame_id as string | undefined;
-          if (frameId != undefined) {
-            transforms.register(frameId);
-          }
-        }
-      }
-
-      // Process all new /tf messages
-      const tfs = frame[TRANSFORM_TOPIC];
-      if (tfs) {
-        const skipFrameId = getGlobalHooks().perPanelHooks().ThreeDimensionalViz.sceneBuilderHooks
-          .skipTransformFrame?.frameId;
-        for (const { message } of tfs) {
-          const parsedMessage = (isBobject(message) ? deepParse(message) : message) as TfMessage;
-          for (const tf of parsedMessage.transforms) {
-            if (tf.child_frame_id !== skipFrameId) {
+          // Process all new TFMessage messages
+          if (msg.datatype === TF2_DATATYPE || msg.datatype === TF_DATATYPE) {
+            const message = msg.message;
+            const parsedMessage = (isBobject(message) ? deepParse(message) : message) as TfMessage;
+            for (const tf of parsedMessage.transforms) {
               transforms.consume(tf);
             }
-          }
-        }
-      }
-
-      // Process all new /tf_static messages
-      const tfs_static = frame[TRANSFORM_STATIC_TOPIC];
-      if (tfs_static) {
-        for (const { message } of tfs_static) {
-          const parsedMessage = (isBobject(message) ? deepParse(message) : message) as TfMessage;
-          for (const tf of parsedMessage.transforms) {
+          } else if (msg.datatype === TF_STAMPED_DATATYPE) {
+            const message = msg.message;
+            const tf = (isBobject(message) ? deepParse(message) : message) as TF;
             transforms.consume(tf);
+          } else {
+            // Find any references to previously unseen frames in the set of incoming messages
+            const frameId = msg.message.header?.frame_id as string | undefined;
+            if (frameId != undefined) {
+              transforms.register(frameId);
+            }
           }
         }
       }

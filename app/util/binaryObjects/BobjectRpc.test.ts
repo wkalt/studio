@@ -60,7 +60,7 @@ describe("BobjectRpc", () => {
       expect(msg).toEqual({ topic, receiveTime, message: js });
       promise.resolve(undefined);
     });
-    sender.send("action name", { topic, receiveTime, message: parsedBobject });
+    sender.send("action name", { topic, datatype, receiveTime, message: parsedBobject });
     await promise;
   });
 
@@ -76,7 +76,7 @@ describe("BobjectRpc", () => {
       expect(deepParse(msg.message)).toEqual(js);
       promise.resolve(undefined);
     });
-    sender.send("action name", { topic, receiveTime, message: parsedBobject });
+    sender.send("action name", { topic, datatype, receiveTime, message: parsedBobject });
     await promise;
   });
 
@@ -90,7 +90,7 @@ describe("BobjectRpc", () => {
       expect(msg).toEqual({ topic, receiveTime, message: js });
       promise.resolve(undefined);
     });
-    sender.send("action name", { topic, receiveTime, message: binaryBobject });
+    sender.send("action name", { topic, datatype, receiveTime, message: binaryBobject });
     await promise;
   });
 
@@ -106,7 +106,7 @@ describe("BobjectRpc", () => {
       expect(deepParse(msg.message)).toEqual(js);
       promise.resolve(undefined);
     });
-    sender.send("action name", { topic, receiveTime, message: binaryBobject });
+    sender.send("action name", { topic, datatype, receiveTime, message: binaryBobject });
     await promise;
   });
 });

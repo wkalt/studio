@@ -39,37 +39,40 @@ function sortMessages(messages: Message[]) {
 const bobjectWithSize = (n: number): Bobject => getObject({}, "time", new ArrayBuffer(n), "");
 
 function generateMessages(): BobjectMessage[] {
+  const datatype = "test";
   return sortMessages([
-    { topic: "/foo", receiveTime: { sec: 100, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/foo", receiveTime: { sec: 101, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/foo", receiveTime: { sec: 102, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/bar", receiveTime: { sec: 100, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/bar", receiveTime: { sec: 101, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/bar", receiveTime: { sec: 102, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 100, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 101, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 102, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 100, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 101, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 102, nsec: 0 }, message: bobjectWithSize(10) },
   ]);
 }
 
 function generateLargeMessages(): BobjectMessage[] {
   // The input is 201 blocks (20.1 seconds) long, with messages every two seconds.
+  const datatype = "test";
   return sortMessages([
-    { topic: "/foo", receiveTime: { sec: 0, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 2, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 4, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 6, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 8, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 10, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 12, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 14, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 16, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 18, nsec: 0 }, message: bobjectWithSize(600) },
-    { topic: "/foo", receiveTime: { sec: 20, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 0, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 2, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 4, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 6, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 8, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 10, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 12, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 14, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 16, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 18, nsec: 0 }, message: bobjectWithSize(600) },
+    { topic: "/foo", datatype, receiveTime: { sec: 20, nsec: 0 }, message: bobjectWithSize(600) },
   ]);
 }
 
 function generateMessagesForLongInput(): BobjectMessage[] {
+  const datatype = "test";
   return sortMessages([
-    { topic: "/foo", receiveTime: { sec: 0, nsec: 0 }, message: bobjectWithSize(10) },
-    { topic: "/bar", receiveTime: { sec: 3600, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/foo", datatype, receiveTime: { sec: 0, nsec: 0 }, message: bobjectWithSize(10) },
+    { topic: "/bar", datatype, receiveTime: { sec: 3600, nsec: 0 }, message: bobjectWithSize(10) },
   ]);
 }
 
@@ -320,6 +323,7 @@ describe("MemoryCacheDataProvider", () => {
     const { provider } = getProvider([
       {
         topic: "/foo",
+        datatype: "test",
         receiveTime: { sec: 100, nsec: 0 },
         message: bobjectWithSize(MAX_BLOCK_SIZE_BYTES + 10),
       },

@@ -214,6 +214,7 @@ const datatypes = {
 
 const getPreloadedMessage = (seconds: any) => ({
   topic: "/preloaded_topic",
+  datatype: "test",
   receiveTime: fromSec(seconds),
   message: wrapJsObject(datatypes, "nonstd_msgs/Float64Stamped", {
     data: Math.pow(seconds, 2),
@@ -265,6 +266,7 @@ const fixture = {
   frame: {
     "/some_topic/location": locationMessages.map((message) => ({
       topic: "/some_topic/location",
+      datatype: "test",
       receiveTime: message.header.stamp,
       message,
     })),
@@ -272,17 +274,20 @@ const fixture = {
       .slice(locationMessages.length / 3, (locationMessages.length * 2) / 3)
       .map((message) => ({
         topic: "/some_topic/location_subset",
+        datatype: "test",
         receiveTime: message.header.stamp,
         message,
       })),
     "/some_topic/state": otherStateMessages.map((message) => ({
       topic: "/some_topic/state",
+      datatype: "test",
       receiveTime: message.header.stamp,
       message,
     })),
     "/boolean_topic": [
       {
         topic: "/boolean_topic",
+        datatype: "test",
         receiveTime: { sec: 1, nsec: 0 },
         message: { data: true },
       },
@@ -729,11 +734,13 @@ storiesOf("<Plot>", module)
             "/some_number": [
               {
                 topic: "/some_number",
+                datatype: "test",
                 receiveTime: { sec: 0, nsec: 0 },
                 message: { data: 1.8548483304974972 },
               },
               {
                 topic: "/some_number",
+                datatype: "test",
                 receiveTime: { sec: 1, nsec: 0 },
                 message: { data: 1.8548483304974974 },
               },

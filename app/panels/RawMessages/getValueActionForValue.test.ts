@@ -21,6 +21,7 @@ describe.each(["parsedMessages", "bobjects"])("getValueActionForValue %s", (form
       format === "bobjects"
         ? (wrapMessage({
             topic: "/dummy",
+            datatype: "dummy",
             receiveTime: { sec: 0, nsec: 0 },
             message: { data },
           }).message as any).data()

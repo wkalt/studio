@@ -112,6 +112,7 @@ describe("useMessageReducer", () => {
 
     const message = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
@@ -138,6 +139,7 @@ describe("useMessageReducer", () => {
 
     const message = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
@@ -362,11 +364,13 @@ describe("useMessageReducer", () => {
 
     const message1 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
     const message2 = {
       topic: "/bar",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 3 },
     };
@@ -398,11 +402,13 @@ describe("useMessageReducer", () => {
 
     const message1 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
     const message2 = {
       topic: "/bar",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 3 },
     };
@@ -439,6 +445,7 @@ describe("useMessageReducer", () => {
 
     const message = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
@@ -534,6 +541,7 @@ describe("useMessageReducer", () => {
 
     const message1 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };

@@ -13,6 +13,7 @@
 
 import { debounce, isEqual } from "lodash";
 import Bag, { open, Time, BagReader, TimeUtil } from "rosbag";
+import ReadResult from "rosbag/dist/ReadResult";
 import decompressLZ4 from "wasm-lz4";
 
 import BrowserHttpReader from "@foxglove-studio/app/dataProviders/BrowserHttpReader";
@@ -111,6 +112,7 @@ export default class BagDataProvider implements DataProvider {
   _bag?: Bag;
   _lastPerformanceStatsToLog?: TimedDataThroughput;
   _extensionPoint?: ExtensionPoint;
+  _topicsToTypes = new Map<string, string>();
 
   constructor(options: Options, children: DataProviderDescriptor[]) {
     if (children.length > 0) {
@@ -207,6 +209,7 @@ export default class BagDataProvider implements DataProvider {
     const messageDefinitionsByTopic: Record<string, string> = {};
     const messageDefinitionMd5SumByTopic: Record<string, string> = {};
     for (const connection of connections) {
+      this._topicsToTypes.set(connection.topic, connection.type);
       messageDefinitionsByTopic[connection.topic] = connection.messageDefinition;
       messageDefinitionMd5SumByTopic[connection.topic] = connection.md5sum;
     }
@@ -258,22 +261,20 @@ export default class BagDataProvider implements DataProvider {
     end: Time,
     subscriptions: GetMessagesTopics,
   ): Promise<GetMessagesResult> {
-    const topics = subscriptions.rosBinaryMessages || [];
+    const topics = subscriptions.rosBinaryMessages ?? [];
     const connectionStart = fromMillis(new Date().getTime());
     let totalSizeOfMessages = 0;
     let numberOfMessages = 0;
     const messages: Message[] = [];
-    const onMessage = (msg: Message) => {
-      const { data, topic, timestamp } = msg as any;
+    const onMessage = (msg: ReadResult<unknown>) => {
+      const { data, topic, timestamp } = msg;
       messages.push({
         topic,
+        datatype: this._topicsToTypes.get(topic) ?? "",
         receiveTime: timestamp,
-        message: data.buffer.slice(
-          data.byteOffset,
-          (data.byteOffset as number) + (data.length as number),
-        ),
+        message: data.buffer.slice(data.byteOffset, data.byteOffset + data.length),
       });
-      totalSizeOfMessages += data.length as number;
+      totalSizeOfMessages += data.length;
       numberOfMessages += 1;
     };
     const options = {
@@ -301,7 +302,7 @@ export default class BagDataProvider implements DataProvider {
       },
     };
     try {
-      await this._bag?.readMessages(options, onMessage as any);
+      await this._bag?.readMessages(options, onMessage);
     } catch (error) {
       reportMalformedError("bag parsing", error);
       throw error;

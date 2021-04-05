@@ -299,6 +299,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 2 },
               message: { payload: "foo bar" },
             },
@@ -479,6 +480,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 0 },
               message: { payload: "foo bar" },
             },
@@ -565,6 +567,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 0 },
               message: { payload: "foo bar" },
             },
@@ -651,6 +654,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 5 },
               message: { payload: "foo bar" },
             },
@@ -719,6 +723,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 5 },
               message: { payload: "foo bar" },
             },
@@ -797,6 +802,7 @@ describe("RandomAccessPlayer", () => {
           const parsedMessages: Message[] = [
             {
               topic: "/foo/bar",
+              datatype: "test",
               receiveTime: { sec: 10, nsec: 5 },
               message: { payload: "foo bar" },
             },
@@ -811,6 +817,7 @@ describe("RandomAccessPlayer", () => {
             parsedMessages: [
               {
                 topic: "/foo/bar",
+                datatype: "test",
                 receiveTime: { sec: 10, nsec: 101 },
                 message: { payload: "baz" },
               },
@@ -920,6 +927,7 @@ describe("RandomAccessPlayer", () => {
             parsedMessages: [
               {
                 topic: "/foo/bar",
+                datatype: "test",
                 receiveTime: { sec: 20, nsec: 50 },
                 message: { payload: "baz" },
               },
@@ -989,6 +997,7 @@ describe("RandomAccessPlayer", () => {
     store.reset(0); // We expect 0 more messages; this will throw an error later if we received more.
     const result: Message = {
       topic: "/foo/bar",
+      datatype: "test",
       receiveTime: { sec: 10, nsec: 5 },
       message: { payload: "foo bar" },
     };
@@ -1140,21 +1149,25 @@ describe("RandomAccessPlayer", () => {
     const items: Message[] = [
       {
         topic: "/foo/bar",
+        datatype: "test",
         receiveTime: { sec: 10, nsec: 0 },
         message: { payload: "foo bar 1" },
       },
       {
         topic: "/baz",
+        datatype: "test",
         receiveTime: { sec: 10, nsec: 500 },
         message: { payload: "baz 1" },
       },
       {
         topic: "/baz",
+        datatype: "test",
         receiveTime: { sec: 10, nsec: 5000 },
         message: { payload: "baz 2" },
       },
       {
         topic: "/foo/bar",
+        datatype: "test",
         receiveTime: { sec: 10, nsec: 9000000 },
         message: { payload: "foo bar 2" },
       },

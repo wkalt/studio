@@ -23,6 +23,7 @@ const fixture = {
     "/rosout": [
       {
         topic: "/rosout",
+        datatype: "rosgraph_msgs/Log",
         receiveTime: { sec: 123, nsec: 456 },
         message: {
           file: "some_topic_utils/src/foo.cpp",
@@ -36,6 +37,7 @@ const fixture = {
       },
       {
         topic: "/rosout",
+        datatype: "rosgraph_msgs/Log",
         receiveTime: { sec: 123, nsec: 456 },
         message: {
           file: "other_topic_utils/src/foo.cpp",
@@ -49,6 +51,7 @@ const fixture = {
       },
       {
         topic: "/rosout",
+        datatype: "rosgraph_msgs/Log",
         receiveTime: { sec: 123, nsec: 456 },
         message: {
           file: "other_topic_utils/src/foo.cpp",
@@ -62,6 +65,7 @@ const fixture = {
       },
       {
         topic: "/rosout",
+        datatype: "rosgraph_msgs/Log",
         receiveTime: { sec: 0, nsec: 0 },
         message: {
           header: { seq: 335, stamp: { sec: 1529678605, nsec: 521518001 }, frame_id: "" },

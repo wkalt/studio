@@ -337,6 +337,7 @@ describe("useMessagesByPath", () => {
 
     const message = {
       topic: "/some/topic",
+      datatype: "test",
       receiveTime: { sec: 100, nsec: 0 },
       message: {
         bars: [

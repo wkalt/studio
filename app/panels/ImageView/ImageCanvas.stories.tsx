@@ -77,6 +77,7 @@ function LoadImageMessage({ children }: any) {
 function marker(type: number, props: any = {}) {
   return {
     topic: "/foo",
+    datatype: "visualization_msgs/Marker",
     receiveTime: { sec: 0, nsec: 0 },
     message: { ...props, type },
   };
@@ -251,6 +252,7 @@ function RGBStory({ encoding }: { encoding: string }) {
       topic={topics[0]}
       image={{
         topic: "/foo",
+        datatype: "test",
         receiveTime: { sec: 0, nsec: 0 },
         message: { data, width, height, encoding },
       }}
@@ -292,6 +294,7 @@ function BayerStory({ encoding }: { encoding: string }) {
       topic={topics[0]}
       image={{
         topic: "/foo",
+        datatype: "test",
         receiveTime: { sec: 0, nsec: 0 },
         message: { data, width, height, encoding },
       }}
@@ -319,6 +322,7 @@ function Mono16Story({ bigEndian }: { bigEndian: boolean }) {
       topic={topics[0]}
       image={{
         topic: "/foo",
+        datatype: "test",
         receiveTime: { sec: 0, nsec: 0 },
         message: { data, width, height, encoding: "16UC1", is_bigendian: bigEndian ? 1 : 0 },
       }}
@@ -479,6 +483,7 @@ storiesOf("<ImageCanvas>", module)
         topic={topics[0]}
         image={{
           topic: "/foo",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: { data: new Uint8Array([]), width: 100, height: 50, encoding: "Foo" },
         }}
@@ -522,6 +527,7 @@ storiesOf("<ImageCanvas>", module)
             topic={topics[0]}
             image={{
               topic: "/foo",
+              datatype: "test",
               receiveTime: { sec: 0, nsec: 0 },
               message: { data: new Uint8Array([]), width: 100, height: 50, encoding: "Foo" },
             }}

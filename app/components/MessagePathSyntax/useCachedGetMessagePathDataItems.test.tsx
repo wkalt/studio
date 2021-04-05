@@ -71,6 +71,7 @@ describe("useCachedGetMessagePathDataItems", () => {
     const Test = createTest();
     const message: Message = {
       topic: "/topic",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { an_array: [5, 10, 15, 20] },
     };
@@ -138,6 +139,7 @@ describe("useCachedGetMessagePathDataItems", () => {
     const Test = createTest();
     const message: Message = {
       topic: "/topic",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { an_array: [5, 10, 15, 20] },
     };
@@ -179,11 +181,13 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: { some_array: [{ some_id: 10, some_message: { x: 10, y: 20 } }] },
         },
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             some_array: [
@@ -247,11 +251,13 @@ describe("useCachedGetMessagePathDataItems", () => {
         const messages: Message[] = [
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { someJson: { someId: 10 } },
           },
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { someJson: { someId: 11, anotherId: 12 } },
           },
@@ -297,6 +303,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         const messages: Message[] = [
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { jsonArr: [{ foo: { bar: 42 } }] },
           },
@@ -323,6 +330,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         const messages: Message[] = [
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { jsonArr: [{ id: 1, val: 42 }, { id: 2 }] },
           },
@@ -341,6 +349,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         const messages: Message[] = [
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { jsonArr: [{ foo: 42 }] },
           },
@@ -365,6 +374,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         const messages: Message[] = [
           {
             topic: "/some/topic",
+            datatype: "test",
             receiveTime: { sec: 0, nsec: 0 },
             message: { someJson: { someId: 11, anotherId: 12 } },
           },
@@ -408,6 +418,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: { some_array: [1, 2, 3, 4, 5] },
         },
@@ -437,6 +448,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: { value: 1 },
         },
@@ -455,6 +467,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: { stamp: { sec: 1, nsec: 2 } },
         },
@@ -474,6 +487,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             some_array: [
@@ -537,6 +551,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             str_field: "A",
@@ -545,6 +560,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         },
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             str_field: "A",
@@ -553,6 +569,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         },
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             str_field: "B",
@@ -643,6 +660,7 @@ describe("useCachedGetMessagePathDataItems", () => {
       const messages: Message[] = [
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             state: 0,
@@ -650,6 +668,7 @@ describe("useCachedGetMessagePathDataItems", () => {
         },
         {
           topic: "/some/topic",
+          datatype: "test",
           receiveTime: { sec: 0, nsec: 0 },
           message: {
             state: 1,

@@ -165,8 +165,9 @@ export const wrapMessages = <T>(messages: readonly Message[]): TypedMessage<T>[]
   const frame = groupBy(messages, "topic");
   const topics = Object.keys(frame).map((topic) => ({ name: topic, datatype: topic }));
   const datatypes = createRosDatatypesFromFrame(topics, frame);
-  return messages.map(({ topic, receiveTime, message }) => ({
+  return messages.map(({ topic, datatype, receiveTime, message }) => ({
     topic,
+    datatype,
     receiveTime,
     message: wrapJsObject(datatypes, topic, message),
   }));
@@ -179,6 +180,7 @@ export const wrapObjects = <T>(objects: readonly any[]): T[] => {
   const messages = objects.map((message) => ({
     receiveTime: { sec: 0, nsec: 0 },
     topic: "dummy",
+    datatype: "dummy",
     message,
   }));
   return wrapMessages<T>(messages).map(({ message }) => message);

@@ -32,17 +32,19 @@ import { SECOND_SOURCE_PREFIX } from "@foxglove-studio/app/util/globalConstants"
 
 // reusable providers
 function getProvider() {
+  const topic = "/some_topic1";
+  const datatype = "some_datatype";
   const messages = {
     parsedMessages: [
-      { topic: "/some_topic1", receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
-      { topic: "/some_topic1", receiveTime: { sec: 103, nsec: 0 }, message: { value: 3 } },
+      { topic, datatype, receiveTime: { sec: 101, nsec: 0 }, message: { value: 1 } },
+      { topic, datatype, receiveTime: { sec: 103, nsec: 0 }, message: { value: 3 } },
     ],
     rosBinaryMessages: undefined,
     bobjects: undefined,
   };
   return new MemoryDataProvider({
     messages,
-    topics: [{ name: "/some_topic1", datatype: "some_datatype" }],
+    topics: [{ name: topic, datatype }],
     providesParsedMessages: true,
     messageDefinitionsByTopic: { "/some_topic1": "int32 value" },
   });
@@ -151,6 +153,7 @@ describe("RenameDataProvider", () => {
                   "/some_topic1": [
                     {
                       topic: "/some_topic1",
+                      datatype: "some_datatype",
                       receiveTime: { sec: 101, nsec: 0 },
                       message: wrapJsObject({}, "time", { sec: 0, nsec: 0 }),
                     },

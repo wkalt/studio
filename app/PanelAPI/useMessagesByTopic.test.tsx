@@ -58,12 +58,14 @@ describe("useMessagesByTopic", () => {
 
     const message1 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 1 },
     };
 
     const message2 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };
@@ -91,12 +93,14 @@ describe("useMessagesByTopic", () => {
 
     const message1 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 1 },
     };
 
     const message2 = {
       topic: "/foo",
+      datatype: "test",
       receiveTime: { sec: 0, nsec: 0 },
       message: { value: 2 },
     };

@@ -79,7 +79,12 @@ describe("inferDatatypes", () => {
   });
 });
 
-const makeMessage = (message: any) => ({ receiveTime: { sec: 0, nsec: 0 }, topic: "", message });
+const makeMessage = (message: any) => ({
+  receiveTime: { sec: 0, nsec: 0 },
+  topic: "",
+  datatype: "",
+  message,
+});
 
 describe("createRosDatatypesFromFrame", () => {
   it("handles times", () => {
