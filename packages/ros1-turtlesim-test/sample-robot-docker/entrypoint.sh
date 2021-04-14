@@ -6,6 +6,8 @@ source /opt/ros/noetic/setup.bash
 catkin_make
 source ~/catkin_ws/devel/setup.bash
 
-roscore &
+# roscore &
 
-xvfb-run --auto-servernum rosrun turtlesim turtlesim_node
+xvfb-run --auto-servernum roslaunch /home/rosuser/rosbridge_websocket.launch
+
+# xvfb-run --auto-servernum rosrun turtlesim turtlesim_node
