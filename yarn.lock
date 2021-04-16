@@ -2173,6 +2173,8 @@ __metadata:
 "@foxglove/log@workspace:packages/log":
   version: 0.0.0-use.local
   resolution: "@foxglove/log@workspace:packages/log"
+  dependencies:
+    rimraf: 3.0.2
   languageName: unknown
   linkType: soft
 

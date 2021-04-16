@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*.ts", "test/**/*.ts", "jest.config.ts"],
+  "include": ["src/**/*.ts"],
   "compilerOptions": {
-    "module": "es2020"
+    "module": "es2020",
+    "rootDir": "src",
+    "outDir": "dist",
+    "composite": true
   }
 }
