@@ -1,4 +1,7 @@
 {
   "files": [],
-  "references": [{ "path": "just-fetch" }, { "path": "log" }, { "path": "xmlrpc" }]
+  "references": [{ "path": "just-fetch" }, { "path": "log" }, { "path": "xmlrpc" }],
+  "compilerOptions": {
+    "composite": true
+  }
 }
