@@ -6,12 +6,11 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "test": "NODE_OPTIONS='-r ts-node/register' jest",
-    "test:debug": "NODE_OPTIONS='-r ts-node/register --inspect-brk' jest",
-    "test:watch": "NODE_OPTIONS='-r ts-node/register' jest --watch"
+    "clean": "tsc --build --clean",
+    "prepack": "tsc --build",
+    "test": "jest"
   },
   "devDependencies": {
-    "@jest/types": "26.6.2",
     "jest": "26.6.3",
     "jest-circus": "26.6.3",
     "kelonio": "0.6.0",
