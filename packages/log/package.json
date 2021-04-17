@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "clean": "tsc --build --clean",
     "prepack": "tsc --build"

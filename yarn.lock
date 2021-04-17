@@ -2178,6 +2178,7 @@ __metadata:
   resolution: "@foxglove/ros1-turtlesim-test@workspace:packages/ros1-turtlesim-test"
   dependencies:
     "@foxglove/ros1": "workspace:packages/ros1"
+    "@foxglove/xmlrpc": "workspace:packages/xmlrpc"
     ts-node: 9.1.1
     typescript: 4.2.2
   languageName: unknown

@@ -6,7 +6,6 @@
   "private": true,
   "main": "dist/node.js",
   "browser": "dist/browser.js",
-  "type": "module",
   "scripts": {
     "clean": "tsc --build --clean",
     "prepack": "tsc --build"
