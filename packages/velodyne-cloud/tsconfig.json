@@ -3,7 +3,6 @@
   "include": ["src/**/*.ts", "src/**/*.json", "fixtures/**/*", "jest.config.ts"],
   "compilerOptions": {
     "outDir": "dist",
-    "module": "commonjs",
     "lib": ["es2020"],
     "rootDir": "."
   }

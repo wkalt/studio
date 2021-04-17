@@ -4,20 +4,7 @@
   "description": "TypeScript library for converting Velodyne LIDAR packet data to point clouds",
   "license": "MPL-2.0",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/foxglove/studio.git"
-  },
-  "author": {
-    "name": "Foxglove Technologies",
-    "email": "support@foxglove.dev"
-  },
-  "homepage": "https://foxglove.dev/",
   "main": "src/index.ts",
-  "module": "src/index.ts",
-  "files": [
-    "src"
-  ],
   "scripts": {
     "test": "NODE_OPTIONS='-r ts-node/register' jest",
     "test:debug": "NODE_OPTIONS='-r ts-node/register --inspect-brk' jest",

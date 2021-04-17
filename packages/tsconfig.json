@@ -1,6 +1,16 @@
-// Allows referencing all packages at once from webpack
+// Helper tsconfig to build all packages (used in webpack config)
 {
-  "extends": "../tsconfig.base.json",
   "files": [],
-  "references": [{ "path": "just-fetch" }, { "path": "log" }, { "path": "xmlrpc" }]
+  "references": [
+    { "path": "electron-socket" },
+    { "path": "just-fetch" },
+    { "path": "log" },
+    { "path": "ros1-turtlesim-test" },
+    { "path": "ros1" },
+    { "path": "rosmsg-bobject" },
+    { "path": "rosmsg-deser" },
+    { "path": "velodyne-cloud" },
+    { "path": "wasm-bz2" },
+    { "path": "xmlrpc" },
+  ]
 }

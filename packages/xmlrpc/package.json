@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "tsc --build --clean",
     "prepack": "tsc --build",
-    "test": "NODE_OPTIONS='-r ts-node/register' jest"
+    "test": "jest"
   },
   "dependencies": {
     "@foxglove/just-fetch": "workspace:packages/just-fetch",
