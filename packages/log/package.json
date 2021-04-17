@@ -7,5 +7,8 @@
   "scripts": {
     "clean": "tsc --build --clean",
     "prepack": "tsc --build"
+  },
+  "devDependencies": {
+    "typescript": "4.2.2"
   }
 }

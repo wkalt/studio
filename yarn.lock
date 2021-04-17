@@ -2151,7 +2151,6 @@ __metadata:
     "@jest/types": 26.6.2
     eventemitter3: 4.0.7
     jest: 26.6.3
-    tslib: 2.2.0
     typescript: 4.2.2
   peerDependencies:
     electron: ">=12"
@@ -2169,6 +2168,8 @@ __metadata:
 "@foxglove/log@workspace:packages/log":
   version: 0.0.0-use.local
   resolution: "@foxglove/log@workspace:packages/log"
+  dependencies:
+    typescript: 4.2.2
   languageName: unknown
   linkType: soft
 
