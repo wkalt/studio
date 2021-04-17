@@ -1,5 +1,0 @@
-parserOptions:
-  project: packages/log/tsconfig.json
-
-ignorePatterns:
-  - dist/
