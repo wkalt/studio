@@ -2162,12 +2162,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@foxglove/just-fetch@workspace:packages/just-fetch"
   dependencies:
-    node-fetch: ^3.0.0-beta.9
-    rimraf: 3.0.2
-    tslib: 2.2.0
-    typescript: 4.2.2
-  peerDependencies:
     node-fetch: ">=3.0.0-beta.9"
+    rimraf: 3.0.2
   languageName: unknown
   linkType: soft
 
@@ -4920,16 +4916,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: e6e6613c800aeda63e2331e753e8d21df1a2c9aa7a4bc71ed792a848e4811fc96e609759089355314a2318c76eff1f161499cd242044838ab1e6f56e463ebb9c
-  languageName: node
-  linkType: hard
-
-"@types/rimraf@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@types/rimraf@npm:3.0.0"
-  dependencies:
-    "@types/glob": "*"
-    "@types/node": "*"
-  checksum: 00a00a430f838ddafdbc17386f08d928b1ae7aeada84d112f4369a7a89b4d47c1bb6849688f1d6ee404a08338ab52a80c742f0c3040d63ccc2aaec04bd1009f5
   languageName: node
   linkType: hard
 
@@ -12034,7 +12020,6 @@ __metadata:
     "@types/electron-devtools-installer": 2.2.0
     "@types/license-checker": ^25.0.1
     "@types/nearley": 2.11.1
-    "@types/rimraf": ^3.0.0
     "@types/sass": ^1.16.0
     "@types/semver": ^7
     "@types/webpack-dev-server": 3.11.3
@@ -17105,20 +17090,20 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "node-fetch@npm:2.6.1"
-  checksum: cbb171635e538162b977eac5dfe7a1e07a9a02e991924377a6435502291e2f823d306b95aabc455caebf4a118ccf836868462bc70ccc3095af02bb9da61fda37
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^3.0.0-beta.9":
+"node-fetch@npm:>=3.0.0-beta.9":
   version: 3.0.0-beta.9
   resolution: "node-fetch@npm:3.0.0-beta.9"
   dependencies:
     data-uri-to-buffer: ^3.0.1
     fetch-blob: ^2.1.1
   checksum: e1b71946805b6dbe44394df4dcd7287bb18c2d93bb5b1d41de24c5d87bc3ec28be5e7ec0601dfc93a62d41c05a25dc5f7c0804912e2c11bfbb23252c8ff2a155
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "node-fetch@npm:2.6.1"
+  checksum: cbb171635e538162b977eac5dfe7a1e07a9a02e991924377a6435502291e2f823d306b95aabc455caebf4a118ccf836868462bc70ccc3095af02bb9da61fda37
   languageName: node
   linkType: hard
 
