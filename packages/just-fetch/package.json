@@ -7,13 +7,10 @@
   "main": "dist/node.js",
   "browser": "dist/browser.js",
   "scripts": {
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "clean": "tsc --build --clean",
     "prepack": "tsc --build"
   },
   "dependencies": {
     "node-fetch": ">=3.0.0-beta.9"
-  },
-  "devDependencies": {
-    "rimraf": "3.0.2"
   }
 }
