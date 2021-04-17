@@ -2179,7 +2179,6 @@ __metadata:
   dependencies:
     "@foxglove/ros1": "workspace:packages/ros1"
     ts-node: 9.1.1
-    tslib: 2.2.0
     typescript: 4.2.2
   languageName: unknown
   linkType: soft
@@ -2193,7 +2192,6 @@ __metadata:
     eventemitter3: 4.0.7
     jest: 26.6.3
     rosbag: "github:foxglove/rosbag.js#fc61125fbc01ff55698c5ed48987b2d9e7599572"
-    tslib: 2.2.0
     typescript: 4.2.2
     web-encoding: 1.1.4
   languageName: unknown
@@ -2220,7 +2218,6 @@ __metadata:
     jest-circus: 26.6.3
     kelonio: 0.6.0
     rosbag: "github:foxglove/rosbag.js#fc61125fbc01ff55698c5ed48987b2d9e7599572"
-    tslib: 2.2.0
     typescript: 4.2.2
   languageName: unknown
   linkType: soft
@@ -23180,17 +23177,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.2.0, tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0":
-  version: 2.2.0
-  resolution: "tslib@npm:2.2.0"
-  checksum: 2d35468c470410871c5246e43f12dcb6d0fc363b617c176f26443b9530e5c5ee8448966892a42956168d8f495da7865bda33dfe82c26c91991e28999974a618f
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: f44fe7f216946b17d3e3074df3746372703cf24e9127b4c045511456e8e4bf25515fb0a1bb3937676cc305651c5d4fcb6377b0588a4c6a957e748c4c28905d17
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0":
+  version: 2.2.0
+  resolution: "tslib@npm:2.2.0"
+  checksum: 2d35468c470410871c5246e43f12dcb6d0fc363b617c176f26443b9530e5c5ee8448966892a42956168d8f495da7865bda33dfe82c26c91991e28999974a618f
   languageName: node
   linkType: hard
 
