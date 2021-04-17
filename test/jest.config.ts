@@ -6,7 +6,7 @@ export default {
   preset: "ts-jest",
   globals: {
     "ts-jest": {
-      tsconfig: "<rootDir>/../tsconfig.json",
+      tsconfig: "<rootDir>/../tsconfig.base.json",
     },
   },
   globalSetup: "<rootDir>/globalSetup.ts",

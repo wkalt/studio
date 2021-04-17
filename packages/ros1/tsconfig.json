@@ -1,12 +1,7 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "include": ["src/**/*.ts", "jest.config.ts"],
   "compilerOptions": {
-    "module": "es2020",
-    "lib": ["es2020"],
-    "declaration": true,
-    "rootDir": ".",
-    "noUnusedParameters": true,
-    "noEmit": true
+    "rootDir": "."
   }
 }

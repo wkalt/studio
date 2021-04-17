@@ -1,7 +1,6 @@
+// Allows referencing all packages at once from webpack
 {
+  "extends": "../tsconfig.base.json",
   "files": [],
-  "references": [{ "path": "just-fetch" }, { "path": "log" }, { "path": "xmlrpc" }],
-  "compilerOptions": {
-    "composite": true
-  }
+  "references": [{ "path": "just-fetch" }, { "path": "log" }, { "path": "xmlrpc" }]
 }
