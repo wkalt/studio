@@ -35,6 +35,7 @@ type IpcListener = (ev: unknown, ...args: unknown[]) => void;
 const menuClickListeners = new Map<string, IpcListener>();
 
 // Initialize the RPC channel for electron-socket
+// FIXME: @jhurliman this returns a promise, should we have await here?
 PreloaderSockets.Create();
 
 window.addEventListener(

@@ -1,5 +1,8 @@
 {
   "extends": "../tsconfig.base.json",
   "include": ["**/*.ts", "../typings/*.d.ts"],
-  "references": [{ "path": "../packages" }]
+  "references": [{ "path": "../packages" }],
+  "compilerOptions": {
+    "lib": ["dom", "es2020"]
+  }
 }
