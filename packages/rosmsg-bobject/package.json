@@ -2,6 +2,7 @@
   "name": "@foxglove/rosmsg-bobject",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "clean": "tsc --build --clean",

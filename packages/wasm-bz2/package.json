@@ -4,6 +4,7 @@
   "description": "Bzip2 decompression compiled to WebAssembly",
   "license": "MPL-2.0",
   "private": true,
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "clean": "tsc --build --clean",
