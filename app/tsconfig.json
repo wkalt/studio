@@ -13,5 +13,6 @@
   "typeAcquisition": {
     "exclude": ["node"]
   },
-  "include": ["**/*", "../typings/*.d.ts", ".storybook/*"]
+  "include": ["**/*", "../typings/*.d.ts", ".storybook/*"],
+  "references": [{ "path": "../packages" }]
 }
