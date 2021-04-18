@@ -1,4 +1,9 @@
+// TypeScript configuration for files in project root
+// Do not extend from this file, see /tsconfig.base.json instead
 {
-  "include": ["*.ts", "*.js", "test/**/*.ts", "resources/notarize.ts"],
-  "exclude": ["node_modules"]
+  "extends": "./tsconfig.base.json",
+  "include": ["*.ts", "resources/**/*.ts", "test/**/*.ts"],
+  "compilerOptions": {
+    "noEmit": true
+  }
 }

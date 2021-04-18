@@ -14,6 +14,7 @@ import installExtension, {
 } from "electron-devtools-installer";
 import { autoUpdater } from "electron-updater";
 import fs from "fs";
+import { URL } from "url";
 
 import { APP_NAME, APP_VERSION, APP_HOMEPAGE } from "@foxglove-studio/app/constants";
 import Logger from "@foxglove/log";
