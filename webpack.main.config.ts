@@ -55,9 +55,6 @@ export default (_: unknown, argv: WebpackArgv): Configuration => {
               // avoid looking at files which are not part of the bundle
               onlyCompileBundledFiles: true,
               projectReferences: true,
-              compilerOptions: {
-                module: "es2020",
-              },
             },
           },
         },
