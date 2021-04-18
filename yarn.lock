@@ -2013,6 +2013,11 @@ __metadata:
   dependencies:
     "@fluentui/react": 8.11.0
     "@fluentui/react-icons-mdl2": 1.0.4
+    "@foxglove/electron-socket": "workspace:packages/electron-socket"
+    "@foxglove/log": "workspace:packages/log"
+    "@foxglove/rosmsg-bobject": "workspace:packages/rosmsg-bobject"
+    "@foxglove/rosmsg-deser": "workspace:packages/rosmsg-deser"
+    "@foxglove/velodyne-cloud": "workspace:packages/velodyne-cloud"
     "@mdi/svg": 5.9.55
     "@storybook/addon-actions": 6.2.5
     "@storybook/addon-essentials": 6.2.5
