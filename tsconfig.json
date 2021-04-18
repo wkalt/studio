@@ -1,8 +1,9 @@
 // TypeScript configuration for files in project root
 // Do not extend from this file, see /tsconfig.base.json instead
+// Do not add files to "include" if their directory already has its own tsconfig.json
 {
   "extends": "./tsconfig.base.json",
-  "include": ["*.ts", "resources/**/*.ts", "test/**/*.ts"],
+  "include": ["*.ts", "*.json", "resources/**/*", "test/**/*"],
   "compilerOptions": {
     "noEmit": true
   }
