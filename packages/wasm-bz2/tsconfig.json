@@ -1,8 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["*.ts", "src/*.ts", "test/*.ts"],
+  "include": ["src/**/*.ts"],
   "compilerOptions": {
-    "lib": ["dom"],
-    "rootDir": "."
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "es2020",
+    "lib": ["dom", "es2020"]
   }
 }
