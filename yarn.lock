@@ -2018,6 +2018,7 @@ __metadata:
     "@foxglove/rosmsg-bobject": "workspace:packages/rosmsg-bobject"
     "@foxglove/rosmsg-deser": "workspace:packages/rosmsg-deser"
     "@foxglove/velodyne-cloud": "workspace:packages/velodyne-cloud"
+    "@foxglove/wasm-bz2": "workspace:packages/wasm-bz2"
     "@mdi/svg": 5.9.55
     "@storybook/addon-actions": 6.2.5
     "@storybook/addon-essentials": 6.2.5
