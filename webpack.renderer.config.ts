@@ -113,7 +113,8 @@ export function makeConfig(_: unknown, argv: WebpackArgv, options?: Options): Co
                 // avoid looking at files which are not part of the bundle
                 onlyCompileBundledFiles: true,
                 projectReferences: true,
-                configFile: isDev ? "tsconfig.dev.json" : "tsconfig.json",
+                // FIXME: uncommenting this line breaks package building
+                // configFile: isDev ? "tsconfig.dev.json" : "tsconfig.json",
                 getCustomTransformers: () => ({ before: [styledComponentsTransformer] }),
               },
             },
