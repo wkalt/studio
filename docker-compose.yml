@@ -1,0 +1,10 @@
+version: "3.0"
+services:
+  app:
+    build: .
+    command: bash -c "yarn && yarn serve"
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/src
+      - ./.docker/yarn:/root/.yarn

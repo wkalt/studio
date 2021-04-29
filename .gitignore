@@ -1,5 +1,6 @@
 *.log
 *.tsbuildinfo
+.docker/
 .DS_Store
 .webpack/
 dist/
