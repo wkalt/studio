@@ -7,6 +7,14 @@ import Hammer from "hammerjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// fixme - for some reason the type merging these modules perform with chart.js doesn't
+// work properly when imported in ChartJSManager and I get type errors on the web build
+// but when imported here the type errors go away?!
+// @ts-expect-error
+import DatalabelPlugin from "chartjs-plugin-datalabels";
+// @ts-expect-error
+import { Zoom as ZoomPlugin } from "chartjs-plugin-zoom";
+
 import { RpcElement, RpcScales } from "@foxglove-studio/app/components/Chart/types";
 import WebWorkerManager from "@foxglove-studio/app/util/WebWorkerManager";
 

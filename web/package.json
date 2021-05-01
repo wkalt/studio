@@ -1,0 +1,8 @@
+{
+  "name": "@foxglove-studio/web",
+  "private": true,
+  "dependencies": {
+    "@foxglove-studio/app": "workspace:app",
+    "@foxglove/tsconfig": "workspace:packages/tsconfig"
+  }
+}

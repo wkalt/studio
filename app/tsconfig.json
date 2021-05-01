@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "@foxglove/tsconfig/tsconfig.base.json",
   "include": [
     "./**/*",
     "./**/*.json",
@@ -16,8 +16,6 @@
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "es2020"],
     "paths": {
-      // Storybook breaks without this
-      "micro-memoize": ["../typings/micro-memoize"],
       // This is only needed for vscode import suggestions
       "@foxglove-studio/app/*": ["./*"]
     }

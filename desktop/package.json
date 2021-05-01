@@ -1,0 +1,8 @@
+{
+  "name": "@foxglove-studio/desktop",
+  "private": true,
+  "dependencies": {
+    "@foxglove-studio/app": "workspace:app",
+    "@foxglove/electron-socket": "workspace:packages/electron-socket"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "extends": "@foxglove/tsconfig/tsconfig.base.json",
+  "include": ["./**/*", "../typings/*.d.ts", "../WebpackArgv.ts"],
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "dom.iterable", "es2020"],
+    "paths": {
+      // override the typics shipped with micro-memoize
+      "micro-memoize": ["../node_modules/@types/micro-memoize"]
+    }
+  }
+}
