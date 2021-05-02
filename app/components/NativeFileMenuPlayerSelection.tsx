@@ -4,11 +4,18 @@
 
 import { ReactElement, useEffect } from "react";
 
+// fixme - this ties in to workspace platform event listeners
+// those are native application menu event listeners
+// here we have the ability to register handlers into the native application menu
 import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import { usePlayerSelection } from "@foxglove-studio/app/context/PlayerSelectionContext";
 
 // NativeFileMenuPlayerSelection adds available player selection items to the apps native OS menubar
 export function NativeFileMenuPlayerSelection(): ReactElement {
+  // native app menu support
+  // we can add items, or we can add handlers
+  const nativeAppMenu = useNativeAppMenu();
+
   const { selectSource, availableSources } = usePlayerSelection();
 
   useEffect(() => {

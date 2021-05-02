@@ -17,7 +17,6 @@ import { useToasts } from "react-toast-notifications";
 import { useMountedState } from "react-use";
 import styled from "styled-components";
 
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import { redoLayoutChange, undoLayoutChange } from "@foxglove-studio/app/actions/layoutHistory";
 import { importPanelLayout, loadLayout } from "@foxglove-studio/app/actions/panels";
 import AddPanelMenu from "@foxglove-studio/app/components/AddPanelMenu";
@@ -109,6 +108,14 @@ export default function Workspace(): JSX.Element {
     // Add a hook for integration tests.
     (window as TestableWindow).setPanelLayout = (payload: ImportPanelLayoutPayload) =>
       dispatch(importPanelLayout(payload));
+
+    // platform events are commands from the underlying host to invoke actions on the workspace
+    // fixme - are these maybe platform menu events?
+    const platformEvents = usePlatformEvents();
+
+    platformEvents.on("undo", () => {});
+
+    platformEvents.on("open-preferences", () => {});
 
     // For undo/redo events, first try the browser's native undo/redo, and if that is disabled, then
     // undo/redo the layout history. Note that in GlobalKeyListener we also handle the keyboard
