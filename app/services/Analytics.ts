@@ -6,9 +6,9 @@ import { addBreadcrumb, setUser, Severity } from "@sentry/electron";
 import amplitude from "amplitude-js";
 import { v4 as uuidv4 } from "uuid";
 
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import Storage from "@foxglove-studio/app/util/Storage";
 import Logger from "@foxglove/log";
+import { APP_VERSION } from "@foxglove-studio/app/version";
 
 const UUID_ZERO = "00000000-0000-0000-0000-000000000000";
 const USER_ID_KEY = "analytics_user_id";
@@ -32,14 +32,17 @@ export class Analytics {
   private _amplitude?: amplitude.AmplitudeClient;
   private _crashReporting: boolean;
   private _storage = new Storage();
+  private _deviceId: string;
 
   constructor(options: {
     optOut?: boolean;
+    deviceId?: string;
     crashReportingOptOut: boolean;
     amplitudeApiKey: string | undefined;
   }) {
     const amplitudeApiKey = options.amplitudeApiKey;
     const optOut = options.optOut ?? false;
+    this._deviceId = options.deviceId ?? UUID_ZERO;
     this._crashReporting = !(options.crashReportingOptOut ?? false);
     if (!optOut && amplitudeApiKey != undefined && amplitudeApiKey.length > 0) {
       const userId = this.getUserId();
@@ -68,7 +71,7 @@ export class Analytics {
   }
 
   getAppVersion(): string {
-    return OsContextSingleton?.getAppVersion() ?? "0.0.0";
+    return APP_VERSION;
   }
 
   getUserId(): string {
@@ -81,7 +84,7 @@ export class Analytics {
   }
 
   getDeviceId(): string {
-    return OsContextSingleton?.getMachineId() ?? UUID_ZERO;
+    return this._deviceId;
   }
 
   async logEvent(event: AppEvent, data?: { [key: string]: unknown }): Promise<void> {
