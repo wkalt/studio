@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useAsyncFn } from "react-use";
 import styled from "styled-components";
 
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import Button from "@foxglove-studio/app/components/Button";
 import Checkbox from "@foxglove-studio/app/components/Checkbox";
 import Flex from "@foxglove-studio/app/components/Flex";
@@ -66,8 +65,7 @@ function WelcomePanel() {
     !loading;
 
   // TODO: optional chaining is compiled out (for storybook) if used here; may be a webpack bug
-  const commandOrControl =
-    (OsContextSingleton && OsContextSingleton.platform === "darwin" && "⌘") ?? "^";
+  const commandOrControl = process.platform === "darwin" ? "⌘" : "^";
 
   return (
     <Flex col scroll dataTest="welcome-content">
