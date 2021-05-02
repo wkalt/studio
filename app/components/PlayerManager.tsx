@@ -25,7 +25,6 @@ import { useLocalStorage, useMountedState } from "react-use";
 import { URL } from "universal-url";
 
 import { AppSetting } from "@foxglove-studio/app/AppSetting";
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import {
   setUserNodeDiagnostics,
   addUserNodeLogs,
@@ -265,10 +264,17 @@ async function roscoreSource(options: FactoryOptions) {
   if (options.skipRestore ?? false) {
     const value = options.storage.getItem<string>(storageCacheKey);
 
+    // get the ros master uri from what?
+    // process.env['ROS_MASTER_URI'] ?
+    // or maybe a hook above will provide it?
+    const processEnv = useProcessEnv();
+    processEnv.get("ROS_MASTER_URI");
+    // or we add the whitelisted env vars to process.env?
+
     maybeUrl = await options.prompt({
       title: "ROS 1 TCP connection",
       placeholder: "localhost:11311",
-      value: value ?? OsContextSingleton?.getEnvVar("ROS_MASTER_URI") ?? "localhost:11311",
+      value: value ?? process.env.ROS_MASTER_URI ?? "localhost:11311",
       transformer: (str) => {
         const result = parseInputUrl(str, "ros:", {
           "http:": { port: 80 },
@@ -417,6 +423,10 @@ function PlayerManager({
   }, []);
 
   useEffect(() => {
+    // fixme - these are argv things in renderer - in web they would be?
+    // probably nothing - its a render concept - maybe the renderer should get them
+    // and then provide them via a context?
+    // these deep links are _actions_ on the application
     const links = OsContextSingleton?.getDeepLinks() ?? [];
     const firstLink = links[0];
     if (firstLink == undefined) {
