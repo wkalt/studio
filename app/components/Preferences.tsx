@@ -18,7 +18,6 @@ import moment from "moment-timezone";
 import { useCallback, useMemo, useState } from "react";
 
 import { AppSetting } from "@foxglove-studio/app/AppSetting";
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import { ExperimentalFeatureSettings } from "@foxglove-studio/app/components/ExperimentalFeatureSettings";
 import { useAsyncAppConfigurationValue } from "@foxglove-studio/app/hooks/useAsyncAppConfigurationValue";
 import { nonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
@@ -135,13 +134,17 @@ function RosHostname(): React.ReactElement {
     },
   );
 
-  const os = OsContextSingleton;
+  // fixme - this is related to Ros1Player hostname changes
+  // again trying to calculate the hostname for _our_ node
+  // this is a placeholder hint - so maybe we don't put anything here?
+  // the placeholder shows what value we will compute tho - but that is fragile if we change the code
+  // that computes the hostname in Ros1Player and forget to update here...
   const rosHostnamePlaceholder = useMemo(
     () =>
       os != undefined
         ? RosNode.GetRosHostname(os.getEnvVar, os.getHostname, os.getNetworkInterfaces)
         : "localhost",
-    [os],
+    [],
   );
 
   return (
