@@ -6,7 +6,6 @@ import { isEqual, sortBy } from "lodash";
 import { RosMsgDefinition, Time } from "rosbag";
 import { v4 as uuidv4 } from "uuid";
 
-import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import {
   AdvertisePayload,
   MessageEvent,
@@ -42,8 +41,12 @@ const rosLog = Logger.getLogger("ROS1");
 const CAPABILITIES = [PlayerCapabilities.getParameters, PlayerCapabilities.setParameters];
 
 type Ros1PlayerOpts = {
+  // url for roscore
   url: string;
-  hostname?: string;
+  // the hostname our local node will advertise itself as
+  hostname: string;
+  // process id for our local node
+  pid: number;
   metricsCollector: PlayerMetricsCollectorInterface;
 };
 
@@ -51,9 +54,10 @@ type Ros1PlayerOpts = {
 // showing simulated time, so current time from Date.now() is always used instead.
 export default class Ros1Player implements Player {
   private _url: string; // rosmaster URL.
-  private _hostname?: string; // ROS_HOSTNAME
+  private _hostname: string; // ROS_HOSTNAME
   private _rosNode?: RosNode; // Our ROS node when we're connected.
   private _id: string = uuidv4(); // Unique ID for this player.
+  private _pid: number;
   private _listener?: (arg0: PlayerState) => Promise<void>; // Listener for _emitState().
   private _closed: boolean = false; // Whether the player has been completely closed using close().
   private _providerTopics?: Topic[]; // Topics as advertised by rosmaster.
@@ -76,26 +80,24 @@ export default class Ros1Player implements Player {
   // track issues within the player
   private _problems: PlayerProblem[] = [];
 
-  constructor({ url, hostname, metricsCollector }: Ros1PlayerOpts) {
+  constructor({ url, hostname, pid, metricsCollector }: Ros1PlayerOpts) {
     log.info(`initializing Ros1Player (url=${url})`);
     this._metricsCollector = metricsCollector;
     this._url = url;
     this._hostname = hostname;
+    this._pid = pid;
     this._start = fromMillis(Date.now());
     this._metricsCollector.playerConstructed();
     this._open();
   }
 
   private _open = async (): Promise<void> => {
-    const os = OsContextSingleton;
-    if (this._closed || os == undefined) {
+    if (this._closed) {
       return;
     }
     this._presence = PlayerPresence.INITIALIZING;
 
-    const hostname =
-      this._hostname ??
-      RosNode.GetRosHostname(os.getEnvVar, os.getHostname, os.getNetworkInterfaces);
+    const hostname = this._hostname;
 
     const net = await Sockets.Create();
     const httpServer = await net.createHttpServer();
@@ -107,7 +109,7 @@ export default class Ros1Player implements Player {
       const rosNode = new RosNode({
         name: "/foxglovestudio",
         hostname,
-        pid: os.pid,
+        pid: this._pid,
         rosMasterUri: this._url,
         httpServer: (httpServer as unknown) as HttpServer,
         tcpSocketCreate,
