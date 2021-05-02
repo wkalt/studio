@@ -24,6 +24,9 @@ const log = Logger.getLogger(__filename);
 
 log.debug("initializing renderer");
 
+// fixme - need to know if crash reporting is enabled before starting sentry
+// this is read from argv in preload which gets it from additional arguments in main
+// none of this requires any additional loading
 if (
   (OsContextSingleton?.isCrashReportingEnabled() ?? false) &&
   typeof process.env.SENTRY_DSN === "string"

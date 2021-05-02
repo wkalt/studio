@@ -140,6 +140,7 @@ const ctx: OsContext = {
 contextBridge.exposeInMainWorld("ctxbridge", ctx); // poorly named - expose to renderer
 
 // Load telemetry opt-out settings from window.process.argv
+// These are set via `additionalArguments` when constructing a BrowserWindow
 function getTelemetrySettings(): [crashReportingEnabled: boolean, telemetryEnabled: boolean] {
   const argv = window.process.argv;
   const crashReportingEnabled = Boolean(
