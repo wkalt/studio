@@ -29,7 +29,7 @@ function makeMockContext(): Pick<OsContext, "storage"> & { storage: MockStorage 
 
 describe("OsContextAppConfiguration", () => {
   it("loads state upon construction and returns values from cached state", async () => {
-    const ctx = makeMockContext();
+    const ctx = makeMockContext("test");
     const called = signal();
     const result = signal<string>();
     ctx.storage.get.mockImplementationOnce(async () => {
