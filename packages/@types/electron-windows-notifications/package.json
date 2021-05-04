@@ -1,0 +1,4 @@
+{
+  "name": "@types/electron-windows-notifications",
+  "types": "index.d.ts"
+}
