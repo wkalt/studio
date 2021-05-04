@@ -15,10 +15,10 @@ import {
 import EmptyState from "@foxglove-studio/app/components/EmptyState";
 import Panel from "@foxglove-studio/app/components/Panel";
 import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import Logger from "@foxglove/log";
 
 import FilteredPointMarkers from "./FilteredPointMarkers";
-import helpContent from "./index.help.md";
 import { NavSatFixMsg, Point } from "./types";
 
 import "leaflet/dist/leaflet.css";
@@ -140,7 +140,7 @@ function MapPanel(props: Props) {
   if (!center) {
     return (
       <>
-        <PanelToolbar floating helpContent={helpContent} />
+        <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/map`} />
         <EmptyState>Waiting for first gps point...</EmptyState>
       </>
     );
@@ -148,7 +148,7 @@ function MapPanel(props: Props) {
 
   return (
     <>
-      <PanelToolbar floating helpContent={helpContent} />
+      <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/map`} />
       <MapContainer
         whenCreated={setCurrentMap}
         preferCanvas

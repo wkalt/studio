@@ -31,7 +31,7 @@ export const SYNC_OPTIONS = {
 };
 
 type Props = {
-  helpContent: Node | string;
+  helpUrl: string;
   saveConfig: Save3DConfig;
   flattenMarkers: boolean;
   autoTextBackgroundColor: boolean;
@@ -145,7 +145,7 @@ export function syncBags(
 }
 
 export default function PanelToolbarMenu({
-  helpContent,
+  helpUrl,
   checkedKeys,
   settingsByKey,
   saveConfig,
@@ -155,7 +155,7 @@ export default function PanelToolbarMenu({
   return (
     <PanelToolbar
       floating
-      helpContent={helpContent}
+      helpUrl={helpUrl}
       menuContent={
         <>
           <Item

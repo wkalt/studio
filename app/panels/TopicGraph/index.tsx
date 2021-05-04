@@ -28,10 +28,10 @@ import Panel from "@foxglove-studio/app/components/Panel";
 import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import styles from "@foxglove-studio/app/panels/ThreeDimensionalViz/Layout.module.scss";
 import colors from "@foxglove-studio/app/styles/colors.module.scss";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 
 import Graph, { GraphMutation } from "./Graph";
 import Toolbar from "./Toolbar";
-import helpContent from "./index.help.md";
 
 const LABEL_MAX_WIDTH = 200;
 const STYLESHEET: Cytoscape.Stylesheet[] = [
@@ -258,7 +258,7 @@ function TopicGraph() {
   if (publishedTopics == undefined) {
     return (
       <>
-        <PanelToolbar floating helpContent={helpContent} />
+        <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/topic-graph`} />
         <EmptyState>Waiting for data...</EmptyState>
       </>
     );
@@ -266,7 +266,7 @@ function TopicGraph() {
 
   return (
     <>
-      <PanelToolbar floating helpContent={helpContent} />
+      <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/topic-graph`} />
       <Toolbar>
         <div className={styles.buttons}>
           <Button tooltip="Zoom Fit" onClick={onZoomFit}>

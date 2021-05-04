@@ -21,7 +21,6 @@ import {
 import { useState, useEffect, useRef, useLayoutEffect, useMemo } from "react";
 import styled from "styled-components";
 
-import helpContent from "@foxglove-studio/app/components/GlobalVariablesMenu/index.help.md";
 import GlobalVariablesTable, {
   ANIMATION_RESET_DELAY_MS,
   isActiveElementEditable,
@@ -30,6 +29,7 @@ import Menu from "@foxglove-studio/app/components/Menu";
 import HelpButton from "@foxglove-studio/app/components/PanelToolbar/HelpButton";
 import useGlobalVariables from "@foxglove-studio/app/hooks/useGlobalVariables";
 import inScreenshotTests from "@foxglove-studio/app/stories/inScreenshotTests";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 
 export const SLinkUnderline = styled.span`
@@ -77,7 +77,10 @@ function MenuContent(menuProps: IContextualMenuProps) {
         <STitleBar>
           <STitle>Global variables</STitle>
           <SActions>
-            <HelpButton iconStyle={{ width: "18px", height: "18px" }}>{helpContent}</HelpButton>
+            <HelpButton
+              iconStyle={{ width: "18px", height: "18px" }}
+              url={`${STUDIO_DOCS_URL}/app-concepts/global-variables`}
+            />
           </SActions>
         </STitleBar>
         <hr />

@@ -25,16 +25,13 @@ import DocumentDropListener from "@foxglove-studio/app/components/DocumentDropLi
 import DropOverlay from "@foxglove-studio/app/components/DropOverlay";
 import GlobalKeyListener from "@foxglove-studio/app/components/GlobalKeyListener";
 import GlobalVariablesMenu from "@foxglove-studio/app/components/GlobalVariablesMenu";
-import HelpModal from "@foxglove-studio/app/components/HelpModal";
 import LayoutMenu from "@foxglove-studio/app/components/LayoutMenu";
-import messagePathHelp from "@foxglove-studio/app/components/MessagePathSyntax/index.help.md";
 import { useMessagePipeline } from "@foxglove-studio/app/components/MessagePipeline";
 import NotificationDisplay from "@foxglove-studio/app/components/NotificationDisplay";
 import PanelLayout from "@foxglove-studio/app/components/PanelLayout";
 import PlaybackControls from "@foxglove-studio/app/components/PlaybackControls";
 import { PlayerStatusIndicator } from "@foxglove-studio/app/components/PlayerStatusIndicator";
 import Preferences from "@foxglove-studio/app/components/Preferences";
-import { RenderToBodyComponent } from "@foxglove-studio/app/components/RenderToBodyComponent";
 import ShortcutsModal from "@foxglove-studio/app/components/ShortcutsModal";
 import TinyConnectionPicker from "@foxglove-studio/app/components/TinyConnectionPicker";
 import Toolbar from "@foxglove-studio/app/components/Toolbar";
@@ -83,7 +80,6 @@ export default function Workspace(): JSX.Element {
   );
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [shortcutsModalOpen, setShortcutsModalOpen] = useState(false);
-  const [messagePathSyntaxModalOpen, setMessagePathSyntaxModalOpen] = useState(false);
 
   const isMounted = useMountedState();
 
@@ -93,13 +89,6 @@ export default function Workspace(): JSX.Element {
       await setPlayerFromDemoBag();
     }
   }, [dispatch, setPlayerFromDemoBag, isMounted]);
-
-  const handleInternalLink = useCallback((event: React.MouseEvent, href: string) => {
-    if (href === "#help:message-path-syntax") {
-      event.preventDefault();
-      setMessagePathSyntaxModalOpen(true);
-    }
-  }, []);
 
   useEffect(() => {
     // Focus on page load to enable keyboard interaction.
@@ -127,9 +116,6 @@ export default function Workspace(): JSX.Element {
     });
 
     OsContextSingleton?.addIpcEventListener("open-preferences", () => setPreferencesOpen(true));
-    OsContextSingleton?.addIpcEventListener("open-message-path-syntax-help", () =>
-      setMessagePathSyntaxModalOpen(true),
-    );
     OsContextSingleton?.addIpcEventListener("open-keyboard-shortcuts", () =>
       setShortcutsModalOpen(true),
     );
@@ -197,7 +183,7 @@ export default function Workspace(): JSX.Element {
     playerPresence === PlayerPresence.NOT_PRESENT || playerCapabilities.includes("playbackControl");
 
   return (
-    <LinkHandlerContext.Provider value={handleInternalLink}>
+    <LinkHandlerContext.Provider value={() => {}}>
       <DocumentDropListener filesSelected={dropHandler} allowedExtensions={allowedDropExtensions}>
         <DropOverlay>
           <div style={{ fontSize: "4em", marginBottom: "1em" }}>Drop a file here</div>
@@ -207,13 +193,6 @@ export default function Workspace(): JSX.Element {
         <GlobalKeyListener />
         {shortcutsModalOpen && (
           <ShortcutsModal onRequestClose={() => setShortcutsModalOpen(false)} />
-        )}
-        {messagePathSyntaxModalOpen && (
-          <RenderToBodyComponent>
-            <HelpModal onRequestClose={() => setMessagePathSyntaxModalOpen(false)}>
-              {messagePathHelp}
-            </HelpModal>
-          </RenderToBodyComponent>
         )}
 
         <Toolbar onDoubleClick={OsContextSingleton?.handleToolbarDoubleClick}>

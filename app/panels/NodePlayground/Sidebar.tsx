@@ -23,13 +23,12 @@ import TextContent from "@foxglove-studio/app/components/TextContent";
 import { Explorer } from "@foxglove-studio/app/panels/NodePlayground";
 import TemplateIcon from "@foxglove-studio/app/panels/NodePlayground/assets/file-document-edit.svg";
 import HammerWrenchIcon from "@foxglove-studio/app/panels/NodePlayground/assets/hammer-wrench.svg";
-import nodePlaygroundDocs from "@foxglove-studio/app/panels/NodePlayground/index.help.md";
 import { Script } from "@foxglove-studio/app/panels/NodePlayground/script";
 import { getNodeProjectConfig } from "@foxglove-studio/app/players/UserNodePlayer/nodeTransformerWorker/typescript/projectConfig";
 import templates from "@foxglove-studio/app/players/UserNodePlayer/nodeTransformerWorker/typescript/templates";
-import userUtilsReadMe from "@foxglove-studio/app/players/UserNodePlayer/nodeTransformerWorker/typescript/userUtils/README.md";
 import { UserNodes } from "@foxglove-studio/app/types/panels";
 import { isNonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 
 const MenuWrapper = styled.div`
@@ -135,7 +134,6 @@ type Props = {
   deleteNode: (nodeId: string) => void;
   userNodes: UserNodes;
   selectedNodeId?: string;
-  otherMarkdownDocsForTest?: string;
   explorer: Explorer;
   updateExplorer: (explorer: Explorer) => void;
   setScriptOverride: (script: Script, maxDepth?: number) => void;
@@ -174,7 +172,6 @@ const Sidebar = ({
   selectNode,
   deleteNode,
   selectedNodeId,
-  otherMarkdownDocsForTest,
   explorer,
   updateExplorer,
   setScriptOverride,
@@ -182,7 +179,6 @@ const Sidebar = ({
   addNewNode,
 }: Props): React.ReactElement => {
   const nodesSelected = explorer === "nodes";
-  const docsSelected = explorer === "docs";
   const utilsSelected = explorer === "utils";
   const templatesSelected = explorer === "templates";
 
@@ -222,17 +218,6 @@ const Sidebar = ({
           selectedNodeId={selectedNodeId}
         />
       ),
-      docs: (
-        <SFlex>
-          <SidebarTitle title={"docs"} collapse={() => updateExplorer(undefined)} />
-          <TextContent style={{ backgroundColor: "transparent" }}>
-            {otherMarkdownDocsForTest ?? nodePlaygroundDocs}
-          </TextContent>
-          <br />
-          <br />
-          <TextContent style={{ backgroundColor: "transparent" }}>{userUtilsReadMe}</TextContent>
-        </SFlex>
-      ),
       utils: (
         <Flex col style={{ position: "relative" }}>
           <SidebarTitle
@@ -251,7 +236,6 @@ const Sidebar = ({
           ))}
         </Flex>
       ),
-
       templates: (
         <Flex col>
           <SidebarTitle
@@ -275,7 +259,6 @@ const Sidebar = ({
       addNewNode,
       deleteNode,
       gotoUtils,
-      otherMarkdownDocsForTest,
       script,
       selectNode,
       selectedNodeId,
@@ -314,15 +297,15 @@ const Sidebar = ({
         >
           <TemplateIcon />
         </Icon>
-        <Icon
-          dataTest="docs-explorer"
-          onClick={() => updateExplorer(docsSelected ? undefined : "docs")}
-          large
-          tooltip={"docs"}
-          style={{ color: docsSelected ? "inherit" : colors.DARK9 }}
+        <a
+          href={`${STUDIO_DOCS_URL}/utility-panels/node-playground`}
+          target="_blank"
+          rel="noreferrer"
         >
-          <HelpCircleIcon />
-        </Icon>
+          <Icon large tooltip={"docs"} style={{ color: colors.DARK9 }}>
+            <HelpCircleIcon />
+          </Icon>
+        </a>
       </MenuWrapper>
       <ExplorerWrapper show={explorer != undefined}>
         {explorer != undefined && explorers[explorer]}

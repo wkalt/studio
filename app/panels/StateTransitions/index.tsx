@@ -31,12 +31,12 @@ import TimeBasedChart, {
   TimeBasedChartTooltipData,
 } from "@foxglove-studio/app/components/TimeBasedChart";
 import { PanelConfig } from "@foxglove-studio/app/types/panels";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { darkColor, lineColors } from "@foxglove-studio/app/util/plotColors";
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 import { TimestampMethod, subtractTimes, toSec } from "@foxglove-studio/app/util/time";
 import { grey } from "@foxglove-studio/app/util/toolsColorScheme";
 
-import helpContent from "./index.help.md";
 import positiveModulo from "./positiveModulo";
 
 export const transitionableRosTypes = [
@@ -383,7 +383,10 @@ const StateTransitions = React.memo(function StateTransitions(props: Props) {
 
   return (
     <SRoot>
-      <PanelToolbar floating helpContent={helpContent} />
+      <PanelToolbar
+        floating
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/state-transitions`}
+      />
       <SAddButton show={isHovered}>
         <Button
           onClick={() =>

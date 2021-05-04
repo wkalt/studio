@@ -45,9 +45,9 @@ import PlotChart, {
 import PlotLegend from "@foxglove-studio/app/panels/Plot/PlotLegend";
 import PlotMenu from "@foxglove-studio/app/panels/Plot/PlotMenu";
 import { PanelConfig } from "@foxglove-studio/app/types/panels";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { fromSec, subtractTimes, toSec } from "@foxglove-studio/app/util/time";
 
-import helpContent from "./index.help.md";
 import { PlotConfig } from "./types";
 
 export { plotableRosTypes } from "./types";
@@ -279,7 +279,7 @@ function Plot(props: Props) {
   return (
     <Flex col clip center style={{ position: "relative" }}>
       <PanelToolbar
-        helpContent={helpContent}
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/plot`}
         floating
         menuContent={
           <PlotMenu

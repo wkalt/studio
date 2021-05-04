@@ -20,9 +20,8 @@ import Panel from "@foxglove-studio/app/components/Panel";
 import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import { Sparkline, SparklinePoint } from "@foxglove-studio/app/components/Sparkline";
 import { PlayerStateActiveData } from "@foxglove-studio/app/players/types";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { subtractTimes, toSec } from "@foxglove-studio/app/util/time";
-
-import helpContent from "./index.help.md";
 
 const TIME_RANGE = 5000;
 
@@ -119,7 +118,10 @@ export function UnconnectedPlaybackPerformance({
 
   return (
     <Flex col>
-      <PanelToolbar floating helpContent={helpContent} />
+      <PanelToolbar
+        floating
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/playback-performance`}
+      />
       <Flex col wrap center start style={{ lineHeight: 1, whiteSpace: "nowrap" }}>
         <PlaybackPerformanceItem points={perfPoints.current.speed} maximum={1.6} decimalPlaces={2}>
           &times; realtime

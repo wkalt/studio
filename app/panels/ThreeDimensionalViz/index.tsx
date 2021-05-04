@@ -23,7 +23,6 @@ import Panel from "@foxglove-studio/app/components/Panel";
 import PanelContext from "@foxglove-studio/app/components/PanelContext";
 import Layout from "@foxglove-studio/app/panels/ThreeDimensionalViz/TopicTree/Layout";
 import Transforms from "@foxglove-studio/app/panels/ThreeDimensionalViz/Transforms";
-import helpContent from "@foxglove-studio/app/panels/ThreeDimensionalViz/index.help.md";
 import {
   useTransformedCameraState,
   getNewCameraStateOnFollowChange,
@@ -32,6 +31,7 @@ import { ThreeDimensionalVizConfig } from "@foxglove-studio/app/panels/ThreeDime
 import withTransforms from "@foxglove-studio/app/panels/ThreeDimensionalViz/withTransforms";
 import { Frame, Topic } from "@foxglove-studio/app/players/types";
 import { SaveConfig } from "@foxglove-studio/app/types/panels";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 
 import { FrameCompatibilityDEPRECATED } from "./FrameCompatibility";
 
@@ -44,7 +44,7 @@ export type Props = {
   cleared?: boolean;
   config: ThreeDimensionalVizConfig;
   frame: Frame;
-  helpContent: Node | string;
+  helpUrl: string;
   saveConfig: Save3DConfig;
   setSubscriptions: (subscriptions: string[]) => void;
   topics: Topic[];
@@ -188,7 +188,7 @@ const BaseRenderer = (props: Props, ref: React.Ref<unknown>) => {
       followOrientation={followOrientation}
       followTf={followTf}
       frame={frame}
-      helpContent={helpContent}
+      helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/3d`}
       isPlaying={isPlaying}
       onAlignXYAxis={onAlignXYAxis}
       onCameraStateChange={onCameraStateChange}

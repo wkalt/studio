@@ -30,11 +30,10 @@ import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import TopicToRenderMenu from "@foxglove-studio/app/components/TopicToRenderMenu";
 import DiagnosticsHistory from "@foxglove-studio/app/panels/diagnostics/DiagnosticsHistory";
 import filterMap from "@foxglove-studio/app/util/filterMap";
-import { DIAGNOSTIC_TOPIC } from "@foxglove-studio/app/util/globalConstants";
+import { STUDIO_DOCS_URL, DIAGNOSTIC_TOPIC } from "@foxglove-studio/app/util/globalConstants";
 import toggle from "@foxglove-studio/app/util/toggle";
 
 import { Config as DiagnosticStatusConfig } from "./DiagnosticStatusPanel";
-import helpContent from "./DiagnosticSummary.help.md";
 import styles from "./DiagnosticSummary.module.scss";
 import {
   DiagnosticId,
@@ -172,7 +171,7 @@ function DiagnosticSummary(props: Props): JSX.Element {
   return (
     <Flex col className={styles.panel}>
       <PanelToolbar
-        helpContent={helpContent}
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/diagnostics/`}
         additionalIcons={topicToRenderMenu}
         menuContent={menuContent}
       >

@@ -281,20 +281,6 @@ storiesOf("panels/NodePlayground", module)
       </PanelSetup>
     );
   })
-  .add("sidebar open - docs explorer", () => {
-    return (
-      <PanelSetup
-        fixture={{ ...fixture, userNodes }}
-        onMount={(el: any) => {
-          setTimeout(() => {
-            el.querySelectorAll("[data-test=docs-explorer]")[0].click();
-          }, SIDEBAR_OPEN_CLICK_TIMEOUT);
-        }}
-      >
-        <NodePlayground config={{ selectedNodeId: "nodeId1" }} />
-      </PanelSetup>
-    );
-  })
   .add("sidebar open - utils explorer - selected utility", () => {
     return (
       <PanelSetup
@@ -325,7 +311,7 @@ storiesOf("panels/NodePlayground", module)
   })
   .add("sidebar - code snippets wrap", () => {
     const Story = () => {
-      const [explorer, updateExplorer] = React.useState<Explorer>("docs");
+      const [explorer, updateExplorer] = React.useState<Explorer>("nodes");
       return (
         <PanelSetup fixture={{ ...fixture, userNodes }}>
           <Sidebar

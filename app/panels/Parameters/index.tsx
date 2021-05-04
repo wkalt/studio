@@ -25,12 +25,12 @@ import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import { JSONInput } from "@foxglove-studio/app/components/input/JSONInput";
 import { usePreviousValue } from "@foxglove-studio/app/hooks/usePreviousValue";
 import { ParameterValue, PlayerCapabilities } from "@foxglove-studio/app/players/types";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 
 import AnimatedRow from "./AnimatedRow";
 import ParametersPanel from "./ParametersPanel";
 import ParametersTable from "./ParametersTable";
 import Scrollable from "./Scrollable";
-import helpContent from "./index.help.md";
 
 // The minimum amount of time to wait between showing the parameter update animation again
 export const ANIMATION_RESET_DELAY_MS = 3000;
@@ -90,7 +90,7 @@ function Parameters(): ReactElement {
   if (!canGetParams) {
     return (
       <>
-        <PanelToolbar floating helpContent={helpContent} />
+        <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/parameters`} />
         <EmptyState>Connect to a ROS source to view parameters</EmptyState>
       </>
     );
@@ -98,7 +98,7 @@ function Parameters(): ReactElement {
 
   return (
     <ParametersPanel>
-      <PanelToolbar helpContent={helpContent} floating />
+      <PanelToolbar helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/parameters`} floating />
       <Scrollable>
         <ParametersTable>
           <table>

@@ -42,6 +42,7 @@ import { CameraInfo, StampedMessage } from "@foxglove-studio/app/types/Messages"
 import { SaveConfig } from "@foxglove-studio/app/types/panels";
 import { nonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
 import filterMap from "@foxglove-studio/app/util/filterMap";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import naturalSort from "@foxglove-studio/app/util/naturalSort";
 import { getTopicsByTopicName } from "@foxglove-studio/app/util/selectors";
 import { colors as sharedColors } from "@foxglove-studio/app/util/sharedStyleConstants";
@@ -51,7 +52,6 @@ import toggle from "@foxglove-studio/app/util/toggle";
 
 import ImageCanvas from "./ImageCanvas";
 import imageCanvasStyles from "./ImageCanvas.module.scss";
-import helpContent from "./index.help.md";
 import style from "./index.module.scss";
 import {
   getCameraInfoTopic,
@@ -617,7 +617,7 @@ function ImageView(props: Props) {
     return (
       <PanelToolbar
         floating={cameraTopic !== ""}
-        helpContent={helpContent}
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/image`}
         menuContent={menuContent}
       >
         <div className={style.controls}>

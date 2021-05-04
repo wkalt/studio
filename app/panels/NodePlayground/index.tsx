@@ -31,7 +31,10 @@ import BottomBar from "@foxglove-studio/app/panels/NodePlayground/BottomBar";
 import Sidebar from "@foxglove-studio/app/panels/NodePlayground/Sidebar";
 import Playground from "@foxglove-studio/app/panels/NodePlayground/playground-icon.svg";
 import { UserNodes } from "@foxglove-studio/app/types/panels";
-import { DEFAULT_WEBVIZ_NODE_PREFIX } from "@foxglove-studio/app/util/globalConstants";
+import {
+  STUDIO_DOCS_URL,
+  DEFAULT_WEBVIZ_NODE_PREFIX,
+} from "@foxglove-studio/app/util/globalConstants";
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 
 import Config from "./Config";
@@ -85,26 +88,18 @@ const SWelcomeScreen = styled.div`
   }
 `;
 
-export type Explorer = undefined | "docs" | "nodes" | "utils" | "templates";
+export type Explorer = undefined | "nodes" | "utils" | "templates";
 
-const WelcomeScreen = ({
-  addNewNode,
-  updateExplorer,
-}: {
-  addNewNode: () => void;
-  updateExplorer: (explorer: Explorer) => void;
-}) => {
+const WelcomeScreen = ({ addNewNode }: { addNewNode: () => void }) => {
   return (
     <SWelcomeScreen>
       <Playground />
       <TextContent>
         Welcome to Node Playground! Get started by reading the{" "}
         <a
-          href=""
-          onClick={(e) => {
-            e.preventDefault();
-            updateExplorer("docs");
-          }}
+          href={`${STUDIO_DOCS_URL}/utility-panels/node-playground`}
+          target="_blank"
+          rel="noreferrer"
         >
           docs
         </a>
@@ -310,9 +305,7 @@ function NodePlayground(props: Props) {
           </Flex>
 
           <Stack grow style={{ overflow: "hidden " }}>
-            {selectedNodeId == undefined && (
-              <WelcomeScreen addNewNode={addNewNode as any} updateExplorer={updateExplorer} />
-            )}
+            {selectedNodeId == undefined && <WelcomeScreen addNewNode={addNewNode as any} />}
             <div
               data-nativeundoredo="true"
               style={{

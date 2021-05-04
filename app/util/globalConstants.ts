@@ -12,8 +12,9 @@
 //   You may not use this file except in compliance with the License.
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 
-// URL params
+// URLs & URL params
 // DANGER: if you change this you break existing urls
+export const STUDIO_DOCS_URL = "https://foxglove.dev/docs";
 export const REMOTE_BAG_URL_QUERY_KEY = "remote-bag-url";
 export const REMOTE_BAG_URL_2_QUERY_KEY = "remote-bag-url-2";
 export const ROSBRIDGE_WEBSOCKET_URL_QUERY_KEY = "rosbridge-websocket-url";

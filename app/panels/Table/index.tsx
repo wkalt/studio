@@ -36,10 +36,9 @@ import {
 import { RosObject } from "@foxglove-studio/app/players/types";
 import { SaveConfig } from "@foxglove-studio/app/types/panels";
 import { isNonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { ROBOTO_MONO } from "@foxglove-studio/app/util/sharedStyleConstants";
 import { toolsColorScheme } from "@foxglove-studio/app/util/toolsColorScheme";
-
-import helpContent from "./index.help.md";
 
 const STable = styled.table`
   border: none;
@@ -338,7 +337,7 @@ function TablePanel({ config, saveConfig }: Props) {
 
   return (
     <Flex col clip style={{ position: "relative" }}>
-      <PanelToolbar helpContent={helpContent}>
+      <PanelToolbar helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/table`}>
         <div style={{ width: "100%", lineHeight: "20px" }}>
           <MessagePathInput
             index={0}

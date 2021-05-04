@@ -37,7 +37,6 @@ import {
 } from "@foxglove-studio/app/actions/panels";
 import ChildToggle from "@foxglove-studio/app/components/ChildToggle";
 import Dropdown from "@foxglove-studio/app/components/Dropdown";
-import HelpModal from "@foxglove-studio/app/components/HelpModal";
 import Icon from "@foxglove-studio/app/components/Icon";
 import { Item, SubMenu } from "@foxglove-studio/app/components/Menu";
 import PanelContext from "@foxglove-studio/app/components/PanelContext";
@@ -55,7 +54,7 @@ import styles from "./index.module.scss";
 type Props = {
   children?: React.ReactNode;
   floating?: boolean;
-  helpContent?: React.ReactNode;
+  helpUrl?: string;
   menuContent?: React.ReactNode;
   additionalIcons?: React.ReactNode;
   hideToolbars?: boolean;
@@ -296,7 +295,7 @@ export default React.memo<Props>(function PanelToolbar({
   additionalIcons,
   children,
   floating = false,
-  helpContent,
+  helpUrl,
   hideToolbars = false,
   isUnknownPanel = false,
   menuContent,
@@ -305,7 +304,6 @@ export default React.memo<Props>(function PanelToolbar({
   const { isHovered = false, id, supportsStrictMode = true } = useContext(PanelContext) ?? {};
   const [containsOpen, setContainsOpen] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [showHelp, setShowHelp] = useState(false);
   const dispatch = useDispatch();
 
   const { store } = useContext(ReactReduxContext);
@@ -341,14 +339,16 @@ export default React.memo<Props>(function PanelToolbar({
             <AlertIcon />
           </Icon>
         )}
-        {Boolean(helpContent) && (
-          <Icon tooltip="Help" fade onClick={() => setShowHelp(true)}>
-            <HelpCircleOutlineIcon className={styles.icon} />
-          </Icon>
+        {Boolean(helpUrl) && (
+          <a href={helpUrl} target="_blank" rel="noreferrer">
+            <Icon tooltip="Help" fade>
+              <HelpCircleOutlineIcon className={styles.icon} />
+            </Icon>
+          </a>
         )}
       </>
     );
-  }, [additionalIcons, helpContent, supportsStrictMode]);
+  }, [additionalIcons, helpUrl, supportsStrictMode]);
 
   const { width, ref: sizeRef } = useResizeDetector({
     handleHeight: false,
@@ -364,7 +364,6 @@ export default React.memo<Props>(function PanelToolbar({
     <div ref={sizeRef}>
       <ChildToggle.ContainsOpen onChange={setContainsOpen}>
         {shareModal}
-        {showHelp && <HelpModal onRequestClose={() => setShowHelp(false)}>{helpContent}</HelpModal>}
         <div
           className={cx(styles.panelToolbarContainer, {
             [styles.floating!]: floating,

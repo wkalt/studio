@@ -17,12 +17,14 @@ import { MessageEvent } from "@foxglove-studio/app/players/types";
 import { JointState } from "@foxglove-studio/app/types/Messages";
 import { SaveConfig } from "@foxglove-studio/app/types/panels";
 import filterMap from "@foxglove-studio/app/util/filterMap";
-import { ROBOT_DESCRIPTION_PARAM } from "@foxglove-studio/app/util/globalConstants";
+import {
+  ROBOT_DESCRIPTION_PARAM,
+  STUDIO_DOCS_URL,
+} from "@foxglove-studio/app/util/globalConstants";
 
 import { JointValueSliders } from "./JointValueSliders";
 import OverlayControls from "./OverlayControls";
 import { Renderer } from "./Renderer";
-import helpContent from "./index.help.md";
 import useRobotDescriptionAsset from "./useRobotDescriptionAsset";
 
 export type EventTypes = {
@@ -176,7 +178,7 @@ function URDFViewer({ config, saveConfig }: Props) {
 
   return (
     <Flex col clip>
-      <PanelToolbar helpContent={helpContent}>
+      <PanelToolbar helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/urdf-viewer`}>
         <Stack grow horizontal verticalAlign="baseline">
           <Toggle
             inlineLabel

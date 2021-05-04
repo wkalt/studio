@@ -12,26 +12,23 @@
 //   You may not use this file except in compliance with the License.
 
 import HelpCircleOutlineIcon from "@mdi/svg/svg/help-circle-outline.svg";
-import { CSSProperties, PropsWithChildren, useState } from "react";
+import { CSSProperties } from "react";
 
-import HelpModal from "@foxglove-studio/app/components/HelpModal";
 import Icon from "@foxglove-studio/app/components/Icon";
 
 import styles from "./index.module.scss";
 
 type Props = {
   iconStyle?: CSSProperties;
+  url: string;
 };
 
-export default function HelpButton(props: PropsWithChildren<Props>): JSX.Element {
-  const [showHelp, setShowHelp] = useState<boolean>(false);
-
+export default function HelpButton(props: Props): JSX.Element {
   return (
-    <Icon tooltip="Help" fade onClick={() => setShowHelp(true)}>
-      {showHelp && (
-        <HelpModal onRequestClose={() => setShowHelp(false)}>{props.children}</HelpModal>
-      )}
-      <HelpCircleOutlineIcon className={styles.icon} style={props.iconStyle} />
-    </Icon>
+    <a href={props.url} target="_blank" rel="noreferrer">
+      <Icon tooltip="Help" fade>
+        <HelpCircleOutlineIcon className={styles.icon} style={props.iconStyle} />
+      </Icon>
+    </a>
   );
 }

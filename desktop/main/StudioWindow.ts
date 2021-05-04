@@ -15,6 +15,7 @@ import {
 import path from "path";
 
 import colors from "@foxglove-studio/app/styles/colors.module.scss";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { APP_NAME } from "@foxglove-studio/app/version";
 import Logger from "@foxglove/log";
 
@@ -237,16 +238,16 @@ function buildMenu(browserWindow: BrowserWindow): Menu {
         click: () => browserWindow.webContents.send("open-welcome-layout"),
       },
       {
-        label: "Message Path Syntax",
-        click: () => browserWindow.webContents.send("open-message-path-syntax-help"),
+        label: "Message path syntax",
+        click: () => shell.openExternal(`${STUDIO_DOCS_URL}/app-concepts/message-path-syntax`),
       },
       {
-        label: "Keyboard Shortcuts",
+        label: "Keyboard shortcuts",
         accelerator: "CommandOrControl+/",
         click: () => browserWindow.webContents.send("open-keyboard-shortcuts"),
       },
       {
-        label: "Learn More",
+        label: "Learn more",
         click: async () => shell.openExternal("https://foxglove.dev"),
       },
     ],

@@ -23,10 +23,9 @@ import { usePanelContext } from "@foxglove-studio/app/components/PanelContext";
 import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import TopicToRenderMenu from "@foxglove-studio/app/components/TopicToRenderMenu";
 import { isNonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
-import { DIAGNOSTIC_TOPIC } from "@foxglove-studio/app/util/globalConstants";
+import { DIAGNOSTIC_TOPIC, STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 
 import DiagnosticStatus from "./DiagnosticStatus";
-import helpContent from "./DiagnosticStatusPanel.help.md";
 import DiagnosticsHistory, { DiagnosticAutocompleteEntry } from "./DiagnosticsHistory";
 import { DiagnosticInfo, getDisplayName, trimHardwareId } from "./util";
 
@@ -113,7 +112,11 @@ function DiagnosticStatusPanel(props: Props) {
 
           return (
             <>
-              <PanelToolbar floating helpContent={helpContent} additionalIcons={topicToRenderMenu}>
+              <PanelToolbar
+                floating
+                helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/diagnostics/`}
+                additionalIcons={topicToRenderMenu}
+              >
                 <Autocomplete
                   placeholder={selectedDisplayName ?? "Select a diagnostic"}
                   items={buffer.sortedAutocompleteEntries}

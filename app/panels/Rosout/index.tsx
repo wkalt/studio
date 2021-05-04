@@ -19,12 +19,12 @@ import Panel from "@foxglove-studio/app/components/Panel";
 import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import TopicToRenderMenu from "@foxglove-studio/app/components/TopicToRenderMenu";
 import { MessageEvent } from "@foxglove-studio/app/players/types";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 
 import FilterBar, { FilterBarProps } from "./FilterBar";
 import LogList from "./LogList";
 import LogMessage from "./LogMessage";
 import filterMessages from "./filter";
-import helpContent from "./index.help.md";
 import { RosgraphMsgs$Log } from "./types";
 
 type Config = {
@@ -79,7 +79,11 @@ const RosoutPanel = React.memo(({ config, saveConfig }: Props) => {
 
   return (
     <Stack verticalFill>
-      <PanelToolbar floating helpContent={helpContent} additionalIcons={topicToRenderMenu}>
+      <PanelToolbar
+        floating
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/rosout`}
+        additionalIcons={topicToRenderMenu}
+      >
         <FilterBar
           searchTerms={searchTermsSet}
           minLogLevel={minLogLevel}

@@ -145,7 +145,7 @@ type Props = LayoutToolbarSharedProps &
     cleared?: boolean;
     currentTime: Time;
     frame?: Frame;
-    helpContent: Node | string;
+    helpUrl: string;
     isPlaying?: boolean;
     config: ThreeDimensionalVizConfig;
     saveConfig: Save3DConfig;
@@ -208,7 +208,7 @@ export default function Layout({
   followOrientation,
   followTf,
   frame,
-  helpContent,
+  helpUrl,
   isPlaying = false,
   onAlignXYAxis,
   onCameraStateChange,
@@ -837,7 +837,7 @@ export default function Layout({
             autoTextBackgroundColor={autoTextBackgroundColor}
             checkedKeys={checkedKeys}
             flattenMarkers={!!flattenMarkers}
-            helpContent={helpContent}
+            helpUrl={helpUrl}
             saveConfig={saveConfig}
             settingsByKey={settingsByKey}
           />

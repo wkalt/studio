@@ -54,7 +54,11 @@ import getDiff, {
   diffLabelsByLabelText,
 } from "@foxglove-studio/app/panels/RawMessages/getDiff";
 import { Topic } from "@foxglove-studio/app/players/types";
-import { jsonTreeTheme, SECOND_SOURCE_PREFIX } from "@foxglove-studio/app/util/globalConstants";
+import {
+  STUDIO_DOCS_URL,
+  jsonTreeTheme,
+  SECOND_SOURCE_PREFIX,
+} from "@foxglove-studio/app/util/globalConstants";
 import { enumValuesByDatatypeAndField } from "@foxglove-studio/app/util/selectors";
 
 import { HighlightedValue, SDiffSpan, MaybeCollapsedValue } from "./Diff";
@@ -65,7 +69,6 @@ import {
   getValueActionForValue,
   getStructureItemForPath,
 } from "./getValueActionForValue";
-import helpContent from "./index.help.md";
 import styles from "./index.module.scss";
 import { DATA_ARRAY_PREVIEW_LIMIT, getItemStringForDiff } from "./utils";
 
@@ -498,7 +501,7 @@ function RawMessages(props: Props) {
 
   return (
     <Flex col clip style={{ position: "relative" }}>
-      <PanelToolbar helpContent={helpContent}>
+      <PanelToolbar helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/raw-messages`}>
         <Icon tooltip="Toggle diff" medium fade onClick={onToggleDiff} active={diffEnabled}>
           <PlusMinusIcon />
         </Icon>

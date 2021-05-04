@@ -27,8 +27,8 @@ import {
   TabActions,
   TabDndContext,
 } from "@foxglove-studio/app/panels/Tab/TabDndContext";
-import helpContent from "@foxglove-studio/app/panels/Tab/index.help.md";
 import { TabConfig } from "@foxglove-studio/app/types/layouts";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { colors } from "@foxglove-studio/app/util/sharedStyleConstants";
 
 const STabbedToolbar = styled.div<{ highlight: boolean }>`
@@ -94,7 +94,7 @@ export function TabbedToolbar(props: Props): JSX.Element {
 
   return (
     <STabbedToolbar highlight={isOver}>
-      <PanelToolbar helpContent={helpContent} showHiddenControlsOnHover>
+      <PanelToolbar helpUrl={`${STUDIO_DOCS_URL}/utility-panels/tab`} showHiddenControlsOnHover>
         <STabs ref={dropRef} data-test="toolbar-droppable">
           {tabs.map((tab, i) => (
             <DraggableToolbarTab
