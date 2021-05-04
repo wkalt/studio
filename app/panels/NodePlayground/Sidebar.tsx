@@ -19,7 +19,6 @@ import styled from "styled-components";
 
 import Flex from "@foxglove-studio/app/components/Flex";
 import Icon from "@foxglove-studio/app/components/Icon";
-import TextContent from "@foxglove-studio/app/components/TextContent";
 import { Explorer } from "@foxglove-studio/app/panels/NodePlayground";
 import TemplateIcon from "@foxglove-studio/app/panels/NodePlayground/assets/file-document-edit.svg";
 import HammerWrenchIcon from "@foxglove-studio/app/panels/NodePlayground/assets/hammer-wrench.svg";
@@ -86,16 +85,6 @@ const TemplateItem = styled.li`
   }
   &:hover {
     background-color: ${colors.DARK9};
-  }
-`;
-
-const SFlex = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-
-  pre {
-    white-space: pre-wrap;
   }
 `;
 

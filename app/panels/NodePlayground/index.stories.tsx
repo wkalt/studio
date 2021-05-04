@@ -14,9 +14,7 @@
 import { storiesOf } from "@storybook/react";
 
 import { setUserNodes } from "@foxglove-studio/app/actions/panels";
-import NodePlayground, { Explorer } from "@foxglove-studio/app/panels/NodePlayground";
-import Sidebar from "@foxglove-studio/app/panels/NodePlayground/Sidebar";
-import testDocs from "@foxglove-studio/app/panels/NodePlayground/index.test.md";
+import NodePlayground from "@foxglove-studio/app/panels/NodePlayground";
 import rawUserUtils from "@foxglove-studio/app/players/UserNodePlayer/nodeTransformerWorker/typescript/rawUserUtils";
 import { UserNodeLog } from "@foxglove-studio/app/players/UserNodePlayer/types";
 import PanelSetup from "@foxglove-studio/app/stories/PanelSetup";
@@ -308,35 +306,6 @@ storiesOf("panels/NodePlayground", module)
         <NodePlayground />
       </PanelSetup>
     );
-  })
-  .add("sidebar - code snippets wrap", () => {
-    const Story = () => {
-      const [explorer, updateExplorer] = React.useState<Explorer>("nodes");
-      return (
-        <PanelSetup fixture={{ ...fixture, userNodes }}>
-          <Sidebar
-            explorer={explorer}
-            updateExplorer={updateExplorer}
-            selectedNodeId={undefined}
-            userNodes={userNodes}
-            deleteNode={() => {
-              // no-op
-            }}
-            selectNode={() => {
-              // no-op
-            }}
-            otherMarkdownDocsForTest={testDocs}
-            setScriptOverride={() => {
-              // no-op
-            }}
-            addNewNode={() => {
-              // no-op
-            }}
-          />
-        </PanelSetup>
-      );
-    };
-    return <Story />;
   })
   .add("editor loading state", () => {
     const NeverLoad = () => {

@@ -37,7 +37,6 @@ import TinyConnectionPicker from "@foxglove-studio/app/components/TinyConnection
 import Toolbar from "@foxglove-studio/app/components/Toolbar";
 import { useAppConfiguration } from "@foxglove-studio/app/context/AppConfigurationContext";
 import { useAssets } from "@foxglove-studio/app/context/AssetContext";
-import LinkHandlerContext from "@foxglove-studio/app/context/LinkHandlerContext";
 import { usePlayerSelection } from "@foxglove-studio/app/context/PlayerSelectionContext";
 import useElectronFilesToOpen from "@foxglove-studio/app/hooks/useElectronFilesToOpen";
 import welcomeLayout from "@foxglove-studio/app/layouts/welcomeLayout";
@@ -183,7 +182,7 @@ export default function Workspace(): JSX.Element {
     playerPresence === PlayerPresence.NOT_PRESENT || playerCapabilities.includes("playbackControl");
 
   return (
-    <LinkHandlerContext.Provider value={() => {}}>
+    <>
       <DocumentDropListener filesSelected={dropHandler} allowedExtensions={allowedDropExtensions}>
         <DropOverlay>
           <div style={{ fontSize: "4em", marginBottom: "1em" }}>Drop a file here</div>
@@ -236,6 +235,6 @@ export default function Workspace(): JSX.Element {
         <PanelLayout />
         {showPlaybackControls && <PlaybackControls />}
       </div>
-    </LinkHandlerContext.Provider>
+    </>
   );
 }
