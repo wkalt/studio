@@ -29,6 +29,7 @@ import usePublisher from "@foxglove-studio/app/hooks/usePublisher";
 import { PlayerCapabilities, Topic } from "@foxglove-studio/app/players/types";
 import colors from "@foxglove-studio/app/styles/colors.module.scss";
 import { isNonEmptyOrUndefined } from "@foxglove-studio/app/util/emptyOrUndefined";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { useRethrow } from "@foxglove/hooks";
 
 import buildSampleMessage from "./buildSampleMessage";
@@ -225,7 +226,11 @@ function Publish(props: Props) {
 
   return (
     <Flex col style={{ height: "100%", padding: "12px" }}>
-      <PanelToolbar floating menuContent={menuContent} />
+      <PanelToolbar
+        floating
+        menuContent={menuContent}
+        helpUrl={`${STUDIO_DOCS_URL}/visualization-panels/publish`}
+      />
       {advancedView && (
         <SRow>
           <SSpan>Topic:</SSpan>

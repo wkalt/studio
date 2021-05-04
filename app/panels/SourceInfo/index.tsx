@@ -21,6 +21,7 @@ import PanelToolbar from "@foxglove-studio/app/components/PanelToolbar";
 import SelectableTimestamp from "@foxglove-studio/app/components/SelectableTimestamp";
 import clipboard from "@foxglove-studio/app/util/clipboard";
 import { formatDuration } from "@foxglove-studio/app/util/formatTime";
+import { STUDIO_DOCS_URL } from "@foxglove-studio/app/util/globalConstants";
 import { subtractTimes, toSec } from "@foxglove-studio/app/util/time";
 
 const STableContainer = styled.div`
@@ -76,7 +77,7 @@ function SourceInfo() {
   if (!startTime || !endTime) {
     return (
       <>
-        <PanelToolbar floating />
+        <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/utility-panels/data-source-info`} />
         <EmptyState>Waiting for data...</EmptyState>
       </>
     );
@@ -85,7 +86,7 @@ function SourceInfo() {
   const duration = subtractTimes(endTime, startTime);
   return (
     <>
-      <PanelToolbar floating />
+      <PanelToolbar floating helpUrl={`${STUDIO_DOCS_URL}/utility-panels/data-source-info`} />
       <STableContainer>
         <SHeader>
           <SHeaderItem>
