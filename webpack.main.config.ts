@@ -44,6 +44,11 @@ export default (_: unknown, argv: WebpackArgv): Configuration => {
 
     module: {
       rules: [
+        // Add support for native node modules
+        {
+          test: /\.node$/,
+          use: "node-loader",
+        },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,

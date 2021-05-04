@@ -13,6 +13,7 @@ import installExtension, {
   REDUX_DEVTOOLS,
 } from "electron-devtools-installer";
 import { autoUpdater } from "electron-updater";
+import { appId, ToastNotification } from "electron-windows-notifications";
 import fs from "fs";
 import { URL } from "universal-url";
 
@@ -33,6 +34,33 @@ const log = Logger.getLogger(__filename);
 log.info(`${APP_NAME} ${APP_VERSION}`);
 
 const isProduction = process.env.NODE_ENV === "production";
+
+const notification = new ToastNotification({
+  appId: appId,
+  template: `
+    <toast>
+      <visual>
+        <binding template="ToastGeneric">
+          <text>%s</text>
+          <progress
+              title="%s"
+              value="%d"
+              valueStringOverride="%s"
+              status="%s"/>
+        </binding>
+      </visual>
+    </toast>`,
+  strings: [
+    "Downloading your weekly playlist...",
+    "Weekly playlist",
+    "0.6",
+    "15/26 songs",
+    "Downloading...",
+  ],
+});
+
+notification.on("activated", () => console.log("Activated!"));
+notification.show();
 
 // Suppress Electron Security Warning in development
 // See the comment for the webSecurity setting on browser window

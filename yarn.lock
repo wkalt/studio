@@ -2765,6 +2765,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nodert-win10-20h1/windows.applicationmodel@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@nodert-win10-20h1/windows.applicationmodel@npm:0.1.0"
+  dependencies:
+    nan: latest
+    node-gyp: latest
+  checksum: 2890ff8c37e5a97a5ef355a04929e3eb287c4b27cd06c641f179fbb2aaeefd04836f29decc008a7cde4d0a927e84920b9dfdd7ac08a18a47ef59baffd5e60b3f
+  languageName: node
+  linkType: hard
+
+"@nodert-win10-20h1/windows.data.xml.dom@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@nodert-win10-20h1/windows.data.xml.dom@npm:0.1.0"
+  dependencies:
+    nan: latest
+    node-gyp: latest
+  checksum: 0877d72ebb8c97568d20ec91f9da3cd4d12016c55c6e4472c8b4a9ddbcd76b31216f7044cf0cdef482ea4929a97243085bb1b8b305a9562e1d27e50c6d048fc2
+  languageName: node
+  linkType: hard
+
+"@nodert-win10-20h1/windows.ui.notifications@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@nodert-win10-20h1/windows.ui.notifications@npm:0.1.0"
+  dependencies:
+    nan: latest
+    node-gyp: latest
+  checksum: bf981edfd1dfa438df510f3d415d31fba97421daf493c57a4c977946522e741751263b49870f81dd9dbd73c8f61ef0144efb746aee25912dd137ac7e5b7a5a3b
+  languageName: node
+  linkType: hard
+
 "@npmcli/move-file@npm:^1.0.1":
   version: 1.1.2
   resolution: "@npmcli/move-file@npm:1.1.2"
@@ -4525,6 +4555,12 @@ __metadata:
   checksum: b312abefc19080dc1989bf0efc0718aee09fb0380f49d0d5f5aeb5df0a4a5baa81dedc933dff964b9008d1c6be4c5362187eaa1d2e0dd2ceb6a2004d355dfa57
   languageName: node
   linkType: hard
+
+"@types/electron-windows-notifications@workspace:packages/@types/electron-windows-notifications":
+  version: 0.0.0-use.local
+  resolution: "@types/electron-windows-notifications@workspace:packages/@types/electron-windows-notifications"
+  languageName: unknown
+  linkType: soft
 
 "@types/emscripten@npm:1.39.4":
   version: 1.39.4
@@ -10974,6 +11010,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"electron-windows-notifications@https://github.com/foxglove/electron-windows-notifications.git#commit=e4cff311be5481976ef23ab1b9cf3f7e96dc9d36":
+  version: 3.0.8-foxglove1
+  resolution: "electron-windows-notifications@https://github.com/foxglove/electron-windows-notifications.git#commit=e4cff311be5481976ef23ab1b9cf3f7e96dc9d36"
+  dependencies:
+    "@nodert-win10-20h1/windows.applicationmodel": ^0.1.0
+    "@nodert-win10-20h1/windows.data.xml.dom": ^0.1.0
+    "@nodert-win10-20h1/windows.ui.notifications": ^0.1.0
+    debug: ^4.3.1
+    is-electron-renderer: ^2.0.1
+    sanitize-xml-string: ^1.1.0
+    uuid: ^8.3.2
+    xml-escape: ^1.1.0
+  checksum: 6721fd828b23661fc25dd338a2eac65120d86ca9f41c84c1bf59ea5bef12cb68d4e555a69b0d0e6b954443af4deca2adf3188b27790616f986aa756d42f123a6
+  languageName: node
+  linkType: hard
+
 "electron@npm:13.0.0-beta.13":
   version: 13.0.0-beta.13
   resolution: "electron@npm:13.0.0-beta.13"
@@ -12720,6 +12772,7 @@ __metadata:
     "@types/case-sensitive-paths-webpack-plugin": 2.1.5
     "@types/circular-dependency-plugin": ^5.0.2
     "@types/electron-devtools-installer": 2.2.0
+    "@types/electron-windows-notifications": "workspace:packages/@types/electron-windows-notifications"
     "@types/jest": 26.0.22
     "@types/license-checker": ^25.0.1
     "@types/nearley": 2.11.1
@@ -12746,6 +12799,7 @@ __metadata:
     electron-notarize: 1.0.0
     electron-squirrel-startup: 1.0.0
     electron-updater: 4.3.8
+    electron-windows-notifications: "https://github.com/foxglove/electron-windows-notifications.git#commit=e4cff311be5481976ef23ab1b9cf3f7e96dc9d36"
     eslint: 7.23.0
     eslint-config-prettier: 8.1.0
     eslint-import-resolver-webpack: 0.13.0
@@ -14914,6 +14968,13 @@ __metadata:
   version: 1.0.3
   resolution: "is-dotfile@npm:1.0.3"
   checksum: 82be54d6d57710d393c2275a63f4c60b33bfe5e21080899073b4ef315f13c9017891aed3477c2c1ecfc43b2a1c2180151fad8fab02aba930473e88b00393501f
+  languageName: node
+  linkType: hard
+
+"is-electron-renderer@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "is-electron-renderer@npm:2.0.1"
+  checksum: 1860eb2bf665c4d65c334670f2f059629d189c4d5f8bdbb44b93152d1b97f2efecfdd4fd4d7fe9d9c4dff37716ed52cc43f99a30e55edf59a4ddbc5cfe2852e2
   languageName: node
   linkType: hard
 
@@ -18084,7 +18145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.12.1":
+"nan@npm:^2.12.1, nan@npm:latest":
   version: 2.14.2
   resolution: "nan@npm:2.14.2"
   dependencies:
@@ -22591,6 +22652,13 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"sanitize-xml-string@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "sanitize-xml-string@npm:1.1.0"
+  checksum: bf1310af3ba41202b0812bbc32200dc2c67093449c79da5f53a20f966ea544516c03523e7b851e706afe7c11962cdc160949e9b077283f43143a9870446bfe14
+  languageName: node
+  linkType: hard
+
 "sass-loader@npm:11.0.1":
   version: 11.0.1
   resolution: "sass-loader@npm:11.0.1"
@@ -26450,6 +26518,13 @@ typescript@4.2.2:
   version: 4.0.0
   resolution: "xdg-basedir@npm:4.0.0"
   checksum: 928953cb7dda8e2475932f748847a3aae751f44864a0067b03e5ca66820a36e1e9ffb647f9b06fb68ebcb0b9d06d5aee630717a1d2501be14cec99f82efa2fe6
+  languageName: node
+  linkType: hard
+
+"xml-escape@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "xml-escape@npm:1.1.0"
+  checksum: 8e0348b81e746f4014425fd0870241bdd8b2eda4bba0587f00a97690badb0b966a3193ff377b129ad00ca1aa139694e5b4f583d9d4a9cdd37c28f35f4c00ec6b
   languageName: node
   linkType: hard
 
