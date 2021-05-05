@@ -4,8 +4,10 @@
 
 import { init as initSentry } from "@sentry/electron";
 import { contextBridge, ipcRenderer } from "electron";
+import { readdir, readFile } from "fs/promises";
 import { machineId } from "node-machine-id";
 import os from "os";
+import { dirname, join as pathJoin } from "path";
 
 import type { OsContext, OsContextForwardedEvent } from "@foxglove-studio/app/OsContext";
 import { NetworkInterface } from "@foxglove-studio/app/OsContext";
@@ -14,6 +16,7 @@ import { PreloaderSockets } from "@foxglove/electron-socket/preloader";
 import Logger from "@foxglove/log";
 
 import LocalFileStorage from "./LocalFileStorage";
+import { fileUrl } from "./fileUrl";
 
 const log = Logger.getLogger(__filename);
 
@@ -124,6 +127,33 @@ const ctx: OsContext = {
 
   getDeepLinks: (): string[] => {
     return window.process.argv.filter((arg) => arg.startsWith("foxglove://"));
+  },
+
+  getExtensionUris: async (): Promise<string[]> => {
+    const uris: string[] = [];
+
+    const homePath = (await ipcRenderer.invoke("getHomePath")) as string;
+    const rootFolder = pathJoin(homePath, ".foxglove-studio", "extensions");
+    const rootFolderContents = await readdir(rootFolder, { withFileTypes: true });
+    for (const entry of rootFolderContents) {
+      if (entry.isDirectory()) {
+        const packagePath = pathJoin(rootFolder, entry.name, "package.json");
+        try {
+          const packageData = await readFile(packagePath, { encoding: "utf8" });
+          const packageJson = JSON.parse(packageData);
+          const entryPoint = packageJson.main;
+          if (typeof entryPoint === "string" && entryPoint.length > 0) {
+            const entryPointPath = pathJoin(dirname(packagePath), entryPoint);
+            const url = fileUrl(entryPointPath);
+            uris.push(url);
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
+
+    return uris;
   },
 
   // Context bridge cannot expose "classes" only exposes functions

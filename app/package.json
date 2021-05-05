@@ -97,6 +97,7 @@
     "@types/cytoscape": "^3",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "1.0.6",
+    "@types/foxglove-studio": "workspace:packages/@types/foxglove-studio",
     "@types/gl-matrix": "3.2.0",
     "@types/hammerjs": "2.0.39",
     "@types/http-server": "^0.10.1",

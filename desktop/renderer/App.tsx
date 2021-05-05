@@ -24,6 +24,7 @@ import StudioToastProvider from "@foxglove-studio/app/components/StudioToastProv
 import AnalyticsProvider from "@foxglove-studio/app/context/AnalyticsProvider";
 import { AssetsProvider } from "@foxglove-studio/app/context/AssetContext";
 import ExperimentalFeaturesLocalStorageProvider from "@foxglove-studio/app/context/ExperimentalFeaturesLocalStorageProvider";
+import ExtensionsProvider from "@foxglove-studio/app/context/ExtensionsProvider";
 import ModalHost from "@foxglove-studio/app/context/ModalHost";
 import OsContextAppConfigurationProvider from "@foxglove-studio/app/context/OsContextAppConfigurationProvider";
 import OsContextLayoutStorageProvider from "@foxglove-studio/app/context/OsContextLayoutStorageProvider";
@@ -100,6 +101,7 @@ export default function App(): ReactElement {
     <ExperimentalFeaturesLocalStorageProvider features={experimentalFeatures} />,
     <PlayerManager playerSources={playerSources} />,
     <AssetsProvider loaders={assetLoaders} />,
+    <ExtensionsProvider />,
     /* eslint-enable react/jsx-key */
   ];
 

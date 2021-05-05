@@ -13,3 +13,6 @@ storybook-static/
 !.yarn/plugins
 !.yarn/sdks
 .pnp.*
+
+# Extensions
+*.fgsx

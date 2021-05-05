@@ -80,6 +80,9 @@ export interface OsContext {
   // Get an array of deep links provided on app launch
   getDeepLinks: () => string[];
 
+  // Get an array of available extension URIs
+  getExtensionUris: () => Promise<string[]>;
+
   // file backed key/value storage
   storage: Storage;
 }
