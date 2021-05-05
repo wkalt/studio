@@ -4,7 +4,7 @@
   "description": "",
   "version": "0.0.1",
   "engines": {
-    "foxglove-studio": "^0.7.0"
+    "@foxglove/studio": "^0.7.0"
   },
   "main": "./dist/extension.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "lint": "eslint src --ext ts"
   },
   "devDependencies": {
-    "@types/foxglove-studio": "workspace:packages/@types/foxglove-studio",
+    "@foxglove/studio": "workspace:packages/@foxglove/studio",
     "@typescript-eslint/eslint-plugin": "4.21.0",
     "@typescript-eslint/parser": "4.21.0",
     "bestzip": "2.2.0",

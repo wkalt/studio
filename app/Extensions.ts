@@ -2,9 +2,8 @@
 // License, v2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-import type { ExtensionContext } from "foxglove-studio";
-
 import Logger from "@foxglove/log";
+import type { ExtensionContext } from "@foxglove/studio";
 
 import { Extension } from "./Extension";
 import OsContextSingleton from "./OsContextSingleton";
@@ -34,12 +33,6 @@ export class Extensions {
 
     for (const ext of this.loaded) {
       ext.activate(ctx);
-    }
-  }
-
-  deactivate(): void {
-    for (const ext of this.loaded) {
-      ext.deactivate();
     }
   }
 }
