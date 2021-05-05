@@ -1,0 +1,29 @@
+{
+  "name": "@foxglove/fox",
+  "version": "0.1.0",
+  "description": "Foxglove Studio Extension Manager",
+  "license": "MPL-2.0",
+  "main": "dist/api.js",
+  "typings": "dist/api.d.ts",
+  "bin": "dist/fox",
+  "scripts": {
+    "copy-fox": "copyfiles -f src/fox dist",
+    "compile": "tsc && yarn copy-fox",
+    "watch": "yarn copy-fox && tsc --watch",
+    "test": "jest",
+    "prepublishOnly": "tsc && yarn copy-fox && yarn test",
+    "fox": "node dist/fox"
+  },
+  "engines": {
+    "node": ">= 12"
+  },
+  "devDependencies": {
+    "@types/copyfiles": "^2",
+    "@types/node": "^12",
+    "copyfiles": "2.4.1",
+    "typescript": "4.2.2"
+  },
+  "dependencies": {
+    "commander": "7.2.0"
+  }
+}
