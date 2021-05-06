@@ -10,7 +10,7 @@
 //   found at http://www.apache.org/licenses/LICENSE-2.0
 //   You may not use this file except in compliance with the License.
 
-import { ReactElement, useState, useEffect, useMemo, Suspense, PropsWithChildren } from "react";
+import { ReactElement, useState, useEffect, useMemo, Suspense } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Provider as ReduxProvider } from "react-redux";
@@ -18,6 +18,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import OsContextSingleton from "@foxglove-studio/app/OsContextSingleton";
 import ErrorBoundary from "@foxglove-studio/app/components/ErrorBoundary";
 import LayoutStorageReduxAdapter from "@foxglove-studio/app/components/LayoutStorageReduxAdapter";
+import MultiProvider from "@foxglove-studio/app/components/MultiProvider";
 import { NativeFileMenuPlayerSelection } from "@foxglove-studio/app/components/NativeFileMenuPlayerSelection";
 import PlayerManager from "@foxglove-studio/app/components/PlayerManager";
 import StudioToastProvider from "@foxglove-studio/app/components/StudioToastProvider";
@@ -30,10 +31,11 @@ import OsContextAppConfigurationProvider from "@foxglove-studio/app/context/OsCo
 import OsContextLayoutStorageProvider from "@foxglove-studio/app/context/OsContextLayoutStorageProvider";
 import { PlayerSourceDefinition } from "@foxglove-studio/app/context/PlayerSelectionContext";
 import WindowGeometryContext from "@foxglove-studio/app/context/WindowGeometryContext";
-import experimentalFeatures from "@foxglove-studio/app/experimentalFeatures";
 import URDFAssetLoader from "@foxglove-studio/app/services/URDFAssetLoader";
 import getGlobalStore from "@foxglove-studio/app/store/getGlobalStore";
 import ThemeProvider from "@foxglove-studio/app/theme/ThemeProvider";
+
+import NativeAppMenuProvider from "./components/NativeAppMenuProvider";
 
 const BuiltinPanelCatalogProvider = React.lazy(
   () => import("@foxglove-studio/app/context/BuiltinPanelCatalogProvider"),
@@ -41,16 +43,7 @@ const BuiltinPanelCatalogProvider = React.lazy(
 
 const Workspace = React.lazy(() => import("@foxglove-studio/app/Workspace"));
 
-function AllProviders({ providers, children }: PropsWithChildren<{ providers: JSX.Element[] }>) {
-  return (
-    <>
-      {providers.reduceRight(
-        (wrappedChildren, provider) => React.cloneElement(provider, undefined, wrappedChildren),
-        children,
-      )}
-    </>
-  );
-}
+const DEMO_BAG_URL = "https://storage.googleapis.com/foxglove-public-assets/demo.bag";
 
 export default function App(): ReactElement {
   const globalStore = getGlobalStore();
@@ -98,26 +91,26 @@ export default function App(): ReactElement {
     <StudioToastProvider />,
     <ReduxProvider store={globalStore} />,
     <AnalyticsProvider />,
-    <ExperimentalFeaturesLocalStorageProvider features={experimentalFeatures} />,
     <PlayerManager playerSources={playerSources} />,
     <AssetsProvider loaders={assetLoaders} />,
+    <NativeAppMenuProvider />,
     <ExtensionsProvider />,
     /* eslint-enable react/jsx-key */
   ];
 
   return (
     <ErrorBoundary>
-      <AllProviders providers={providers}>
+      <MultiProvider providers={providers}>
         <LayoutStorageReduxAdapter />
         <NativeFileMenuPlayerSelection />
         <DndProvider backend={HTML5Backend}>
           <Suspense fallback={<></>}>
             <BuiltinPanelCatalogProvider>
-              <Workspace />
+              <Workspace demoBagUrl={DEMO_BAG_URL} />
             </BuiltinPanelCatalogProvider>
           </Suspense>
         </DndProvider>
-      </AllProviders>
+      </MultiProvider>
     </ErrorBoundary>
   );
 }

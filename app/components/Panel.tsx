@@ -61,14 +61,12 @@ import Flex from "@foxglove-studio/app/components/Flex";
 import Icon from "@foxglove-studio/app/components/Icon";
 import KeyListener from "@foxglove-studio/app/components/KeyListener";
 import PanelContext from "@foxglove-studio/app/components/PanelContext";
-import { useExperimentalFeature } from "@foxglove-studio/app/context/ExperimentalFeaturesContext";
 import { usePanelCatalog } from "@foxglove-studio/app/context/PanelCatalogContext";
 import usePanelDrag from "@foxglove-studio/app/hooks/usePanelDrag";
 import { State } from "@foxglove-studio/app/reducers";
 import { TabPanelConfig } from "@foxglove-studio/app/types/layouts";
 import {
   CreateTabPanelPayload,
-  EditHistoryOptions,
   SaveConfigsPayload,
   SaveFullConfigPayload,
   PanelConfig,
@@ -216,10 +214,7 @@ export default function Panel<Config extends PanelConfig>(
 
     // Mix partial config with current config or `defaultConfig`
     const saveCompleteConfig = useCallback(
-      (
-        configToSave: Partial<Config>,
-        options: { historyOptions?: EditHistoryOptions } | undefined,
-      ) => {
+      (configToSave: Partial<Config>) => {
         if (saveConfig) {
           saveConfig(configToSave as any);
         }
@@ -228,7 +223,6 @@ export default function Panel<Config extends PanelConfig>(
             configs: [
               { id: childId, config: configToSave, defaultConfig: PanelComponent.defaultConfig },
             ],
-            historyOptions: options?.historyOptions,
           });
         }
       },
@@ -236,12 +230,8 @@ export default function Panel<Config extends PanelConfig>(
     );
 
     const updatePanelConfig = useCallback(
-      (
-        panelType: string,
-        perPanelFunc: (arg0: PanelConfig) => PanelConfig,
-        historyOptions?: EditHistoryOptions,
-      ) => {
-        actions.saveFullPanelConfig({ panelType, perPanelFunc, historyOptions });
+      (panelType: string, perPanelFunc: (arg0: PanelConfig) => PanelConfig) => {
+        actions.saveFullPanelConfig({ panelType, perPanelFunc });
       },
       [actions],
     );
@@ -502,7 +492,6 @@ export default function Panel<Config extends PanelConfig>(
       [panelComponentConfig, saveCompleteConfig],
     );
 
-    const isDemoMode = useExperimentalFeature("demoMode");
     const renderCount = useRef(0);
 
     const perfInfo = useRef<HTMLDivElement>(ReactNull);
@@ -568,12 +557,12 @@ export default function Panel<Config extends PanelConfig>(
             className={cx({
               [styles.root!]: true,
               [styles.rootFullScreen!]: fullScreen,
-              [styles.selected!]: isSelected && !isDemoMode,
+              [styles.selected!]: isSelected,
             })}
             col
             dataTest={`panel-mouseenter-container ${childId ?? ""}`}
             clip
-            innerRef={(el) => {
+            ref={(el) => {
               connectOverlayDragPreview(el);
               connectToolbarDragPreview(el);
             }}

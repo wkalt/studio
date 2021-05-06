@@ -32,6 +32,14 @@ if (allowCrashReporting && typeof process.env.SENTRY_DSN === "string") {
     dsn: process.env.SENTRY_DSN,
     autoSessionTracking: true,
     release: `${process.env.SENTRY_PROJECT}@${APP_VERSION}`,
+    // Remove the default breadbrumbs integration - it does not accurately track breadcrumbs and
+    // creates more noise than benefit.
+    integrations: (integrations) => {
+      return integrations.filter((integration) => {
+        return integration.name !== "Breadcrumbs";
+      });
+    },
+    maxBreadcrumbs: 10,
   });
 }
 
@@ -72,6 +80,9 @@ const ctx: OsContext = {
   },
   addIpcEventListener(eventName: OsContextForwardedEvent, handler: () => void) {
     ipcRenderer.on(eventName, () => handler());
+  },
+  removeIpcEventListener(eventName: OsContextForwardedEvent, handler: () => void) {
+    ipcRenderer.off(eventName, () => handler());
   },
   async menuAddInputSource(name: string, handler: () => void) {
     if (menuClickListeners.has(name)) {
