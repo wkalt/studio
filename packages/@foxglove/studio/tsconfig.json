@@ -1,0 +1,10 @@
+{
+  "extends": "@foxglove/tsconfig/tsconfig.base.json",
+  "include": ["./src/**/*.ts"],
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+}

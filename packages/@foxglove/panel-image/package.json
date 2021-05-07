@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "license": "MPL-2.0",
   "engines": {
-    "@foxglove/studio": "^0.7.0"
+    "@foxglove/studio": "^0.1.0"
   },
   "module": "./dist/extension.js",
   "scripts": {

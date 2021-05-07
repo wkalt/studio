@@ -1,4 +1,13 @@
 {
   "name": "@foxglove/studio",
-  "types": "index.d.ts"
+  "version": "0.1.0",
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "4.2.2"
+  }
 }
