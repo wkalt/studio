@@ -3,10 +3,11 @@
   "displayName": "Image",
   "description": "",
   "version": "0.0.1",
+  "license": "MPL-2.0",
   "engines": {
     "@foxglove/studio": "^0.7.0"
   },
-  "main": "./dist/extension.js",
+  "module": "./dist/extension.js",
   "scripts": {
     "foxglove:prepublish": "yarn run package",
     "compile": "webpack",

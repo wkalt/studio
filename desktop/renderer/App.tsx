@@ -24,8 +24,6 @@ import PlayerManager from "@foxglove-studio/app/components/PlayerManager";
 import StudioToastProvider from "@foxglove-studio/app/components/StudioToastProvider";
 import AnalyticsProvider from "@foxglove-studio/app/context/AnalyticsProvider";
 import { AssetsProvider } from "@foxglove-studio/app/context/AssetContext";
-import ExperimentalFeaturesLocalStorageProvider from "@foxglove-studio/app/context/ExperimentalFeaturesLocalStorageProvider";
-import ExtensionsProvider from "@foxglove-studio/app/context/ExtensionsProvider";
 import ModalHost from "@foxglove-studio/app/context/ModalHost";
 import OsContextAppConfigurationProvider from "@foxglove-studio/app/context/OsContextAppConfigurationProvider";
 import OsContextLayoutStorageProvider from "@foxglove-studio/app/context/OsContextLayoutStorageProvider";
@@ -35,6 +33,7 @@ import URDFAssetLoader from "@foxglove-studio/app/services/URDFAssetLoader";
 import getGlobalStore from "@foxglove-studio/app/store/getGlobalStore";
 import ThemeProvider from "@foxglove-studio/app/theme/ThemeProvider";
 
+import ExtensionsProvider from "./components/ExtensionsProvider";
 import NativeAppMenuProvider from "./components/NativeAppMenuProvider";
 
 const BuiltinPanelCatalogProvider = React.lazy(

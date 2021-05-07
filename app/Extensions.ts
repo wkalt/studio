@@ -2,26 +2,29 @@
 // License, v2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
+import { ExtensionInstance } from "@foxglove-studio/app/ExtensionInstance";
 import Logger from "@foxglove/log";
 import type { ExtensionContext } from "@foxglove/studio";
 
 import { Extension } from "./Extension";
-import OsContextSingleton from "./OsContextSingleton";
 
 const log = Logger.getLogger(__filename);
 
 export class Extensions {
-  loaded: Extension[] = [];
+  extensions = new Map<string, ExtensionInstance>();
 
-  async load(): Promise<void> {
-    const uris = (await OsContextSingleton?.getExtensionUris()) ?? [];
-    for (const uri of uris) {
-      log.debug(`Importing extension from ${uri}`);
-      try {
-        const extension = (await import(/* webpackIgnore: true */ uri)) as Extension;
-        this.loaded.push(extension);
-      } catch (err) {
-        log.error(`Failed to import extension ${uri}: ${err}`);
+  async load(descriptors: { uri: string; packageJson: unknown }[]): Promise<void> {
+    for (const { uri, packageJson } of descriptors) {
+      const instance = new ExtensionInstance(uri, packageJson, true);
+      log.debug(`Importing extension ${instance.name()} (${instance.version()}) from ${uri}`);
+      this.extensions.set(uri, instance);
+
+      if (instance.enabled) {
+        try {
+          instance.extension = (await import(/* webpackIgnore: true */ uri)) as Extension;
+        } catch (err) {
+          log.error(`Failed to import extension ${uri}: ${err}`);
+        }
       }
     }
   }
@@ -31,8 +34,11 @@ export class Extensions {
       process.env.NODE_ENV === "production" ? 1 : process.env.NODE_ENV === "test" ? 3 : 2;
     const ctx: ExtensionContext = { extensionMode };
 
-    for (const ext of this.loaded) {
-      ext.activate(ctx);
+    for (const instance of this.extensions.values()) {
+      if (instance.enabled && instance.extension != undefined) {
+        log.debug(`Activating extension ${instance.name()}`);
+        instance.extension.activate(ctx);
+      }
     }
   }
 }

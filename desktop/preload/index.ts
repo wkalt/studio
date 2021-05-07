@@ -140,8 +140,8 @@ const ctx: OsContext = {
     return window.process.argv.filter((arg) => arg.startsWith("foxglove://"));
   },
 
-  getExtensionUris: async (): Promise<string[]> => {
-    const uris: string[] = [];
+  getExtensions: async (): Promise<{ uri: string; packageJson: unknown }[]> => {
+    const extensions: { uri: string; packageJson: unknown }[] = [];
 
     const homePath = (await ipcRenderer.invoke("getHomePath")) as string;
     const rootFolder = pathJoin(homePath, ".foxglove-studio", "extensions");
@@ -152,11 +152,11 @@ const ctx: OsContext = {
         try {
           const packageData = await readFile(packagePath, { encoding: "utf8" });
           const packageJson = JSON.parse(packageData);
-          const entryPoint = packageJson.main;
+          const entryPoint = packageJson.module;
           if (typeof entryPoint === "string" && entryPoint.length > 0) {
             const entryPointPath = pathJoin(dirname(packagePath), entryPoint);
-            const url = fileUrl(entryPointPath);
-            uris.push(url);
+            const uri = fileUrl(entryPointPath);
+            extensions.push({ uri, packageJson });
           }
         } catch {
           // ignore
@@ -164,7 +164,7 @@ const ctx: OsContext = {
       }
     }
 
-    return uris;
+    return extensions;
   },
 
   // Context bridge cannot expose "classes" only exposes functions
