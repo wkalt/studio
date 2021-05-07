@@ -8,7 +8,7 @@
   "typings": "dist/api.d.ts",
   "bin": "dist/fox",
   "scripts": {
-    "copy-fox": "ncp src/fox dist/fox",
+    "copy-fox": "ncp bin/fox dist/fox",
     "compile": "tsc && yarn copy-fox",
     "watch": "yarn copy-fox && tsc --watch",
     "test": "jest",
