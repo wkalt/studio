@@ -17,7 +17,7 @@ module.exports = function (argv: string[]): void {
   program
     .command("package")
     .description("Packages an extension")
-    .option("-o, --out [path]", "Output .fgsx extension file to [path] location")
+    .option("-o, --out [path]", "Output .foxe extension file to [path] location")
     .action(({ out }) => main(packageCommand({ packagePath: out })));
 
   program

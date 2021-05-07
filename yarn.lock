@@ -2244,10 +2244,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@foxglove/panel-image@workspace:packages/@foxglove/panel-image"
   dependencies:
+    "@foxglove/fox": "workspace:packages/@foxglove/fox"
     "@foxglove/studio": "workspace:packages/@foxglove/studio"
     "@typescript-eslint/eslint-plugin": 4.21.0
     "@typescript-eslint/parser": 4.21.0
-    bestzip: 2.2.0
     eslint: 7.23.0
     ts-loader: 8.1.0
     typescript: 4.2.2
@@ -6683,21 +6683,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"archiver@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "archiver@npm:5.3.0"
-  dependencies:
-    archiver-utils: ^2.1.0
-    async: ^3.2.0
-    buffer-crc32: ^0.2.1
-    readable-stream: ^3.6.0
-    readdir-glob: ^1.0.0
-    tar-stream: ^2.2.0
-    zip-stream: ^4.1.0
-  checksum: f5968876eef0591a59351ea1f1162c402945e60067be4d0a18a4a2ce418956313866be1f0ae9d9b1802effd0221cd84944e6fa09ae8380532b7077b03e8ccebb
-  languageName: node
-  linkType: hard
-
 "are-we-there-yet@npm:~1.1.2":
   version: 1.1.5
   resolution: "are-we-there-yet@npm:1.1.5"
@@ -7530,21 +7515,6 @@ __metadata:
   version: 2.2.0
   resolution: "before-after-hook@npm:2.2.0"
   checksum: 93e5f6532752d7136d871f4da57430cf61357a8fef81ee2c4981d9808483ddeb73a5f3d1c3eafcbb3ee079bdc0dc030cdc279ba3b793f0008fd86e30430f4787
-  languageName: node
-  linkType: hard
-
-"bestzip@npm:2.2.0":
-  version: 2.2.0
-  resolution: "bestzip@npm:2.2.0"
-  dependencies:
-    archiver: ^5.3.0
-    async: ^3.2.0
-    glob: ^7.1.6
-    which: ^2.0.2
-    yargs: ^16.2.0
-  bin:
-    bestzip: bin/cli.js
-  checksum: 5470c182904d0ddb97fdb5f4995b2321f84eec2eaa715d55032a65fc7a9d4f4eab3863efe88c6f87c8c7f22e5815f9665e550fcfb7d81057d0e4a7a4d8e532c1
   languageName: node
   linkType: hard
 
@@ -24312,7 +24282,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tar-stream@npm:^2.1.4, tar-stream@npm:^2.2.0":
+"tar-stream@npm:^2.1.4":
   version: 2.2.0
   resolution: "tar-stream@npm:2.2.0"
   dependencies:
@@ -26774,7 +26744,7 @@ typescript@4.2.2:
   languageName: node
   linkType: hard
 
-"zip-stream@npm:^4.0.4, zip-stream@npm:^4.1.0":
+"zip-stream@npm:^4.0.4":
   version: 4.1.0
   resolution: "zip-stream@npm:4.1.0"
   dependencies:

@@ -114,7 +114,11 @@ async function prepublish(extensionPath: string, pkg: PackageManifest): Promise<
   await new Promise<void>((c, e) => {
     const tool = "yarn";
     const cwd = extensionPath;
-    const child = spawn(tool, ["run", "vscode:prepublish"], { cwd, shell: true, stdio: "inherit" });
+    const child = spawn(tool, ["run", "foxglove:prepublish"], {
+      cwd,
+      shell: true,
+      stdio: "inherit",
+    });
     child.on("exit", (code) => (code === 0 ? c() : e(`${tool} failed with exit code ${code}`)));
     child.on("error", e);
   });
