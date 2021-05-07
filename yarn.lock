@@ -2201,10 +2201,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@foxglove/fox@workspace:packages/@foxglove/fox"
   dependencies:
-    "@types/copyfiles": ^2
+    "@types/ncp": ^2
     "@types/node": ^12
+    "@types/rimraf": ^3
     commander: 7.2.0
-    copyfiles: 2.4.1
+    jszip: 3.6.0
+    ncp: 2.0.0
+    rimraf: 3.0.2
     typescript: 4.2.2
   bin:
     fox: dist/fox
@@ -4528,13 +4531,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/copyfiles@npm:^2":
-  version: 2.4.0
-  resolution: "@types/copyfiles@npm:2.4.0"
-  checksum: fde2bff29a8081dc51f61f75d103c589814e6cfc52f63a92180653a93e5e6626d7ae92c1742dbb26930a4bc290c1341f9efe21592ff2e3838e1936716b2c4c46
-  languageName: node
-  linkType: hard
-
 "@types/css-font-loading-module@npm:0.0.4":
   version: 0.0.4
   resolution: "@types/css-font-loading-module@npm:0.0.4"
@@ -4959,6 +4955,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ncp@npm:^2":
+  version: 2.0.4
+  resolution: "@types/ncp@npm:2.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 9d5f5b6eb74ebd712783eaf1c30517800a1378edee7c02a128fec0b084ad9df1d76e4b118a5a6606f34ec6114d305ae3eb55ecd01b9e8506cc4f34d0800d656c
+  languageName: node
+  linkType: hard
+
 "@types/nearley@npm:2.11.1":
   version: 2.11.1
   resolution: "@types/nearley@npm:2.11.1"
@@ -5305,7 +5310,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/rimraf@npm:^3.0.0":
+"@types/rimraf@npm:^3, @types/rimraf@npm:^3.0.0":
   version: 3.0.0
   resolution: "@types/rimraf@npm:3.0.0"
   dependencies:
@@ -9340,24 +9345,6 @@ __metadata:
   dependencies:
     toggle-selection: ^1.0.6
   checksum: 9707f2e405ca4019de1f4194565568acdf3d1dd8a59f7b8f63d0e7257648132b579461e7aeb6140169cb943cf4b6a243b377cf0437d8c10c6f5e5bb3935dea78
-  languageName: node
-  linkType: hard
-
-"copyfiles@npm:2.4.1":
-  version: 2.4.1
-  resolution: "copyfiles@npm:2.4.1"
-  dependencies:
-    glob: ^7.0.5
-    minimatch: ^3.0.3
-    mkdirp: ^1.0.4
-    noms: 0.0.0
-    through2: ^2.0.1
-    untildify: ^4.0.0
-    yargs: ^16.1.0
-  bin:
-    copyfiles: copyfiles
-    copyup: copyfiles
-  checksum: bdde4b9667ed208796817399f238fce18f6f09e5b6e112c06348e6003228a72ad8cf7d970692516fda8252c4c827d02fb841a86a1f930727396fc8bcb6142686
   languageName: node
   linkType: hard
 
@@ -15499,13 +15486,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isarray@npm:0.0.1":
-  version: 0.0.1
-  resolution: "isarray@npm:0.0.1"
-  checksum: daeda3c23646200b0b464b7a9030d10008d7701fc6b7a1b45cafe42b4f4d2dde20835b56f19a49e04bb218245b7f7a2bcc6d0f696cff3711e4eddaa2031c611f
-  languageName: node
-  linkType: hard
-
 "isarray@npm:1.0.0, isarray@npm:^1.0.0, isarray@npm:~1.0.0":
   version: 1.0.0
   resolution: "isarray@npm:1.0.0"
@@ -16568,7 +16548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jszip@npm:^3.1.0":
+"jszip@npm:3.6.0, jszip@npm:^3.1.0":
   version: 3.6.0
   resolution: "jszip@npm:3.6.0"
   dependencies:
@@ -17936,7 +17916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:3.0.4, minimatch@npm:^3.0.2, minimatch@npm:^3.0.3, minimatch@npm:^3.0.4":
+"minimatch@npm:3.0.4, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
   dependencies:
@@ -18294,6 +18274,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ncp@npm:2.0.0":
+  version: 2.0.0
+  resolution: "ncp@npm:2.0.0"
+  bin:
+    ncp: ./bin/ncp
+  checksum: a751e4c94bc810b34b81c8cad288b90ac59fa83890e701483fd70f800d3c2228bea9eff84d1c034074cd1b393cec40696c04558a70b17476eba7acb06e20e71c
+  languageName: node
+  linkType: hard
+
 "nearley-loader@npm:2.0.0":
   version: 2.0.0
   resolution: "nearley-loader@npm:2.0.0"
@@ -18491,16 +18480,6 @@ __metadata:
   version: 1.1.71
   resolution: "node-releases@npm:1.1.71"
   checksum: 9e283003f1deafd0ca7f9bbde9c4b5b05d880ca165217f5227b37406626d6689a246a5c4c72f9a8512be65cd51b13cc7d0f5d8bc68ad36089b620f1810292340
-  languageName: node
-  linkType: hard
-
-"noms@npm:0.0.0":
-  version: 0.0.0
-  resolution: "noms@npm:0.0.0"
-  dependencies:
-    inherits: ^2.0.1
-    readable-stream: ~1.0.31
-  checksum: 74c2d97da45f4dccc8eb5e9614612154e56893232f20487cc8db9d889a4e1a9c5d99aa912b3b3da2fc6dfc0a512357be8a0abb54fd2fe3fb9dd652a19c49c968
   languageName: node
   linkType: hard
 
@@ -21657,18 +21636,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:~1.0.31":
-  version: 1.0.34
-  resolution: "readable-stream@npm:1.0.34"
-  dependencies:
-    core-util-is: ~1.0.0
-    inherits: ~2.0.1
-    isarray: 0.0.1
-    string_decoder: ~0.10.x
-  checksum: 90f868f0a37e97794ce963f92c3dd8997a66a2143f867075521ac6905ed49967f425842de0dc53a952a49c60aa81e1239af6e32348e9f3dadffd61101b1c4fdc
-  languageName: node
-  linkType: hard
-
 "readdir-glob@npm:^1.0.0":
   version: 1.1.1
   resolution: "readdir-glob@npm:1.1.1"
@@ -23977,13 +23944,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"string_decoder@npm:~0.10.x":
-  version: 0.10.31
-  resolution: "string_decoder@npm:0.10.31"
-  checksum: ae53bca3796913fe686c6b519299a3631d04f0d388f35e7412914e3d351024f711d783d0415babfec276f5f533e84fae687e77220829d872fadb5bb9f7190890
-  languageName: node
-  linkType: hard
-
 "string_decoder@npm:~1.1.1":
   version: 1.1.1
   resolution: "string_decoder@npm:1.1.1"
@@ -24568,7 +24528,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"through2@npm:^2.0.0, through2@npm:^2.0.1, through2@npm:~2.0.3":
+"through2@npm:^2.0.0, through2@npm:~2.0.3":
   version: 2.0.5
   resolution: "through2@npm:2.0.5"
   dependencies:
@@ -25422,13 +25382,6 @@ typescript@4.2.2:
     has-value: ^0.3.1
     isobject: ^3.0.0
   checksum: b4c4853f2744a91e9bb5ccb3dfb28f78c32310bf851f0e6b9e781d3ca5244a803632926b2af701da5f9153a03e405023cebc1f90b87711f73b5fc86b6c33efae
-  languageName: node
-  linkType: hard
-
-"untildify@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "untildify@npm:4.0.0"
-  checksum: 531c5d5994a2eeb63533784c4707bf39b8edf9e10421e5136f7cdbea7df2eca11a5132836f9ad08a113d8144624435b5b2e904affbfcf82fe733710ea8d01e6d
   languageName: node
   linkType: hard
 
@@ -26744,7 +26697,7 @@ typescript@4.2.2:
   languageName: node
   linkType: hard
 
-"yargs@npm:16.2.0, yargs@npm:^16.0.0, yargs@npm:^16.0.3, yargs@npm:^16.1.0, yargs@npm:^16.2.0":
+"yargs@npm:16.2.0, yargs@npm:^16.0.0, yargs@npm:^16.0.3, yargs@npm:^16.2.0":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
   dependencies:

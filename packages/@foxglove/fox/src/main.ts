@@ -4,12 +4,8 @@
 
 import program from "commander";
 
+import { fatal } from "./log";
 import { installCommand, packageCommand } from "./package";
-
-function fatal(message: unknown, ...args: unknown[]): void {
-  console.error(message, ...args);
-  process.exit(1);
-}
 
 function main(task: Promise<void>): void {
   task.catch(fatal);
