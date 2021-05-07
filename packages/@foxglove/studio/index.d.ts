@@ -4,9 +4,9 @@
 
 declare module "@foxglove/studio" {
   export enum ExtensionMode {
-    Production = 1,
-    Development = 2,
-    Test = 3,
+    PRODUCTION = 1,
+    DEVELOPMENT = 2,
+    TEST = 3,
   }
 
   export interface ExtensionContext {
@@ -16,8 +16,7 @@ declare module "@foxglove/studio" {
   export interface Extension<T> {
     readonly id: string;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    readonly packageJSON: any;
+    readonly packageJson: Record<string, unknown>;
 
     readonly exports: T;
   }

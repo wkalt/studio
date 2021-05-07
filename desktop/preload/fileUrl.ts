@@ -4,6 +4,9 @@
 
 import { resolve } from "path";
 
+// Converts a filesystem path such as "/home/user/Documents/myfile" or
+// "C:\Users\user\Documents\myfile" to a file: URI such as "file:///home/user/Documents/myfile" or
+// "file:///C:/Users/user/Documents/myfile"
 export function fileUrl(filePath: string): string {
   if (typeof filePath !== "string") {
     throw new TypeError(`Expected a string, got ${typeof filePath}`);

@@ -4,7 +4,7 @@
 
 import { ExtensionInstance } from "@foxglove-studio/app/ExtensionInstance";
 import Logger from "@foxglove/log";
-import type { ExtensionContext } from "@foxglove/studio";
+import { ExtensionContext, ExtensionMode } from "@foxglove/studio";
 
 import { Extension } from "./Extension";
 
@@ -22,6 +22,8 @@ export class Extensions {
       if (instance.enabled) {
         try {
           instance.extension = (await import(/* webpackIgnore: true */ uri)) as Extension;
+          (instance.extension as { id: string }).id = instance.name();
+          (instance.extension as { packageJson: unknown }).packageJson = instance.packageJson;
         } catch (err) {
           log.error(`Failed to import extension ${uri}: ${err}`);
         }
@@ -31,7 +33,11 @@ export class Extensions {
 
   activate(): void {
     const extensionMode =
-      process.env.NODE_ENV === "production" ? 1 : process.env.NODE_ENV === "test" ? 3 : 2;
+      process.env.NODE_ENV === "production"
+        ? ExtensionMode.PRODUCTION
+        : process.env.NODE_ENV === "test"
+        ? ExtensionMode.TEST
+        : ExtensionMode.DEVELOPMENT;
     const ctx: ExtensionContext = { extensionMode };
 
     for (const instance of this.extensions.values()) {
