@@ -70,6 +70,7 @@ rules:
   "@typescript-eslint/prefer-regexp-exec": off
   "@typescript-eslint/no-unnecessary-condition": off # similar to strict-boolean-expressions, but catches more (noisy) cases?
 
+  "@typescript-eslint/consistent-type-imports": [error, { disallowTypeAnnotations: false }]
   "@typescript-eslint/no-explicit-any": error
   "@typescript-eslint/prefer-nullish-coalescing": error
   "@typescript-eslint/no-non-null-assertion": error
@@ -120,6 +121,11 @@ rules:
   import/default: off
   import/no-named-as-default: off
   import/no-named-as-default-member: off
+
+  # import/no-duplicates incorrectly merges `import type A; import type {B};`, which is valid Flow
+  # but not TypeScript
+  import/no-duplicates: off
+  "@typescript-eslint/no-duplicate-imports": error
 
   prefer-arrow-callback:
     - error

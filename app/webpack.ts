@@ -8,9 +8,10 @@ import MonacoWebpackPlugin from "monaco-editor-webpack-plugin";
 import path from "path";
 import ReactRefreshTypescript from "react-refresh-typescript";
 import createStyledComponentsTransformer from "typescript-plugin-styled-components";
-import webpack, { Configuration, WebpackPluginInstance } from "webpack";
+import type { Configuration, WebpackPluginInstance } from "webpack";
+import webpack from "webpack";
 
-import { WebpackArgv } from "./WebpackArgv";
+import type { WebpackArgv } from "./WebpackArgv";
 
 const styledComponentsTransformer = createStyledComponentsTransformer({
   getDisplayName: (filename, bindingName) => {
