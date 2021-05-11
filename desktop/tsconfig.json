@@ -3,6 +3,7 @@
   "include": ["*.ts", "test/**/*.ts", "../package.json"],
   "compilerOptions": {
     "module": "commonjs",
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "../"
   }
 }
