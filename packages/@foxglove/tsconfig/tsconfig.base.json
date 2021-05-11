@@ -15,6 +15,7 @@
     "isolatedModules": true,
 
     // keep imports of types, necessary for correct webpack watch behavior
+    // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/issues/611
     // https://github.com/TypeStrong/ts-loader/issues/1138#issuecomment-657014970
     "importsNotUsedAsValues": "preserve",
 
