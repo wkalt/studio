@@ -2094,7 +2094,7 @@ __metadata:
     "@types/url-search-params": 1.1.0
     "@types/uuid": 8.3.0
     "@types/wicg-file-system-access": 2020.9.1
-    "@types/ws": 7.4.2
+    "@types/ws": 7.4.4
     "@wojtekmaj/enzyme-adapter-react-17": 0.6.1
     argparse: 2.0.1
     async-mutex: 0.3.1
@@ -2104,7 +2104,7 @@ __metadata:
     chartjs-plugin-zoom: "github:foxglove/chartjs-plugin-zoom#656541279943f00dce600288435f83c436293146"
     chromatic: 5.8.0
     classnames: 2.3.1
-    cytoscape: 3.18.2
+    cytoscape: 3.19.0
     cytoscape-dagre: 2.3.2
     enzyme: 3.11.0
     fetch-mock: 9.11.0
@@ -5528,12 +5528,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ws@npm:7.4.2":
-  version: 7.4.2
-  resolution: "@types/ws@npm:7.4.2"
+"@types/ws@npm:7.4.4":
+  version: 7.4.4
+  resolution: "@types/ws@npm:7.4.4"
   dependencies:
     "@types/node": "*"
-  checksum: 29fc34b61cc039c0f51e835ff8746faf7b98186e6bf785fb099c9fb006ae79825312e62a0c1e856b405543ae6302e196d1a1d372753dbcdce59ab5b72011a9f2
+  checksum: 6a02b3164250813510c5e73998a2bbca1fb98dc23428d70c2c6d664dfbac3fde32cd8d4eb34c335a0221f49a6f02d71b09645b236b01de1aea85f80352f67e1f
   languageName: node
   linkType: hard
 
@@ -9840,13 +9840,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cytoscape@npm:3.18.2":
-  version: 3.18.2
-  resolution: "cytoscape@npm:3.18.2"
+"cytoscape@npm:3.19.0":
+  version: 3.19.0
+  resolution: "cytoscape@npm:3.19.0"
   dependencies:
     heap: ^0.2.6
     lodash.debounce: ^4.0.8
-  checksum: c9b93ac623d67b874a864694744e7c39c95d83953a3de9ffd3ff12fe2f189e22d896c799acfd7277cd852da75040d3438ca5808de68d8285e97287efbd511148
+  checksum: bfb8f123f5b6adad3cf3f5274c48271e2366a36be261e3fcdca0a0edc3af87f5cae84387fc09d091d9c563e2ed2ad321c6fd1bb8fca2c816f81bf5bbb3c1402a
   languageName: node
   linkType: hard
 
