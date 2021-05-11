@@ -3,7 +3,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
 import http from "http";
-import type { AddressInfo } from "net";
+import { AddressInfo } from "net";
 
 import { XmlRpcClient } from "./XmlRpcClient";
 import { XmlRpcFault } from "./XmlRpcFault";

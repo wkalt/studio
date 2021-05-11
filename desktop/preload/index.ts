@@ -7,8 +7,11 @@ import { contextBridge, ipcRenderer } from "electron";
 import { machineId } from "node-machine-id";
 import os from "os";
 
-import type { OsContext, OsContextForwardedEvent } from "@foxglove-studio/app/OsContext";
-import { NetworkInterface } from "@foxglove-studio/app/OsContext";
+import {
+  OsContext,
+  OsContextForwardedEvent,
+  NetworkInterface,
+} from "@foxglove-studio/app/OsContext";
 import { APP_NAME, APP_VERSION } from "@foxglove-studio/app/version";
 import { PreloaderSockets } from "@foxglove/electron-socket/preloader";
 import Logger from "@foxglove/log";

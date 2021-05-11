@@ -11,8 +11,8 @@
 //   found at http://www.apache.org/licenses/LICENSE-2.0
 //   You may not use this file except in compliance with the License.
 
-import type { Action, Store as ReduxStore } from "redux";
-import type { ThunkDispatch } from "redux-thunk";
+import { Action, Store as ReduxStore } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
 import { ActionTypes } from "@foxglove-studio/app/actions";
 import { State } from "@foxglove-studio/app/reducers";

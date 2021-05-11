@@ -10,7 +10,7 @@
 //   This source code is licensed under the Apache License, Version 2.0,
 //   found at http://www.apache.org/licenses/LICENSE-2.0
 //   You may not use this file except in compliance with the License.
-import type { SourceFile, TypeChecker } from "typescript";
+import { SourceFile, TypeChecker } from "typescript";
 
 import { GlobalVariables } from "@foxglove-studio/app/hooks/useGlobalVariables";
 import { Topic, MessageEvent } from "@foxglove-studio/app/players/types";

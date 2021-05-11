@@ -12,7 +12,8 @@
 //   You may not use this file except in compliance with the License.
 import { ChartOptions, ScaleOptions } from "chart.js";
 import { AnnotationOptions } from "chartjs-plugin-annotation";
-import { ZoomOptions } from "chartjs-plugin-zoom/types/options";
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type { ZoomOptions } from "chartjs-plugin-zoom/types/options";
 import React, {
   memo,
   useEffect,

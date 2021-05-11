@@ -13,7 +13,7 @@
 
 import { isPlainObject } from "lodash";
 
-import type { GlobalVariables } from "@foxglove-studio/app/hooks/useGlobalVariables";
+import { GlobalVariables } from "@foxglove-studio/app/hooks/useGlobalVariables";
 import {
   processMessage,
   registerNode,

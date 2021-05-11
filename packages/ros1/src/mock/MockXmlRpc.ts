@@ -2,9 +2,9 @@
 // License, v2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-import type { XmlRpcValue } from "@foxglove/xmlrpc";
+import { XmlRpcValue } from "@foxglove/xmlrpc";
 
-import type { RosXmlRpcResponse } from "../XmlRpcTypes";
+import { RosXmlRpcResponse } from "../XmlRpcTypes";
 
 const TURTLESIM_SERVICES = new Set([
   "/turtlesim/get_loggers",

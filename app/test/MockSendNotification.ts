@@ -14,7 +14,7 @@
 // This file provides a mock implementation of sendNotification so tests can assert that a notification
 // was sent via a sendNotification call
 
-import type {
+import {
   DetailsType,
   NotificationHandler,
   NotificationSeverity,

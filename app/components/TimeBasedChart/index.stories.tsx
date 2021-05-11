@@ -18,8 +18,7 @@ import { useMount } from "react-use";
 import MockMessagePipelineProvider from "@foxglove-studio/app/components/MessagePipeline/MockMessagePipelineProvider";
 import { triggerWheel } from "@foxglove-studio/app/stories/PanelSetup";
 
-import TimeBasedChart, { TimeBasedChartTooltipData } from "./index";
-import type { Props } from "./index";
+import TimeBasedChart, { Props, TimeBasedChartTooltipData } from "./index";
 
 const dataX = 0.000057603000000000004;
 const dataY = 5.544444561004639;

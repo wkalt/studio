@@ -12,8 +12,7 @@
 //   You may not use this file except in compliance with the License.
 
 import { Chart, ChartData, ChartOptions, ChartType } from "chart.js";
-import type { Context as DatalabelContext } from "chartjs-plugin-datalabels";
-import DatalabelPlugin from "chartjs-plugin-datalabels";
+import DatalabelPlugin, { Context as DatalabelContext } from "chartjs-plugin-datalabels";
 import { Zoom as ZoomPlugin } from "chartjs-plugin-zoom";
 import EventEmitter from "eventemitter3";
 import merge from "lodash/merge";

@@ -10,7 +10,7 @@
 /* eslint-disable import/order */
 
 declare module "*.svg" {
-  import type { FunctionComponent, SVGProps } from "react";
+  import { FunctionComponent, SVGProps } from "react";
 
   const IconComponent: FunctionComponent<SVGProps<SVGSVGElement>>;
   export default IconComponent;
@@ -67,7 +67,7 @@ declare module "*.woff2" {
 }
 
 declare module "*.ne" {
-  import type { CompiledRules } from "nearley";
+  import { CompiledRules } from "nearley";
 
   const compiledRules: CompiledRules;
   export default compiledRules;

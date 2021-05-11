@@ -4,7 +4,7 @@
 
 import { bytesToBase64 } from "byte-base64";
 import { create as createXml } from "xmlbuilder2";
-import type { XMLBuilder } from "xmlbuilder2/lib/interfaces";
+import { XMLBuilder } from "xmlbuilder2/lib/interfaces";
 
 import { CustomType } from "./CustomType";
 import { DateFormatter } from "./DateFormatter";

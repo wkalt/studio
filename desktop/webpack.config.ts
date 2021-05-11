@@ -5,8 +5,8 @@
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
-import type { Configuration } from "webpack";
-import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+import { Configuration } from "webpack";
+import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
 
 import packageJson from "../package.json";
 import main from "./webpack.main.config";

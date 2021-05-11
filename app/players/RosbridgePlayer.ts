@@ -44,7 +44,7 @@ import {
   toSec,
 } from "@foxglove-studio/app/util/time";
 import Log from "@foxglove/log";
-import type { RosGraph } from "@foxglove/ros1";
+import { RosGraph } from "@foxglove/ros1";
 
 const log = Log.getLogger(__dirname);
 

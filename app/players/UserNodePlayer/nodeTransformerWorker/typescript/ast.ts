@@ -15,7 +15,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
 import { without } from "lodash";
-import type { RosMsgField } from "rosbag";
+import { RosMsgField } from "rosbag";
 import ts from "typescript/lib/typescript";
 
 import baseDatatypes from "@foxglove-studio/app/players/UserNodePlayer/nodeTransformerWorker/typescript/baseDatatypes";
@@ -41,7 +41,7 @@ import {
   ErrorCodes,
   Diagnostic,
 } from "@foxglove-studio/app/players/UserNodePlayer/types";
-import type { RosDatatypes } from "@foxglove-studio/app/types/RosDatatypes";
+import { RosDatatypes } from "@foxglove-studio/app/types/RosDatatypes";
 
 type TypeParam = {
   parent: TypeParam;
