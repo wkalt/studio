@@ -2,16 +2,14 @@
 // License, v2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-import CircularDependencyPlugin from "circular-dependency-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import MonacoWebpackPlugin from "monaco-editor-webpack-plugin";
 import path from "path";
 import ReactRefreshTypescript from "react-refresh-typescript";
 import createStyledComponentsTransformer from "typescript-plugin-styled-components";
-import type { Configuration, WebpackPluginInstance } from "webpack";
-import webpack from "webpack";
+import webpack, { Configuration } from "webpack";
 
-import type { WebpackArgv } from "./WebpackArgv";
+import { WebpackArgv } from "./WebpackArgv";
 
 const styledComponentsTransformer = createStyledComponentsTransformer({
   getDisplayName: (filename, bindingName) => {
@@ -169,10 +167,6 @@ export function makeConfig(
       ],
     },
     plugins: [
-      new CircularDependencyPlugin({
-        exclude: /node_modules/,
-        failOnError: true,
-      }) as WebpackPluginInstance,
       new webpack.ProvidePlugin({
         // since we avoid "import React from 'react'" we shim here when used globally
         React: "react",

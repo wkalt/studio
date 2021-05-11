@@ -4421,15 +4421,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/circular-dependency-plugin@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "@types/circular-dependency-plugin@npm:5.0.2"
-  dependencies:
-    "@types/webpack": ^4
-  checksum: dbe2449542b566bb1a7d304126d044faf972f7dca8e34bf75b1e2d046e05aa4545c3c3363cea23a96a58300e9f407b302000395bf7559913fe79c7af5b368d60
-  languageName: node
-  linkType: hard
-
 "@types/classnames@npm:2.3.1":
   version: 2.3.1
   resolution: "@types/classnames@npm:2.3.1"
@@ -8586,15 +8577,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"circular-dependency-plugin@npm:5.2.2":
-  version: 5.2.2
-  resolution: "circular-dependency-plugin@npm:5.2.2"
-  peerDependencies:
-    webpack: ">=4.0.1"
-  checksum: 1f6063947017b6b4e4c2111cd097a5bd33e46a20beab07717b2a378641f49c9a5627f89c3e1afee01b032d9758865f61e1c0c11cfc3acaa81068ce900c1cdb81
-  languageName: node
-  linkType: hard
-
 "cjs-module-lexer@npm:^1.0.0":
   version: 1.1.1
   resolution: "cjs-module-lexer@npm:1.1.1"
@@ -12730,7 +12712,6 @@ __metadata:
     "@types/babel__core": ^7
     "@types/babel__preset-env": ^7
     "@types/case-sensitive-paths-webpack-plugin": 2.1.5
-    "@types/circular-dependency-plugin": ^5.0.2
     "@types/electron-devtools-installer": 2.2.0
     "@types/jest": 26.0.22
     "@types/license-checker": ^25.0.1
@@ -12747,7 +12728,6 @@ __metadata:
     babel-jest: 27.0.0-next.8
     babel-plugin-transform-import-meta: 1.0.1
     browserify-zlib: 0.2.0
-    circular-dependency-plugin: 5.2.2
     clean-webpack-plugin: 4.0.0-alpha.0
     colors: 1.4.0
     crypto-browserify: 3.12.0
