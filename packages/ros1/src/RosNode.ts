@@ -3,9 +3,12 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/
 
 import { EventEmitter, ListenerFn } from "eventemitter3";
+import { Md5 } from "md5-typescript";
+import { MessageWriter, parseMessageDefinition, RosMsgDefinition } from "rosbag";
 
 import { HttpServer, XmlRpcFault, XmlRpcValue } from "@foxglove/xmlrpc";
 
+import { Client } from "./Client";
 import { LoggerService } from "./LoggerService";
 import { Publication } from "./Publication";
 import { RosFollower } from "./RosFollower";
@@ -14,10 +17,12 @@ import { RosMasterClient } from "./RosMasterClient";
 import { RosParamClient } from "./RosParamClient";
 import { Subscription } from "./Subscription";
 import { TcpConnection } from "./TcpConnection";
+import { TcpPublisher } from "./TcpPublisher";
 import { TcpSocketCreate, TcpServer, TcpAddress, NetworkInterface } from "./TcpTypes";
 import { RosXmlRpcResponse } from "./XmlRpcTypes";
 import { difference } from "./difference";
 import { isEmptyPlainObject } from "./objectTests";
+import { rosMsgDefinitionText } from "./rosmsg";
 
 export type RosGraph = {
   publishers: Map<string, Set<string>>; // Maps topic names to arrays of nodes publishing each topic
@@ -27,10 +32,18 @@ export type RosGraph = {
 
 export type SubscribeOpts = {
   topic: string;
-  type: string;
+  dataType: string;
   md5sum?: string;
-  queueSize?: number;
   tcpNoDelay?: boolean;
+};
+
+export type PublishOpts = {
+  topic: string;
+  dataType: string;
+  latching?: boolean;
+  messageDefinition?: RosMsgDefinition[];
+  messageDefinitionText?: string;
+  md5sum?: string;
 };
 
 export type ParamUpdateArgs = {
@@ -64,7 +77,7 @@ export class RosNode extends EventEmitter {
   private _running = true;
   private _tcpSocketCreate: TcpSocketCreate;
   private _connectionIdCounter = 0;
-  private _tcpServer?: TcpServer;
+  private _tcpPublisher?: TcpPublisher;
   private _localApiUrl?: string;
   private _log?: LoggerService;
 
@@ -86,7 +99,16 @@ export class RosNode extends EventEmitter {
     this.rosParamClient = new RosParamClient(options.rosMasterUri);
     this.rosFollower = new RosFollower(this, options.httpServer);
     this._tcpSocketCreate = options.tcpSocketCreate;
-    this._tcpServer = options.tcpServer;
+    if (options.tcpServer != undefined) {
+      this._tcpPublisher = new TcpPublisher(
+        options.tcpServer,
+        this.name,
+        this._newConnectionId,
+        this._getPublication,
+        options.log,
+      );
+      this._tcpPublisher.on("connection", this._handleTcpClientConnection);
+    }
     this._log = options.log;
 
     this.rosFollower.on("paramUpdate", (key, value, callerId) => {
@@ -112,7 +134,7 @@ export class RosNode extends EventEmitter {
   shutdown(_msg?: string): void {
     this._log?.debug?.("shutting down");
     this._running = false;
-    this._tcpServer?.close();
+    this._tcpPublisher?.close();
     this.rosFollower.close();
 
     if (this.parameters.size > 0) {
@@ -133,20 +155,20 @@ export class RosNode extends EventEmitter {
   }
 
   subscribe(options: SubscribeOpts): Subscription {
-    const { topic, type } = options;
+    const { topic, dataType } = options;
 
     // Check if we are already subscribed
     let subscription = this.subscriptions.get(topic);
     if (subscription != undefined) {
-      this._log?.debug?.(`reusing existing subscribtion to ${topic} (${type})`);
+      this._log?.debug?.(`reusing existing subscribtion to ${topic} (${dataType})`);
       return subscription;
     }
 
     const md5sum = options.md5sum ?? "*";
-    subscription = new Subscription(topic, md5sum, type);
+    subscription = new Subscription(topic, md5sum, dataType);
     this.subscriptions.set(topic, subscription);
 
-    this._log?.debug?.(`subscribing to ${topic} (${type})`);
+    this._log?.debug?.(`subscribing to ${topic} (${dataType})`);
 
     // Asynchronously register this subscription with rosmaster and connect to
     // each publisher
@@ -155,8 +177,70 @@ export class RosNode extends EventEmitter {
     return subscription;
   }
 
+  async advertise(options: PublishOpts): Promise<Publication> {
+    const { topic, dataType } = options;
+
+    if (!this._tcpPublisher == undefined) {
+      throw new Error(`cannot publish ${topic} without a tcpServer`);
+    }
+
+    // Check if we are already publishing
+    let publication = this.publications.get(topic);
+    if (publication != undefined) {
+      this._log?.debug?.(`reusing existing publication for ${topic} (${dataType})`);
+      return publication;
+    }
+
+    const messageDefinition =
+      options.messageDefinition ?? parseMessageDefinition(options.messageDefinitionText ?? "");
+    const canonicalMsgDefText = rosMsgDefinitionText(messageDefinition);
+    const messageDefinitionText = options.messageDefinitionText ?? canonicalMsgDefText;
+    const md5sum = options.md5sum ?? Md5.init(canonicalMsgDefText);
+    const messageWriter = new MessageWriter(messageDefinition);
+
+    publication = new Publication(
+      topic,
+      md5sum,
+      dataType,
+      options.latching ?? false,
+      messageDefinition,
+      messageDefinitionText,
+      messageWriter,
+    );
+    this.publications.set(topic, publication);
+
+    this._log?.debug?.(`publishing ${topic} (${dataType})`);
+
+    // Register with with rosmaster as a publisher for the requested topic. If
+    // this request fails, an exception is thrown
+    const subscribers = await this._registerPublisher(publication);
+
+    this._log?.info?.(
+      `registered as a publisher for ${topic}, ${subscribers.length} current subscriber(s)`,
+    );
+
+    return publication;
+  }
+
+  publish(topic: string, message: unknown): Promise<void> {
+    if (this._tcpPublisher == undefined) {
+      throw new Error(`cannot publish without a tcpServer`);
+    }
+
+    const publication = this.publications.get(topic);
+    if (publication == undefined) {
+      throw new Error(`cannot publish to unadvertised topic "${topic}"`);
+    }
+
+    return this._tcpPublisher.publish(publication, message);
+  }
+
   isSubscribedTo(topic: string): boolean {
     return this._running && this.subscriptions.has(topic);
+  }
+
+  isAdvertising(topic: string): boolean {
+    return this._running && this.publications.has(topic);
   }
 
   unsubscribe(topic: string): boolean {
@@ -347,7 +431,7 @@ export class RosNode extends EventEmitter {
   }
 
   tcpServerAddress(): TcpAddress | undefined {
-    return this._tcpServer?.address();
+    return this._tcpPublisher?.address();
   }
 
   receivedBytes(): number {
@@ -383,9 +467,13 @@ export class RosNode extends EventEmitter {
     return { port: protocol[2] as number, address: protocol[1] as string };
   }
 
-  private _newConnectionId(): number {
+  private _newConnectionId = (): number => {
     return this._connectionIdCounter++;
-  }
+  };
+
+  private _getPublication = (topic: string): Publication | undefined => {
+    return this.publications.get(topic);
+  };
 
   private _callerApi(): string {
     if (this._localApiUrl != undefined) {
@@ -399,6 +487,24 @@ export class RosNode extends EventEmitter {
 
     return this._localApiUrl;
   }
+
+  private _handleTcpClientConnection = (
+    topic: string,
+    connectionId: number,
+    destinationCallerId: string,
+    client: Client,
+  ) => {
+    const publication = this.publications.get(topic);
+    if (publication == undefined) {
+      this._log?.warn?.(`${client.toString()} connected to non-published topic ${topic}`);
+      return client.close();
+    }
+
+    this._log?.info?.(
+      `adding subscriber ${client.toString()} (${destinationCallerId}) to topic ${topic}, connectionId ${connectionId}`,
+    );
+    publication.addSubscriber(connectionId, destinationCallerId, client);
+  };
 
   private async _registerSubscriber(subscription: Subscription): Promise<string[]> {
     if (!this._running) {
@@ -427,6 +533,34 @@ export class RosNode extends EventEmitter {
     }
 
     return publishers as string[];
+  }
+
+  private async _registerPublisher(publication: Publication): Promise<string[]> {
+    if (!this._running) {
+      return Promise.resolve([]);
+    }
+
+    const callerApi = this._callerApi();
+
+    const [status, msg, subscribers] = await this.rosMasterClient.registerPublisher(
+      this.name,
+      publication.name,
+      publication.dataType,
+      callerApi,
+    );
+
+    if (status !== 1) {
+      throw new Error(`registerPublisher() failed. status=${status}, msg="${msg}"`);
+    }
+
+    this._log?.debug?.(`registered publisher for ${publication.name} (${publication.dataType})`);
+    if (!Array.isArray(subscribers)) {
+      throw new Error(
+        `registerPublisher() did not receive a list of subscribers. value=${subscribers}`,
+      );
+    }
+
+    return subscribers as string[];
   }
 
   private async _unregisterSubscriber(topic: string): Promise<void> {
@@ -505,7 +639,7 @@ export class RosNode extends EventEmitter {
     subscription: Subscription,
     options: SubscribeOpts,
   ): Promise<void> {
-    const { topic, type } = options;
+    const { topic, dataType } = options;
     const md5sum = options.md5sum ?? "*";
     const tcpNoDelay = options.tcpNoDelay ?? false;
 
@@ -542,7 +676,7 @@ export class RosNode extends EventEmitter {
           ["topic", topic],
           ["md5sum", md5sum ?? "*"],
           ["callerid", this.name],
-          ["type", type],
+          ["type", dataType],
           ["tcp_nodelay", tcpNoDelay ? "1" : "0"],
         ]),
         this._log,
