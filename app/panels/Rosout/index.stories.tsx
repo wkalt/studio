@@ -85,9 +85,17 @@ export default {
 
 export const Simple = (): JSX.Element => {
   return (
-    <PanelSetup fixture={fixture}>
-      <Rosout />
-    </PanelSetup>
+    <>
+      <div style={{ fontSize: 20, padding: 10, width: "50%" }}>
+        Look at the position of the .contract-trigger::before pseudo element in the inspector. It
+        has top:0 and left:0, but is not aligned with the top/left of its parent.
+      </div>
+      <div style={{ position: "absolute", left: "50%", right: 0, top: 0, bottom: 0 }}>
+        <PanelSetup>
+          <Rosout />
+        </PanelSetup>
+      </div>
+    </>
   );
 };
 
