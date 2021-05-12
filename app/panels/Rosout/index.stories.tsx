@@ -85,7 +85,7 @@ export default {
 
 export const Simple = (): JSX.Element => {
   return (
-    <>
+    <div style={{ margin: 40, position: "relative", height: "100%" }}>
       <div style={{ fontSize: 20, padding: 10, width: "50%" }}>
         Look at the position of the .contract-trigger::before pseudo element in the inspector. It
         has top:0 and left:0, but is not aligned with the top/left of its parent.
@@ -95,7 +95,7 @@ export const Simple = (): JSX.Element => {
           <Rosout />
         </PanelSetup>
       </div>
-    </>
+    </div>
   );
 };
 
