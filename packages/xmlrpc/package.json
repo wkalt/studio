@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "@types/sax": "^1.2.1",
-    "jest": "27.0.0-next.8",
-    "jest-circus": "27.0.0-next.8",
-    "typescript": "4.2.2"
+    "jest": "27.0.0-next.9",
+    "jest-circus": "27.0.0-next.9",
+    "typescript": "4.2.4"
   }
 }
