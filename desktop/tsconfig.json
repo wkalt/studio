@@ -2,7 +2,8 @@
   "extends": "@foxglove/tsconfig/tsconfig.base.json",
   "include": ["*.ts", "common/**/*", "test/**/*.ts", "../package.json"],
   "compilerOptions": {
-    "module": "commonjs"
+    "module": "commonjs",
+    "outDir": "./dist"
     // "noEmit": true
   },
   "references": [{ "path": "../app" }]
