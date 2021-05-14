@@ -16,5 +16,6 @@
         "../../node_modules/@types/micro-memoize"
       ]
     }
-  }
+  },
+  "references": [{ "path": "../../app" }]
 }

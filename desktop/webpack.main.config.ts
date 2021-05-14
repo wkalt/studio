@@ -50,6 +50,7 @@ export default (_: unknown, argv: WebpackArgv): Configuration => {
           use: {
             loader: "ts-loader",
             options: {
+              projectReferences: true,
               transpileOnly: true,
               // https://github.com/TypeStrong/ts-loader#onlycompilebundledfiles
               // avoid looking at files which are not part of the bundle
@@ -75,7 +76,7 @@ export default (_: unknown, argv: WebpackArgv): Configuration => {
         SENTRY_PROJECT: process.env.SENTRY_PROJECT ?? null, // eslint-disable-line no-restricted-syntax
         AMPLITUDE_API_KEY: process.env.AMPLITUDE_API_KEY ?? null, // eslint-disable-line no-restricted-syntax
       }),
-      new ForkTsCheckerWebpackPlugin(),
+      new ForkTsCheckerWebpackPlugin({ typescript: { build: true } }),
     ],
 
     resolve,

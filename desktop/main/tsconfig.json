@@ -3,5 +3,6 @@
   "include": ["./**/*"],
   "compilerOptions": {
     "noEmit": true
-  }
+  },
+  "references": [{ "path": "../../app" }]
 }

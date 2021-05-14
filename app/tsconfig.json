@@ -18,5 +18,28 @@
       // This is only needed for vscode import suggestions
       "@foxglove-studio/app/*": ["./*"]
     }
-  }
+  },
+  "references": [
+    { "path": "../packages/@foxglove/hooks" },
+    { "path": "../packages/@types/cytoscape-dagre" },
+    { "path": "../packages/@types/memoize-weak" },
+    { "path": "../packages/@types/micro-memoize" },
+    { "path": "../packages/@types/quickhull3d" },
+    { "path": "../packages/@types/rc-color-picker" },
+    { "path": "../packages/@types/react-document-events" },
+    { "path": "../packages/@types/react-hover-observer" },
+    { "path": "../packages/@types/regl-worldview" },
+    { "path": "../packages/@types/roslib" },
+    { "path": "../packages/@types/text-metrics" },
+    { "path": "../packages/@types/universal-url" },
+    { "path": "../packages/@types/wasm-lz4" },
+    { "path": "../packages/electron-socket" },
+    { "path": "../packages/just-fetch" },
+    { "path": "../packages/log" },
+    { "path": "../packages/ros1" },
+    { "path": "../packages/rosmsg-deser" },
+    { "path": "../packages/velodyne-cloud" },
+    { "path": "../packages/wasm-bz2" },
+    { "path": "../packages/xmlrpc" }
+  ]
 }

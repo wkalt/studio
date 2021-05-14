@@ -4,5 +4,6 @@
   "compilerOptions": {
     "module": "commonjs",
     "noEmit": true
-  }
+  },
+  "references": [{ "path": "../app" }]
 }

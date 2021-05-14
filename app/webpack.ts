@@ -78,6 +78,7 @@ export function makeConfig(
             {
               loader: "ts-loader",
               options: {
+                projectReferences: true,
                 transpileOnly: true,
                 // https://github.com/TypeStrong/ts-loader#onlycompilebundledfiles
                 // avoid looking at files which are not part of the bundle
@@ -195,6 +196,7 @@ export function makeConfig(
       }),
       new ForkTsCheckerWebpackPlugin({
         typescript: {
+          build: true,
           configOverwrite: {
             compilerOptions: {
               noUnusedLocals: !allowUnusedLocals,
