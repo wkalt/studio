@@ -66,8 +66,8 @@ export default (env: unknown, argv: WebpackArgv): Configuration => {
     },
 
     output: {
-      publicPath: isServe ? "/" : "/",
-      path: path.resolve(__dirname, ".webpack", "src"),
+      publicPath: "/",
+      path: path.resolve(__dirname, ".webpack"),
     },
 
     plugins: [
