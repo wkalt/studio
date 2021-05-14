@@ -2,7 +2,7 @@
   "extends": "@foxglove/tsconfig/tsconfig.base.json",
   "include": ["./**/*"],
   "compilerOptions": {
-    "noEmit": true
+    // "noEmit": true
   },
   "references": [{ "path": "../../app" }]
 }

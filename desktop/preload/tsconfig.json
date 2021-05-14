@@ -3,7 +3,7 @@
   "include": ["./**/*", "../common/types.ts"],
   "compilerOptions": {
     "rootDir": "../",
-    "noEmit": true,
+    // "noEmit": true,
     "lib": ["dom", "es2020"]
   },
   "references": [{ "path": "../../app" }]
