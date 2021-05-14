@@ -5,14 +5,13 @@
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import SentryWebpackPlugin from "@sentry/webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
 import { Configuration, EnvironmentPlugin, WebpackPluginInstance } from "webpack";
 
 import type { WebpackArgv } from "@foxglove-studio/app/WebpackArgv";
 import { makeConfig } from "@foxglove-studio/app/webpack";
-
-import packageJson from "../package.json";
 
 export default (env: unknown, argv: WebpackArgv): Configuration => {
   const isDev = argv.mode === "development";
@@ -38,7 +37,6 @@ export default (env: unknown, argv: WebpackArgv): Configuration => {
         authToken: process.env.SENTRY_AUTH_TOKEN,
         org: process.env.SENTRY_ORG,
         project: process.env.SENTRY_PROJECT,
-        release: `${process.env.SENTRY_PROJECT}@${packageJson.version}`,
         include: path.resolve(__dirname, ".webpack"),
       }),
     );
@@ -50,8 +48,8 @@ export default (env: unknown, argv: WebpackArgv): Configuration => {
     ...appWebpackConfig,
 
     target: "web",
-    context: path.resolve(__dirname, "./src"),
-    entry: "./index.tsx",
+    context: path.resolve(__dirname),
+    entry: "./src/index.tsx",
     devtool: isDev ? "eval-cheap-module-source-map" : "source-map",
 
     devServer: {
@@ -81,11 +79,20 @@ export default (env: unknown, argv: WebpackArgv): Configuration => {
         SIGNUP_API_URL: "https://foxglove.dev/api/signup",
         SLACK_INVITE_URL: "https://foxglove.dev/join-slack",
       }),
+      new CopyPlugin({
+        patterns: [{ from: "public" }],
+      }),
       new HtmlWebpackPlugin({
         templateContent: `
   <!doctype html>
   <html>
-    <head><meta charset="utf-8"></head>
+    <head>
+      <meta charset="utf-8">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <title>Foxglove Studio</title>
+    </head>
     <script>
       global = globalThis;
       window.FabricConfig = ${

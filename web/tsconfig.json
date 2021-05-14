@@ -1,6 +1,6 @@
 {
   "extends": "@foxglove/tsconfig/tsconfig.base.json",
-  "include": ["*.ts", "../package.json"],
+  "include": ["*.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "noEmit": true
