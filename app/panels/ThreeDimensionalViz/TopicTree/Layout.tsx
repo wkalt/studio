@@ -11,6 +11,7 @@
 //   found at http://www.apache.org/licenses/LICENSE-2.0
 //   You may not use this file except in compliance with the License.
 
+import { Callout, DirectionalHint } from "@fluentui/react";
 import { groupBy } from "lodash";
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { useResizeDetector } from "react-resize-detector";
@@ -46,7 +47,6 @@ import GridBuilder from "@foxglove/studio-base/panels/ThreeDimensionalViz/GridBu
 import {
   InteractionContextMenu,
   OBJECT_TAB_TYPE,
-  TabType,
 } from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions";
 import useLinkedGlobalVariables from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions/useLinkedGlobalVariables";
 import styles from "@foxglove/studio-base/panels/ThreeDimensionalViz/Layout.module.scss";
@@ -58,11 +58,10 @@ import {
   MarkerMatcher,
   ThreeDimensionalVizContext,
 } from "@foxglove/studio-base/panels/ThreeDimensionalViz/ThreeDimensionalVizContext";
-import { ColorPickerSettingsPanel } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
+import { FGColorPicker } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import TopicSettingsModal from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicSettingsModal";
 import TopicTree from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicTree";
 import { TOPIC_DISPLAY_MODES } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicViewModeSelector";
-import { TopicDisplayMode } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/types";
 import useSceneBuilderAndTransformsData from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/useSceneBuilderAndTransformsData";
 import Transforms, {
   DEFAULT_ROOT_FRAME_IDS,
@@ -219,7 +218,7 @@ export default function Layout({
     selectedPolygonEditFormat = "yaml",
     showCrosshair,
     autoSyncCameraState = false,
-    topicDisplayMode = TOPIC_DISPLAY_MODES.SHOW_ALL.value as TopicDisplayMode,
+    topicDisplayMode = TOPIC_DISPLAY_MODES.SHOW_ALL.value,
     settingsByKey,
     colorOverrideBySourceIdxByVariable,
     disableAutoOpenClickedObject = false,
@@ -237,14 +236,13 @@ export default function Layout({
     measurePoints: { start: undefined, end: undefined },
   });
   const [currentEditingTopic, setCurrentEditingTopic] = useState<Topic | undefined>(undefined);
-  const [editingNamespace, setEditingNamespace] =
-    useState<
-      | {
-          namespaceKey: string;
-          namespaceColor?: string;
-        }
-      | undefined
-    >();
+  const [editingNamespace, setEditingNamespace] = useState<
+    | {
+        namespaceKey: string;
+        namespaceColor?: string;
+      }
+    | undefined
+  >();
 
   const searchTextProps = useSearchText();
   const {
@@ -258,8 +256,9 @@ export default function Layout({
   const [_, forceUpdate] = useReducer((x: number) => x + 1, 0);
   const measuringElRef = useRef<MeasuringTool>(ReactNull);
   const [drawingTabType, setDrawingTabType] = useState<DrawingTabType | undefined>(undefined);
-  const [interactionsTabType, setInteractionsTabType] =
-    useState<DrawingTabType | undefined>(undefined);
+  const [interactionsTabType, setInteractionsTabType] = useState<DrawingTabType | undefined>(
+    undefined,
+  );
 
   const [selectionState, setSelectionState] = useState<UserSelectionState>({
     clickedObjects: [],
@@ -341,12 +340,14 @@ export default function Layout({
     [],
   );
 
-  const { availableNamespacesByTopic, sceneErrorsByKey: sceneErrorsByTopicKey } =
-    useSceneBuilderAndTransformsData({
-      sceneBuilder,
-      staticallyAvailableNamespacesByTopic,
-      transforms,
-    });
+  const {
+    availableNamespacesByTopic,
+    sceneErrorsByKey: sceneErrorsByTopicKey,
+  } = useSceneBuilderAndTransformsData({
+    sceneBuilder,
+    staticallyAvailableNamespacesByTopic,
+    transforms,
+  });
 
   // Use deep compare so that we only regenerate rootTreeNode when topics change.
   const memoizedTopics = useShallowMemo(topics);
@@ -605,9 +606,11 @@ export default function Layout({
     if (!args) {
       return;
     }
-    const { drawingTabType: currentDrawingTabType, handleDrawPolygons: currentHandleDrawPolygons } =
-      callbackInputsRef.current;
-    const measuringHandler = measuringElRef.current && (measuringElRef.current as any)[eventName];
+    const {
+      drawingTabType: currentDrawingTabType,
+      handleDrawPolygons: currentHandleDrawPolygons,
+    } = callbackInputsRef.current;
+    const measuringHandler = measuringElRef.current && measuringElRef.current[eventName];
     const measureActive = measuringElRef.current?.measureActive ?? false;
     if (measuringHandler && measureActive) {
       return measuringHandler(ev, args);
@@ -708,8 +711,10 @@ export default function Layout({
       onSetPolygons: (polygons: Polygon[]) => setPolygonBuilder(new PolygonBuilder(polygons)),
       toggleDebug: () => setDebug(!callbackInputsRef.current.debug),
       toggleCameraMode: () => {
-        const { cameraState: currentCameraState, saveConfig: currentSaveConfig } =
-          callbackInputsRef.current;
+        const {
+          cameraState: currentCameraState,
+          saveConfig: currentSaveConfig,
+        } = callbackInputsRef.current;
         currentSaveConfig({
           cameraState: { ...currentCameraState, perspective: !currentCameraState.perspective },
         });
@@ -767,10 +772,11 @@ export default function Layout({
     return handlers;
   }, [pinTopics, saveConfig, searchTextProps, toggleCameraMode]);
 
-  const markerProviders = useMemo(
-    () => [gridBuilder, sceneBuilder, transformsBuilder],
-    [gridBuilder, sceneBuilder, transformsBuilder],
-  );
+  const markerProviders = useMemo(() => [gridBuilder, sceneBuilder, transformsBuilder], [
+    gridBuilder,
+    sceneBuilder,
+    transformsBuilder,
+  ]);
 
   const cursorType = isDrawing ? "crosshair" : "";
 
@@ -800,6 +806,8 @@ export default function Layout({
     height: containerHeight,
     ref: topicTreeSizeRef,
   } = useResizeDetector();
+
+  const [colorPickerShown, setColorPickerShown] = useState(false);
 
   return (
     <ThreeDimensionalVizContext.Provider value={threeDimensionalVizContextValue}>
@@ -879,12 +887,18 @@ export default function Layout({
                       flexDirection: "column",
                     }}
                   >
-                    <ColorPickerSettingsPanel
-                      color={settingsByKey[editingNamespace.namespaceKey]?.overrideColor}
-                      onChange={(newColor) =>
-                        onNamespaceOverrideColorChange(newColor, editingNamespace.namespaceKey)
-                      }
-                    />
+                    <Callout
+                      directionalHint={DirectionalHint.topAutoEdge}
+                      target={containerRef.current}
+                      onDismiss={() => setColorPickerShown(false)}
+                    >
+                      <FGColorPicker
+                        color={settingsByKey[editingNamespace.namespaceKey]?.overrideColor}
+                        onChange={(newColor) =>
+                          onNamespaceOverrideColorChange(newColor, editingNamespace.namespaceKey)
+                        }
+                      />
+                    </Callout>
                   </Modal>
                 </RenderToBodyComponent>
               )}
@@ -915,12 +929,8 @@ export default function Layout({
               <div style={videoRecordingStyle as React.CSSProperties}>
                 <LayoutToolbar
                   cameraState={cameraState}
-                  interactionsTabType={interactionsTabType as TabType | undefined}
-                  setInteractionsTabType={
-                    setInteractionsTabType as React.Dispatch<
-                      React.SetStateAction<TabType | undefined>
-                    >
-                  }
+                  interactionsTabType={interactionsTabType}
+                  setInteractionsTabType={setInteractionsTabType}
                   debug={debug}
                   followOrientation={followOrientation}
                   followTf={followTf}

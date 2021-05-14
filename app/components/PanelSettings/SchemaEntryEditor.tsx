@@ -8,7 +8,6 @@ import {
   DefaultButton,
   DirectionalHint,
   Dropdown,
-  IColorPickerStyles,
   Label,
   SpinButton,
   Stack,
@@ -25,21 +24,6 @@ import { PanelConfigSchemaEntry, SaveConfig } from "@foxglove/studio-base/types/
 import { nonEmptyOrUndefined } from "@foxglove/studio-base/util/emptyOrUndefined";
 
 const log = Logger.getLogger(__filename);
-
-const COLOR_PICKER_STYLES: IColorPickerStyles = {
-  root: { maxWidth: 250 },
-  colorRectangle: { minWidth: 100, minHeight: 100 },
-  table: {
-    // We need to remove table styles from global.scss, but for now, changing them
-    // to e.g. "#root td" messes with the styling in various places because the
-    // selector becomes more specific. So for now, just disable them directly here.
-    "tr, th, td, tr:hover th, tr:hover td": {
-      border: "none",
-      background: "none",
-      cursor: "unset",
-    },
-  },
-};
 
 export default function SchemaEntryEditor({
   entry,
@@ -198,7 +182,6 @@ export default function SchemaEntryEditor({
                 color={value}
                 alphaType="none"
                 onChange={(_event, newValue) => setValue(`#${newValue.hex}`)}
-                styles={COLOR_PICKER_STYLES}
               />
             </Callout>
           )}

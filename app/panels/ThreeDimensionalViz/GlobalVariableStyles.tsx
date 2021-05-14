@@ -217,7 +217,6 @@ function GlobalVariableStylesRow({
         </SInput>
         <SColorPicker>
           <ColorPickerForTopicSettings
-            size={PICKER_SIZE.SMALL.name as any}
             color={overrides[0]?.color}
             onChange={(_color) =>
               updateSettingsForGlobalVariable(
@@ -228,7 +227,6 @@ function GlobalVariableStylesRow({
             }
           />
           <ColorPickerForTopicSettings
-            size={PICKER_SIZE.SMALL.name as any}
             color={overrides[1]?.color}
             onChange={(_color) =>
               updateSettingsForGlobalVariable(

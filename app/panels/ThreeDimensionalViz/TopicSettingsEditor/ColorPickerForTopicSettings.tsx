@@ -11,10 +11,17 @@
 //   found at http://www.apache.org/licenses/LICENSE-2.0
 //   You may not use this file except in compliance with the License.
 
-import { ZIndexes } from "@fluentui/react";
-import ColorPicker, { Panel as ColorPickerPanel } from "rc-color-picker";
+import {
+  Callout,
+  DefaultButton,
+  DirectionalHint,
+  IColor,
+  ColorPicker,
+  getColorFromRGBA,
+} from "@fluentui/react";
+import { useRef, useState } from "react";
+import { Panel as ColorPickerPanel } from "rc-color-picker";
 import { Color } from "regl-worldview";
-import styled from "styled-components";
 import tinyColor from "tinycolor2";
 
 export const PICKER_SIZE = {
@@ -23,23 +30,11 @@ export const PICKER_SIZE = {
 };
 
 export type Size = keyof typeof PICKER_SIZE;
-type Placement = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
 
-const SWrapper = styled.span<any>`
-  .rc-color-picker-trigger {
-    border: none;
-    box-shadow: none;
-    display: inline-block;
-    width: ${({ isSmallSize }) =>
-      isSmallSize ? PICKER_SIZE.SMALL.size : PICKER_SIZE.NORMAL.size}px;
-    height: ${({ isSmallSize }) =>
-      isSmallSize ? PICKER_SIZE.SMALL.size : PICKER_SIZE.NORMAL.size}px;
-    border-radius: ${({ isSmallSize }) =>
-      isSmallSize ? PICKER_SIZE.SMALL.size / 2 : PICKER_SIZE.NORMAL.size / 2}px;
-  }
-`;
-
+// todo remove with retirement of ColorPickerSettingsPanel
 const DEFAULT_OVERRIDE_COLOR = "rgba(255,255,255,1)";
+
+const DEFAULT_COLOR = { r: 255, g: 255, b: 255, a: 100 };
 
 export function getHexFromColorSettingWithDefault(color?: Color): string {
   return color ? tinyColor.fromRatio(color).toRgbString() : DEFAULT_OVERRIDE_COLOR;
@@ -48,8 +43,6 @@ export function getHexFromColorSettingWithDefault(color?: Color): string {
 type Props = {
   color?: Color;
   onChange: (newColor: Color) => void;
-  placement?: Placement;
-  size?: Size;
 };
 type ColorPickerSettingsPanelProps = {
   color?: Color;
@@ -67,6 +60,7 @@ export function getRGBAFromColor(color: { color: string; alpha: number }): Color
     a: rgbaColor.a,
   };
 }
+
 // A tiny wrapper to set up the default handling of color and onChange for ColorPickerPanel.
 export function ColorPickerSettingsPanel({
   color,
@@ -85,26 +79,60 @@ export function ColorPickerSettingsPanel({
   );
 }
 
-export default function ColorPickerForTopicSettings({
-  color,
-  placement,
-  onChange,
-  size,
-}: Props): JSX.Element {
-  const isSmallSize = size === PICKER_SIZE.SMALL.name;
-  const hexColor = getHexFromColorSettingWithDefault(color);
+// Translate our regl Color to a fluentUI color.
+export function getFluentUIColorFromColor(color?: Color): IColor {
+  const defaultedColor = color
+    ? { r: 255 * color.r, g: 255 * color.g, b: 255 * color.b, a: 100 * color.a }
+    : DEFAULT_COLOR;
+  return getColorFromRGBA(defaultedColor);
+}
+
+// Translate a fluentui IColor implementation to our internal Color interface,
+// defaulting the alpha value to 1 if it is not present.
+export function getColorFromFluentUIColor(color: IColor): Color {
+  return {
+    r: color.r / 255,
+    g: color.g / 255,
+    b: color.b / 255,
+    a: color.a ? color.a / 100 : 1,
+  };
+}
+
+export default function ColorPickerForTopicSettings({ color, onChange }: Props): JSX.Element {
+  const fluentColor = getFluentUIColorFromColor(color);
+  const colorButtonRef = useRef<HTMLElement>(ReactNull);
+  const [colorPickerShown, setColorPickerShown] = useState(false);
 
   return (
-    <SWrapper isSmallSize={isSmallSize}>
-      <ColorPicker
-        style={{ zIndex: ZIndexes.Layer + 1 }}
-        animation="slide-up"
-        color={hexColor}
-        placement={placement}
-        onChange={(newColor: { color: string; alpha: number }) =>
-          onChange(getRGBAFromColor(newColor))
-        }
+    <div>
+      <DefaultButton
+        elementRef={colorButtonRef}
+        styles={{
+          root: { backgroundColor: fluentColor.str },
+          rootHovered: { backgroundColor: fluentColor.str, opacity: 0.8 },
+          rootPressed: { backgroundColor: fluentColor.str, opacity: 0.6 },
+        }}
+        onClick={() => setColorPickerShown(!colorPickerShown)}
       />
-    </SWrapper>
+      {colorPickerShown && (
+        <Callout
+          directionalHint={DirectionalHint.topAutoEdge}
+          target={colorButtonRef.current}
+          onDismiss={() => setColorPickerShown(false)}
+        >
+          <FGColorPicker color={color} onChange={onChange} />
+        </Callout>
+      )}
+    </div>
+  );
+}
+
+export function FGColorPicker({ color, onChange }: Props): JSX.Element {
+  return (
+    <ColorPicker
+      color={getFluentUIColorFromColor(color)}
+      alphaType="none"
+      onChange={(_event, newValue) => onChange(getColorFromFluentUIColor(newValue))}
+    />
   );
 }
