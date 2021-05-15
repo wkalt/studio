@@ -85,7 +85,7 @@ export function FGColorPicker({ color, onChange }: ColorPickerProps): JSX.Elemen
 }
 
 // Returns a button that pops out an FGColorPicker in a fluent callout.
-export default function ColorPickerForTopicSettings({
+export default function ColorPickerButtonCallout({
   color,
   onChange,
 }: ColorPickerProps): JSX.Element {

@@ -19,7 +19,7 @@ import { Marker, MarkerArray } from "@foxglove/studio-base/types/Messages";
 import { LINED_CONVEX_HULL_RENDERING_SETTING } from "@foxglove/studio-base/util/globalConstants";
 
 import { TopicSettingsEditorProps } from ".";
-import ColorPickerForTopicSettings from "./ColorPickerForTopicSettings";
+import ColorPickerButtonCallout from "@foxglove-studio/app/components/ColorPicker";
 import { SLabel, SDescription } from "./common";
 
 type MarkerSettings = {
@@ -37,7 +37,7 @@ export default function MarkerSettingsEditor(
       <SDescription>
         Overrides <code>color</code>/<code>colors</code> for all markers on this topic.
       </SDescription>
-      <ColorPickerForTopicSettings
+      <ColorPickerButtonCallout
         color={settings.overrideColor}
         onChange={(newColor) => onFieldChange("overrideColor", newColor)}
       />

@@ -17,8 +17,8 @@ import { Color } from "regl-worldview";
 import styled from "styled-components";
 import tinyColor from "tinycolor2";
 
+import { getHexFromColorSettingWithDefault } from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
-import { getHexFromColorSettingWithDefault } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import { nonEmptyOrUndefined } from "@foxglove/studio-base/util/emptyOrUndefined";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 

@@ -17,14 +17,14 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
+import {
+  getHexFromColorSettingWithDefault,
+  PICKER_SIZE,
+} from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
 import KeyboardShortcut from "@foxglove/studio-base/components/KeyboardShortcut";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
 import useGuaranteedContext from "@foxglove/studio-base/hooks/useGuaranteedContext";
-import {
-  getHexFromColorSettingWithDefault,
-  PICKER_SIZE,
-} from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import { ROW_HEIGHT } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/constants";
 import { TopicTreeContext } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/useTopicTree";
 import clipboard from "@foxglove/studio-base/util/clipboard";

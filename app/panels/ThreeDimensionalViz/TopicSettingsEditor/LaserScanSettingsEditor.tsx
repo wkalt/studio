@@ -16,7 +16,7 @@ import { Color } from "regl-worldview";
 import Flex from "@foxglove/studio-base/components/Flex";
 import { LaserScan } from "@foxglove/studio-base/types/Messages";
 
-import ColorPickerForTopicSettings from "./ColorPickerForTopicSettings";
+import ColorPickerButtonCallout from "@foxglove-studio/app/components/ColorPicker";
 import CommonDecaySettings from "./CommonDecaySettings";
 import CommonPointSettings from "./CommonPointSettings";
 import { SLabel } from "./common";
@@ -45,7 +45,7 @@ export default function LaserScanSettingsEditor(
       <CommonDecaySettings settings={settings} onFieldChange={onFieldChange} />
 
       <SLabel>Color</SLabel>
-      <ColorPickerForTopicSettings
+      <ColorPickerButtonCallout
         color={settings.overrideColor}
         onChange={(newColor) => onFieldChange("overrideColor", newColor)}
       />

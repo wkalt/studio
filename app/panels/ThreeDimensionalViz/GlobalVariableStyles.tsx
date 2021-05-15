@@ -18,6 +18,7 @@ import styled from "styled-components";
 import tinyColor from "tinycolor2";
 
 import Checkbox from "@foxglove/studio-base/components/Checkbox";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
 import ExpandingToolbar, {
   ToolGroup,
   ToolGroupFixedSizePane,
@@ -28,9 +29,6 @@ import { JSONInput } from "@foxglove/studio-base/components/input/JSONInput";
 import useGlobalVariables from "@foxglove/studio-base/hooks/useGlobalVariables";
 import useLinkedGlobalVariables from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions/useLinkedGlobalVariables";
 import styles from "@foxglove/studio-base/panels/ThreeDimensionalViz/Layout.module.scss";
-import ColorPickerForTopicSettings, {
-  PICKER_SIZE,
-} from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import {
   ColorOverride,
   ColorOverrideBySourceIdxByVariable,
@@ -216,7 +214,7 @@ function GlobalVariableStylesRow({
           <JSONInput value={JSON.stringify(value ?? "")} onChange={noop} />
         </SInput>
         <SColorPicker>
-          <ColorPickerForTopicSettings
+          <ColorPickerButtonCallout
             color={overrides[0]?.color}
             onChange={(_color) =>
               updateSettingsForGlobalVariable(
@@ -226,7 +224,7 @@ function GlobalVariableStylesRow({
               )
             }
           />
-          <ColorPickerForTopicSettings
+          <ColorPickerButtonCallout
             color={overrides[1]?.color}
             onChange={(_color) =>
               updateSettingsForGlobalVariable(

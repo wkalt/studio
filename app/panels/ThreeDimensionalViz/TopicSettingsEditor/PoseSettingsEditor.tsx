@@ -20,7 +20,7 @@ import { Color, PoseStamped } from "@foxglove/studio-base/types/Messages";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 
 import { TopicSettingsEditorProps } from ".";
-import ColorPickerForTopicSettings from "./ColorPickerForTopicSettings";
+import ColorPickerButtonCallout from "@foxglove-studio/app/components/ColorPicker";
 import { SLabel, SInput } from "./common";
 
 export type PoseSettings = {
@@ -62,7 +62,7 @@ export default function PoseSettingsEditor(
         return (
           <>
             <SLabel>Color of outline</SLabel>
-            <ColorPickerForTopicSettings
+            <ColorPickerButtonCallout
               color={settings.overrideColor}
               onChange={(newColor) => onFieldChange("overrideColor", newColor)}
             />
@@ -77,7 +77,7 @@ export default function PoseSettingsEditor(
         return (
           <Flex col>
             <SLabel>Color</SLabel>
-            <ColorPickerForTopicSettings
+            <ColorPickerButtonCallout
               color={settings.overrideColor as any}
               onChange={(newColor) => onFieldChange("overrideColor", newColor)}
             />

@@ -18,6 +18,11 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
+import {
+  FGColorPicker,
+  PICKER_SIZE,
+  getHexFromColorSettingWithDefault,
+} from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
 import Modal from "@foxglove/studio-base/components/Modal";
@@ -27,11 +32,6 @@ import useGlobalVariables from "@foxglove/studio-base/hooks/useGlobalVariables";
 import { getDefaultColorOverrideBySourceIdx } from "@foxglove/studio-base/panels/ThreeDimensionalViz/GlobalVariableStyles";
 import { LinkedGlobalVariable } from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions/useLinkedGlobalVariables";
 import { ThreeDimensionalVizContext } from "@foxglove/studio-base/panels/ThreeDimensionalViz/ThreeDimensionalVizContext";
-import {
-  FGColorPicker,
-  PICKER_SIZE,
-  getHexFromColorSettingWithDefault,
-} from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import { ColorOverride } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/Layout";
 import TooltipRow from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TooltipRow";
 import TooltipTable from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TooltipTable";
@@ -263,19 +263,17 @@ function StyleExpressionNode(props: any) {
                 <span style={{ paddingRight: 8 }}>Marker color</span>
                 <SColorPickerWrapper>
                   <SColorTrigger
-                    hexColor={getHexFromColorSettingWithDefault(
-                      (colorOverridesByColumnIdx[0] as any).color,
-                    )}
+                    hexColor={getHexFromColorSettingWithDefault(colorOverridesByColumnIdx[0].color)}
                   />
                 </SColorPickerWrapper>
                 {/* @ts-expect-error-error fix comparison operator */}
                 {editingColorForSourceIdx === 0 && (
                   <ColorPickerOverlay
-                    color={(colorOverridesByColumnIdx[0] as any).color}
+                    color={colorOverridesByColumnIdx[0].color}
                     onChangeColor={(color) => {
                       updateSettingsForGlobalVariable(
                         name,
-                        { color, active: (colorOverridesByColumnIdx[0] as any).active },
+                        { color, active: colorOverridesByColumnIdx[0].active },
                         0,
                       );
                     }}
@@ -294,16 +292,16 @@ function StyleExpressionNode(props: any) {
                   <SColorPickerWrapper>
                     <SColorTrigger
                       hexColor={getHexFromColorSettingWithDefault(
-                        (colorOverridesByColumnIdx[1] as any).color,
+                        colorOverridesByColumnIdx[1].color,
                       )}
                     />
                   </SColorPickerWrapper>
                   {/* @ts-expect-error-error fix comparison operator */}
                   {editingColorForSourceIdx === 1 && (
                     <ColorPickerOverlay
-                      color={(colorOverridesByColumnIdx[1] as any).color}
+                      color={colorOverridesByColumnIdx[1].color}
                       onChangeColor={(color) => {
-                        const active = (colorOverridesByColumnIdx[1] as any).active;
+                        const active = colorOverridesByColumnIdx[1].active;
                         updateSettingsForGlobalVariable(name, { color, active }, 1);
                       }}
                       onRequestClose={() => setEditingColorForSourceIdx(-1 as any)}

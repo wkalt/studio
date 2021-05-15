@@ -16,10 +16,10 @@ import { Color } from "regl-worldview";
 import styled from "styled-components";
 
 import AutoSizingCanvas from "@foxglove/studio-base/components/AutoSizingCanvas";
-import ColorPickerForTopicSettings, {
+import ColorPickerButtonCallout, {
   PICKER_SIZE,
   getHexFromColorSettingWithDefault,
-} from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
+} from "@foxglove/studio-base/components/ColorPicker";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 
 const COLOR_PICKER_SIZE = PICKER_SIZE.NORMAL.size;
@@ -78,11 +78,11 @@ export default function GradientPicker({
   return (
     <>
       <SPickerWrapper>
-        <ColorPickerForTopicSettings
+        <ColorPickerButtonCallout
           color={minColor}
           onChange={(newColor: any) => onChange({ minColor: newColor, maxColor })}
         />
-        <ColorPickerForTopicSettings
+        <ColorPickerButtonCallout
           color={maxColor}
           onChange={(newColor: any) => onChange({ minColor, maxColor: newColor })}
         />

@@ -28,6 +28,7 @@ import { Time } from "rosbag";
 import { useDebouncedCallback } from "use-debounce";
 
 import useDataSourceInfo from "@foxglove/studio-base/PanelAPI/useDataSourceInfo";
+import { FGColorPicker } from "@foxglove/studio-base/components/ColorPicker";
 import KeyListener from "@foxglove/studio-base/components/KeyListener";
 import Modal from "@foxglove/studio-base/components/Modal";
 import PanelToolbar from "@foxglove/studio-base/components/PanelToolbar";
@@ -58,7 +59,6 @@ import {
   MarkerMatcher,
   ThreeDimensionalVizContext,
 } from "@foxglove/studio-base/panels/ThreeDimensionalViz/ThreeDimensionalVizContext";
-import { FGColorPicker } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
 import TopicSettingsModal from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicSettingsModal";
 import TopicTree from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicTree";
 import { TOPIC_DISPLAY_MODES } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicTree/TopicViewModeSelector";
