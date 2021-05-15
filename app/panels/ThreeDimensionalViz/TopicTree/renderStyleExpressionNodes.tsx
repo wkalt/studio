@@ -28,7 +28,7 @@ import { getDefaultColorOverrideBySourceIdx } from "@foxglove/studio-base/panels
 import { LinkedGlobalVariable } from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions/useLinkedGlobalVariables";
 import { ThreeDimensionalVizContext } from "@foxglove/studio-base/panels/ThreeDimensionalViz/ThreeDimensionalVizContext";
 import {
-  ColorPickerSettingsPanel,
+  FGColorPicker,
   PICKER_SIZE,
   getHexFromColorSettingWithDefault,
 } from "@foxglove/studio-base/panels/ThreeDimensionalViz/TopicSettingsEditor/ColorPickerForTopicSettings";
@@ -339,7 +339,7 @@ function ColorPickerOverlay({
           flexDirection: "column",
         }}
       >
-        <ColorPickerSettingsPanel color={color} onChange={onChangeColor} />
+        <FGColorPicker color={color} onChange={onChangeColor} />
       </Modal>
     </RenderToBodyComponent>
   );

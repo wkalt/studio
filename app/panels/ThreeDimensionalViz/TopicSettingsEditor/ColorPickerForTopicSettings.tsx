@@ -20,7 +20,6 @@ import {
   getColorFromRGBA,
 } from "@fluentui/react";
 import { useRef, useState } from "react";
-import { Panel as ColorPickerPanel } from "rc-color-picker";
 import { Color } from "regl-worldview";
 import tinyColor from "tinycolor2";
 
@@ -44,40 +43,6 @@ type Props = {
   color?: Color;
   onChange: (newColor: Color) => void;
 };
-type ColorPickerSettingsPanelProps = {
-  color?: Color;
-  onChange: (newColor: Color) => void;
-};
-
-export function getRGBAFromColor(color: { color: string; alpha: number }): Color {
-  const rgbaColor = tinyColor(color.color)
-    .setAlpha(color.alpha / 100)
-    .toRgb();
-  return {
-    r: rgbaColor.r / 255,
-    g: rgbaColor.g / 255,
-    b: rgbaColor.b / 255,
-    a: rgbaColor.a,
-  };
-}
-
-// A tiny wrapper to set up the default handling of color and onChange for ColorPickerPanel.
-export function ColorPickerSettingsPanel({
-  color,
-  onChange,
-}: ColorPickerSettingsPanelProps): JSX.Element {
-  const hexColor = getHexFromColorSettingWithDefault(color);
-  return (
-    <ColorPickerPanel
-      enableAlpha
-      color={hexColor}
-      onChange={(newColor: { color: string; alpha: number }) =>
-        onChange(getRGBAFromColor(newColor))
-      }
-      mode="RGB"
-    />
-  );
-}
 
 // Translate our regl Color to a fluentUI color.
 export function getFluentUIColorFromColor(color?: Color): IColor {
