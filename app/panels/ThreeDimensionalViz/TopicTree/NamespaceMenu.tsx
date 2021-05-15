@@ -17,7 +17,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
-import { getHexFromColorSettingWithDefault } from "@foxglove/studio-base/components/ColorPicker";
+import getDefaultedRGBStringFromColor from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
 import KeyboardShortcut from "@foxglove/studio-base/components/KeyboardShortcut";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
@@ -50,7 +50,7 @@ const SColorPickerWrapper = styled.span`
 const SColorTrigger = styled.span<any>`
   display: inline-block;
   cursor: pointer;
-  background: ${({ hexColor }) => hexColor};
+  background: ${({ color }) => color};
   width: ${COLOR_PICKER_SIZE}px;
   height: ${COLOR_PICKER_SIZE}px;
   border-radius: ${COLOR_PICKER_SIZE / 2}px;
@@ -181,9 +181,7 @@ export default function NamespaceMenu({
                     <span style={{ paddingRight: 8 }}>Marker color</span>
                     <SColorPickerWrapper style={colorPickerWrapperStyle}>
                       <SColorTrigger
-                        hexColor={getHexFromColorSettingWithDefault(
-                          overrideColorByColumn[0] as any,
-                        )}
+                        color={getDefaultedRGBStringFromColor(overrideColorByColumn[0] as any)}
                       />
                       {(hasNamespaceOverrideColorChangedByColumn[0] ?? false) && (
                         <Icon
@@ -218,9 +216,7 @@ export default function NamespaceMenu({
                       <span style={{ paddingRight: 8 }}>Feature marker color</span>
                       <SColorPickerWrapper style={colorPickerWrapperStyle}>
                         <SColorTrigger
-                          hexColor={getHexFromColorSettingWithDefault(
-                            overrideColorByColumn[1] as any,
-                          )}
+                          color={getDefaultedRGBStringFromColor(overrideColorByColumn[1] as any)}
                         />
                         {(hasNamespaceOverrideColorChangedByColumn[1] ?? false) && (
                           <Icon

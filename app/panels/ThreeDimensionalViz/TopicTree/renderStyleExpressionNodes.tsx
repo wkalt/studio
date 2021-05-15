@@ -20,7 +20,7 @@ import styled from "styled-components";
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
 import {
   FGColorPicker,
-  getHexFromColorSettingWithDefault,
+  getDefaultedRGBStringFromColor,
 } from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
@@ -105,7 +105,7 @@ const SColorPickerWrapper = styled.span`
 const SColorTrigger = styled.span<any>`
   display: inline-block;
   cursor: pointer;
-  background: ${({ hexColor }) => hexColor};
+  background: ${({ color }) => color};
   width: 16px;
   height: 16px;
   border-radius: 8px;
@@ -262,7 +262,7 @@ function StyleExpressionNode(props: any) {
                 <span style={{ paddingRight: 8 }}>Marker color</span>
                 <SColorPickerWrapper>
                   <SColorTrigger
-                    hexColor={getHexFromColorSettingWithDefault(colorOverridesByColumnIdx[0].color)}
+                    color={getDefaultedRGBStringFromColor(colorOverridesByColumnIdx[0].color)}
                   />
                 </SColorPickerWrapper>
                 {/* @ts-expect-error-error fix comparison operator */}
@@ -290,9 +290,7 @@ function StyleExpressionNode(props: any) {
                   <span style={{ paddingRight: 8 }}>Feature marker color</span>
                   <SColorPickerWrapper>
                     <SColorTrigger
-                      hexColor={getHexFromColorSettingWithDefault(
-                        colorOverridesByColumnIdx[1].color,
-                      )}
+                      color={getDefaultedRGBStringFromColor(colorOverridesByColumnIdx[1].color)}
                     />
                   </SColorPickerWrapper>
                   {/* @ts-expect-error-error fix comparison operator */}

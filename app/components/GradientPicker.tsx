@@ -16,8 +16,9 @@ import { Color } from "regl-worldview";
 import styled from "styled-components";
 
 import AutoSizingCanvas from "@foxglove/studio-base/components/AutoSizingCanvas";
-import ColorPickerButtonCallout, {
-  getHexFromColorSettingWithDefault,
+import {
+  ColorPickerButtonCallout,
+  getDefaultedRGBStringFromColor,
 } from "@foxglove/studio-base/components/ColorPicker";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 
@@ -59,18 +60,18 @@ export default function GradientPicker({
   maxColor: Color;
   onChange: (arg0: { minColor: Color; maxColor: Color }) => void;
 }): JSX.Element {
-  const hexMinColor = getHexFromColorSettingWithDefault(minColor);
-  const hexMaxColor = getHexFromColorSettingWithDefault(maxColor);
+  const rgbMinColor = getDefaultedRGBStringFromColor(minColor);
+  const rgbMaxColor = getDefaultedRGBStringFromColor(maxColor);
 
   const drawGradient = useCallback(
     (ctx, width, height) => {
       const gradient = ctx.createLinearGradient(0, 0, width, 0);
-      gradient.addColorStop(0, hexMinColor);
-      gradient.addColorStop(1, hexMaxColor);
+      gradient.addColorStop(0, rgbMinColor);
+      gradient.addColorStop(1, rgbMaxColor);
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
     },
-    [hexMaxColor, hexMinColor],
+    [rgbMaxColor, rgbMinColor],
   );
 
   return (

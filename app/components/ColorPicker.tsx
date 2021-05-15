@@ -23,11 +23,6 @@ import {
 import { useRef, useState } from "react";
 import { Color } from "regl-worldview";
 
-export function getHexFromColorSettingWithDefault(color?: Color): string {
-  const rgba = getIRGBFromColor(color);
-  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
-}
-
 /*
 With the recent switch to FluentUI, Foxglove has two Color interfaces in use -
 FluentUI's IColor, and the Color interface in regl-worldview used pervasively in
@@ -59,6 +54,13 @@ function getColorFromIRGB(rgba: IRGB): Color {
     b: rgba.b / 255,
     a: rgba.a ? rgba.a / 100 : 1,
   };
+}
+
+// Returns an RGB string for a regl-worldview color. The scale of the formatted
+// tuple is (255, 255, 255, 1).
+export function getDefaultedRGBStringFromColor(color?: Color): string {
+  const rgba = getIRGBFromColor(color);
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a ? rgba.a / 100 : 1})`;
 }
 
 type ColorPickerProps = {
