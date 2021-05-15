@@ -17,13 +17,11 @@ import styled from "styled-components";
 
 import AutoSizingCanvas from "@foxglove/studio-base/components/AutoSizingCanvas";
 import ColorPickerButtonCallout, {
-  PICKER_SIZE,
   getHexFromColorSettingWithDefault,
 } from "@foxglove/studio-base/components/ColorPicker";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 
-const COLOR_PICKER_SIZE = PICKER_SIZE.NORMAL.size;
-const GRADIENT_BAR_INSET = Math.floor(COLOR_PICKER_SIZE / 2);
+const GRADIENT_BAR_INSET = 12;
 const GRADIENT_BAR_HEIGHT = 10;
 const GRADIENT_LINE_HEIGHT = 6;
 

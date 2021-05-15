@@ -23,17 +23,10 @@ import {
 import { useRef, useState } from "react";
 import { Color } from "regl-worldview";
 
-export const PICKER_SIZE = {
-  NORMAL: { name: "NORMAL", size: 24 },
-  SMALL: { name: "SMALL", size: 16 },
-};
-
 export function getHexFromColorSettingWithDefault(color?: Color): string {
   const rgba = getIRGBFromColor(color);
   return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 }
-
-export type Size = keyof typeof PICKER_SIZE;
 
 /*
 With the recent switch to FluentUI, Foxglove has two Color interfaces in use -
@@ -45,14 +38,14 @@ functions here, and why we export a custom ColorPicker.
 
 const DEFAULT_RGBA = { r: 255, g: 255, b: 255, a: 100 };
 
-// convert our internal Color type to Fluent's IRGB.
+// Convert our internal Color type to Fluent's IRGB.
 function getIRGBFromColor(color?: Color): IRGB {
   return color
     ? { r: 255 * color.r, g: 255 * color.g, b: 255 * color.b, a: 100 * color.a }
     : DEFAULT_RGBA;
 }
 
-// get a Fluent IColor from a regl-worldview color
+// Get a Fluent IColor from a regl-worldview color
 function getIColorFromColor(color?: Color): IColor {
   return getColorFromRGBA(getIRGBFromColor(color));
 }

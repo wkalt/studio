@@ -17,10 +17,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
-import {
-  getHexFromColorSettingWithDefault,
-  PICKER_SIZE,
-} from "@foxglove/studio-base/components/ColorPicker";
+import { getHexFromColorSettingWithDefault } from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
 import KeyboardShortcut from "@foxglove/studio-base/components/KeyboardShortcut";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
@@ -35,10 +32,10 @@ import { OnNamespaceOverrideColorChange, SetEditingNamespace } from "./types";
 
 const DISABLED_STYLE = { cursor: "not-allowed", color: colors.TEXT_MUTED };
 const ICON_SIZE = 18; // The width of the small icon.
-const COLOR_PIKCER_ICON_SPACING = 4;
+const COLOR_PICKER_ICON_SPACING = 4;
 export const DOT_MENU_WIDTH = ICON_SIZE; // The width of the small icon.
-const COLOR_PICKER_SIZE = PICKER_SIZE.SMALL.size;
-const COLOR_PICKER_AND_ICON_WIDTH = COLOR_PICKER_SIZE + ICON_SIZE + COLOR_PIKCER_ICON_SPACING;
+const COLOR_PICKER_SIZE = 16; // The width of a small color picker
+const COLOR_PICKER_AND_ICON_WIDTH = COLOR_PICKER_SIZE + ICON_SIZE + COLOR_PICKER_ICON_SPACING;
 
 const SItemContent = styled.div`
   display: flex;
@@ -54,9 +51,9 @@ const SColorTrigger = styled.span<any>`
   display: inline-block;
   cursor: pointer;
   background: ${({ hexColor }) => hexColor};
-  width: ${PICKER_SIZE.SMALL.size}px;
-  height: ${PICKER_SIZE.SMALL.size}px;
-  border-radius: ${PICKER_SIZE.SMALL.size / 2}px;
+  width: ${COLOR_PICKER_SIZE}px;
+  height: ${COLOR_PICKER_SIZE}px;
+  border-radius: ${COLOR_PICKER_SIZE / 2}px;
 `;
 
 type Props = {
@@ -76,7 +73,7 @@ type Props = {
 
 const overrideColorChangedIconStyle = {
   color: colors.HIGHLIGHT,
-  marginLeft: COLOR_PIKCER_ICON_SPACING,
+  marginLeft: COLOR_PICKER_ICON_SPACING,
   height: ROW_HEIGHT,
   display: "inline-flex",
   alignItems: "center",

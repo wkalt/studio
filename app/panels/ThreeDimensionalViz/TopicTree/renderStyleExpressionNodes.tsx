@@ -20,7 +20,6 @@ import styled from "styled-components";
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
 import {
   FGColorPicker,
-  PICKER_SIZE,
   getHexFromColorSettingWithDefault,
 } from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
@@ -107,9 +106,9 @@ const SColorTrigger = styled.span<any>`
   display: inline-block;
   cursor: pointer;
   background: ${({ hexColor }) => hexColor};
-  width: ${PICKER_SIZE.SMALL.size}px;
-  height: ${PICKER_SIZE.SMALL.size}px;
-  border-radius: ${PICKER_SIZE.SMALL.size / 2}px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
 `;
 
 function StyleExpressionNode(props: any) {
