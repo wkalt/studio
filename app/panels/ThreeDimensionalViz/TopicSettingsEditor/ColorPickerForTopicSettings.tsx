@@ -16,55 +16,80 @@ import {
   DefaultButton,
   DirectionalHint,
   IColor,
+  IRGB,
   ColorPicker,
   getColorFromRGBA,
 } from "@fluentui/react";
 import { useRef, useState } from "react";
 import { Color } from "regl-worldview";
-import tinyColor from "tinycolor2";
 
 export const PICKER_SIZE = {
   NORMAL: { name: "NORMAL", size: 24 },
   SMALL: { name: "SMALL", size: 16 },
 };
 
-export type Size = keyof typeof PICKER_SIZE;
-
-// todo remove with retirement of ColorPickerSettingsPanel
-const DEFAULT_OVERRIDE_COLOR = "rgba(255,255,255,1)";
-
-const DEFAULT_COLOR = { r: 255, g: 255, b: 255, a: 100 };
-
 export function getHexFromColorSettingWithDefault(color?: Color): string {
-  return color ? tinyColor.fromRatio(color).toRgbString() : DEFAULT_OVERRIDE_COLOR;
+  const rgba = getIRGBFromColor(color);
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 }
 
-type Props = {
+export type Size = keyof typeof PICKER_SIZE;
+
+/*
+With the recent switch to FluentUI, Foxglove has two Color interfaces in use -
+FluentUI's IColor, and the Color interface in regl-worldview used pervasively in
+preexisting code. Fluent's IRGB works on a (255, 255, 255, 100) scale while
+regl-worldview's works on (1, 1, 1, 1). This is why we need some conversion
+functions here, and why we export a custom ColorPicker.
+*/
+
+const DEFAULT_RGBA = { r: 255, g: 255, b: 255, a: 100 };
+
+// convert our internal Color type to Fluent's IRGB.
+function getIRGBFromColor(color?: Color): IRGB {
+  return color
+    ? { r: 255 * color.r, g: 255 * color.g, b: 255 * color.b, a: 100 * color.a }
+    : DEFAULT_RGBA;
+}
+
+// get a Fluent IColor from a regl-worldview color
+function getIColorFromColor(color?: Color): IColor {
+  return getColorFromRGBA(getIRGBFromColor(color));
+}
+
+// Translate a fluentui IRGB to our internal Color interface, defaulting the
+// alpha value to 1 if it is not present.
+function getColorFromIRGB(rgba: IRGB): Color {
+  return {
+    r: rgba.r / 255,
+    g: rgba.g / 255,
+    b: rgba.b / 255,
+    a: rgba.a ? rgba.a / 100 : 1,
+  };
+}
+
+type ColorPickerProps = {
   color?: Color;
   onChange: (newColor: Color) => void;
 };
 
-// Translate our regl Color to a fluentUI color.
-export function getFluentUIColorFromColor(color?: Color): IColor {
-  const defaultedColor = color
-    ? { r: 255 * color.r, g: 255 * color.g, b: 255 * color.b, a: 100 * color.a }
-    : DEFAULT_COLOR;
-  return getColorFromRGBA(defaultedColor);
+// Returns a FluentUI ColorPicker that accepts our regl-worldview Color type.
+export function FGColorPicker({ color, onChange }: ColorPickerProps): JSX.Element {
+  return (
+    <ColorPicker
+      color={getIColorFromColor(color)}
+      alphaType="none"
+      onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
+    />
+  );
 }
 
-// Translate a fluentui IColor implementation to our internal Color interface,
-// defaulting the alpha value to 1 if it is not present.
-export function getColorFromFluentUIColor(color: IColor): Color {
-  return {
-    r: color.r / 255,
-    g: color.g / 255,
-    b: color.b / 255,
-    a: color.a ? color.a / 100 : 1,
-  };
-}
-
-export default function ColorPickerForTopicSettings({ color, onChange }: Props): JSX.Element {
-  const fluentColor = getFluentUIColorFromColor(color);
+// Returns a button that pops out an FGColorPicker in a fluent callout.
+export default function ColorPickerForTopicSettings({
+  color,
+  onChange,
+}: ColorPickerProps): JSX.Element {
+  const fluentColor = getIColorFromColor(color);
   const colorButtonRef = useRef<HTMLElement>(ReactNull);
   const [colorPickerShown, setColorPickerShown] = useState(false);
 
@@ -89,15 +114,5 @@ export default function ColorPickerForTopicSettings({ color, onChange }: Props):
         </Callout>
       )}
     </div>
-  );
-}
-
-export function FGColorPicker({ color, onChange }: Props): JSX.Element {
-  return (
-    <ColorPicker
-      color={getFluentUIColorFromColor(color)}
-      alphaType="none"
-      onChange={(_event, newValue) => onChange(getColorFromFluentUIColor(newValue))}
-    />
   );
 }
