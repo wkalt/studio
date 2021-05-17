@@ -14,6 +14,7 @@
 import { Callout, DefaultButton, DirectionalHint } from "@fluentui/react";
 import { useRef, useState } from "react";
 import { Color } from "regl-worldview";
+import styled from "styled-components";
 
 import ColorPicker from "@foxglove/studio-base/components/ColorPicker/index";
 import { getIColorFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
@@ -23,6 +24,17 @@ type Props = {
   onChange: (newColor: Color) => void;
 };
 
+const SWrapper = styled.span<any>`
+  .color-picker-trigger {
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+  }
+`;
+
 // Returns a button that pops out an ColorPicker in a fluent callout.
 export default function ColorPickerButtonCallout({ color, onChange }: Props): JSX.Element {
   const fluentColor = getIColorFromColor(color);
@@ -30,25 +42,27 @@ export default function ColorPickerButtonCallout({ color, onChange }: Props): JS
   const [colorPickerShown, setColorPickerShown] = useState(false);
 
   return (
-    <div>
-      <DefaultButton
-        elementRef={colorButtonRef}
-        styles={{
-          root: { backgroundColor: fluentColor.str },
-          rootHovered: { backgroundColor: fluentColor.str, opacity: 0.8 },
-          rootPressed: { backgroundColor: fluentColor.str, opacity: 0.6 },
-        }}
-        onClick={() => setColorPickerShown(!colorPickerShown)}
-      />
-      {colorPickerShown && (
-        <Callout
-          directionalHint={DirectionalHint.topAutoEdge}
-          target={colorButtonRef.current}
-          onDismiss={() => setColorPickerShown(false)}
-        >
-          <ColorPicker color={color} onChange={onChange} />
-        </Callout>
-      )}
-    </div>
+    <SWrapper>
+      <div>
+        <DefaultButton
+          elementRef={colorButtonRef}
+          styles={{
+            root: { backgroundColor: fluentColor.str },
+            rootHovered: { backgroundColor: fluentColor.str, opacity: 0.8 },
+            rootPressed: { backgroundColor: fluentColor.str, opacity: 0.6 },
+          }}
+          onClick={() => setColorPickerShown(!colorPickerShown)}
+        />
+        {colorPickerShown && (
+          <Callout
+            directionalHint={DirectionalHint.topAutoEdge}
+            target={colorButtonRef.current}
+            onDismiss={() => setColorPickerShown(false)}
+          >
+            <ColorPicker color={color} onChange={onChange} />
+          </Callout>
+        )}
+      </div>
+    </SWrapper>
   );
 }

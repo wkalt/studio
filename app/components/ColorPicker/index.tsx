@@ -20,17 +20,6 @@ import {
   getIColorFromColor,
 } from "@foxglove/studio-base/components/ColorPicker/utils";
 
-const SWrapper = styled.span<any>`
-  .color-picker-trigger {
-    border: none;
-    box-shadow: none;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-  }
-`;
-
 type Props = {
   color?: Color;
   onChange: (newColor: Color) => void;
@@ -39,12 +28,10 @@ type Props = {
 // Returns a FluentUI ColorPicker that accepts our regl-worldview Color type.
 export default function ColorPicker({ color, onChange }: Props): JSX.Element {
   return (
-    <SWrapper>
-      <Picker
-        color={getIColorFromColor(color)}
-        alphaType="none"
-        onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
-      />
-    </SWrapper>
+    <Picker
+      color={getIColorFromColor(color)}
+      alphaType="none"
+      onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
+    />
   );
 }
