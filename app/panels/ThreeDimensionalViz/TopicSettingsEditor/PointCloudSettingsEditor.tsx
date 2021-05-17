@@ -15,7 +15,7 @@ import React, { useCallback } from "react";
 import { Color } from "regl-worldview";
 import styled from "styled-components";
 
-import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker/ColorPickerButtonCallout";
 import Flex from "@foxglove/studio-base/components/Flex";
 import GradientPicker from "@foxglove/studio-base/components/GradientPicker";
 import Radio from "@foxglove/studio-base/components/Radio";

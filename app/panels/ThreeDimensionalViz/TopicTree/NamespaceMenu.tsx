@@ -17,7 +17,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
-import getDefaultedRGBStringFromColor from "@foxglove/studio-base/components/ColorPicker";
+import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
 import Icon from "@foxglove/studio-base/components/Icon";
 import KeyboardShortcut from "@foxglove/studio-base/components/KeyboardShortcut";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";

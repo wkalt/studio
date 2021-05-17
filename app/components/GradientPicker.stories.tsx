@@ -37,7 +37,7 @@ function Story({
     if (!(changeMinColorAfterMount || changeMaxColorAfterMount)) {
       return;
     }
-    const [minTriggerEl, maxTriggerEl] = document.querySelectorAll(".rc-color-picker-trigger");
+    const [minTriggerEl, maxTriggerEl] = document.querySelectorAll(".color-picker-trigger");
 
     if (changeMinColorAfterMount) {
       (minTriggerEl as any).click();

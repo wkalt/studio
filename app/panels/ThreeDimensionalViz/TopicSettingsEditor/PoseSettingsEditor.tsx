@@ -15,7 +15,7 @@ import CheckboxBlankOutlineIcon from "@mdi/svg/svg/checkbox-blank-outline.svg";
 import CheckboxMarkedIcon from "@mdi/svg/svg/checkbox-marked.svg";
 import { ComponentProps } from "react";
 
-import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker/ColorPickerButtonCallout";
 import Flex from "@foxglove/studio-base/components/Flex";
 import { Color, PoseStamped } from "@foxglove/studio-base/types/Messages";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";

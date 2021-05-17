@@ -18,7 +18,7 @@ import styled from "styled-components";
 import tinyColor from "tinycolor2";
 
 import Checkbox from "@foxglove/studio-base/components/Checkbox";
-import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker/ColorPickerButtonCallout";
 import ExpandingToolbar, {
   ToolGroup,
   ToolGroupFixedSizePane,

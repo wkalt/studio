@@ -13,7 +13,7 @@
 
 import { Color } from "regl-worldview";
 
-import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPickerButtonCallout";
 import Flex from "@foxglove/studio-base/components/Flex";
 import { LaserScan } from "@foxglove/studio-base/types/Messages";
 

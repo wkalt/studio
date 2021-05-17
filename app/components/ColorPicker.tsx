@@ -22,6 +22,7 @@ import {
 } from "@fluentui/react";
 import { useRef, useState } from "react";
 import { Color } from "regl-worldview";
+import styled from "styled-components";
 
 /*
 With the recent switch to FluentUI, Foxglove has two Color interfaces in use -
@@ -32,6 +33,17 @@ functions here, and why we export a custom ColorPicker.
 */
 
 const DEFAULT_RGBA = { r: 255, g: 255, b: 255, a: 100 };
+
+const SWrapper = styled.span<any>`
+  .color-picker-trigger {
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+  }
+`;
 
 // Convert our internal Color type to Fluent's IRGB.
 function getIRGBFromColor(color?: Color): IRGB {
@@ -73,11 +85,13 @@ type ColorPickerProps = {
 // Returns a FluentUI ColorPicker that accepts our regl-worldview Color type.
 export function ColorPicker({ color, onChange }: ColorPickerProps): JSX.Element {
   return (
-    <Picker
-      color={getIColorFromColor(color)}
-      alphaType="none"
-      onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
-    />
+    <SWrapper>
+      <Picker
+        color={getIColorFromColor(color)}
+        alphaType="none"
+        onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
+      />
+    </SWrapper>
   );
 }
 

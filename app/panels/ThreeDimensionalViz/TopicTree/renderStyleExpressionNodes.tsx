@@ -18,10 +18,8 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
-import {
-  ColorPicker,
-  getDefaultedRGBStringFromColor,
-} from "@foxglove/studio-base/components/ColorPicker";
+import { ColorPicker } from "@foxglove/studio-base/components/ColorPicker";
+import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
 import Icon from "@foxglove/studio-base/components/Icon";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
 import Modal from "@foxglove/studio-base/components/Modal";

@@ -14,7 +14,7 @@
 import { Color } from "regl-worldview";
 
 import Checkbox from "@foxglove/studio-base/components/Checkbox";
-import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker/ColorPickerButtonCallout";
 import Flex from "@foxglove/studio-base/components/Flex";
 import { Marker, MarkerArray } from "@foxglove/studio-base/types/Messages";
 import { LINED_CONVEX_HULL_RENDERING_SETTING } from "@foxglove/studio-base/util/globalConstants";

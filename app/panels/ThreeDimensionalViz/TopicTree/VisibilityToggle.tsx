@@ -17,7 +17,7 @@ import { Color } from "regl-worldview";
 import styled from "styled-components";
 import tinyColor from "tinycolor2";
 
-import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker";
+import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
 import Icon from "@foxglove/studio-base/components/Icon";
 import { nonEmptyOrUndefined } from "@foxglove/studio-base/util/emptyOrUndefined";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
