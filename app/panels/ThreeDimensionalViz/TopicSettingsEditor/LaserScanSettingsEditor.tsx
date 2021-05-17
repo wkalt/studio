@@ -13,10 +13,10 @@
 
 import { Color } from "regl-worldview";
 
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
 import Flex from "@foxglove/studio-base/components/Flex";
 import { LaserScan } from "@foxglove/studio-base/types/Messages";
 
-import ColorPickerButtonCallout from "@foxglove-studio/app/components/ColorPicker";
 import CommonDecaySettings from "./CommonDecaySettings";
 import CommonPointSettings from "./CommonPointSettings";
 import { SLabel } from "./common";

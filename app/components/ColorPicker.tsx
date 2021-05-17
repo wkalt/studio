@@ -48,11 +48,12 @@ function getIColorFromColor(color?: Color): IColor {
 // Translate a fluentui IRGB to our internal Color interface, defaulting the
 // alpha value to 1 if it is not present.
 function getColorFromIRGB(rgba: IRGB): Color {
+  const alpha = rgba.a ?? 100;
   return {
     r: rgba.r / 255,
     g: rgba.g / 255,
     b: rgba.b / 255,
-    a: rgba.a ? rgba.a / 100 : 1,
+    a: alpha / 100,
   };
 }
 
@@ -60,7 +61,8 @@ function getColorFromIRGB(rgba: IRGB): Color {
 // tuple is (255, 255, 255, 1).
 export function getDefaultedRGBStringFromColor(color?: Color): string {
   const rgba = getIRGBFromColor(color);
-  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a ? rgba.a / 100 : 1})`;
+  const alpha = rgba.a ?? 100;
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${alpha / 100})`;
 }
 
 type ColorPickerProps = {

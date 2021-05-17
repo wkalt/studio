@@ -15,6 +15,7 @@ import React, { useCallback } from "react";
 import { Color } from "regl-worldview";
 import styled from "styled-components";
 
+import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker";
 import Flex from "@foxglove/studio-base/components/Flex";
 import GradientPicker from "@foxglove/studio-base/components/GradientPicker";
 import Radio from "@foxglove/studio-base/components/Radio";
@@ -25,7 +26,6 @@ import { TopicSettingsEditorProps } from "@foxglove/studio-base/panels/ThreeDime
 import { PointCloud2 } from "@foxglove/studio-base/types/Messages";
 import { isNonEmptyOrUndefined } from "@foxglove/studio-base/util/emptyOrUndefined";
 
-import ColorPickerButtonCallout from "@foxglove-studio/app/components/ColorPicker";
 import CommonDecaySettings from "./CommonDecaySettings";
 import { SLabel, SInput } from "./common";
 
@@ -152,18 +152,20 @@ export default function PointCloudSettingsEditor(
               text={colorMode.mode === "rgb" ? "rgb" : colorMode.colorField}
               value={colorMode.mode === "rgb" ? "rgb" : colorMode.colorField}
               onChange={(value) =>
-                onColorModeChange((newColorMode): ColorMode => {
-                  if (value === "rgb") {
-                    return { mode: "rgb" };
-                  }
-                  if (newColorMode && newColorMode.mode === "gradient") {
-                    return { ...newColorMode, colorField: value };
-                  }
-                  if (newColorMode && newColorMode.mode === "rainbow") {
-                    return { ...newColorMode, colorField: value };
-                  }
-                  return { mode: "rainbow", colorField: value };
-                })
+                onColorModeChange(
+                  (newColorMode): ColorMode => {
+                    if (value === "rgb") {
+                      return { mode: "rgb" };
+                    }
+                    if (newColorMode && newColorMode.mode === "gradient") {
+                      return { ...newColorMode, colorField: value };
+                    }
+                    if (newColorMode && newColorMode.mode === "rainbow") {
+                      return { ...newColorMode, colorField: value };
+                    }
+                    return { mode: "rainbow", colorField: value };
+                  },
+                )
               }
             >
               {!message

@@ -887,18 +887,20 @@ export default function Layout({
                       flexDirection: "column",
                     }}
                   >
-                    <Callout
-                      directionalHint={DirectionalHint.topAutoEdge}
-                      target={containerRef.current}
-                      onDismiss={() => setColorPickerShown(false)}
-                    >
-                      <FGColorPicker
-                        color={settingsByKey[editingNamespace.namespaceKey]?.overrideColor}
-                        onChange={(newColor) =>
-                          onNamespaceOverrideColorChange(newColor, editingNamespace.namespaceKey)
-                        }
-                      />
-                    </Callout>
+                    {colorPickerShown && (
+                      <Callout
+                        directionalHint={DirectionalHint.topAutoEdge}
+                        target={containerRef.current}
+                        onDismiss={() => setColorPickerShown(false)}
+                      >
+                        <FGColorPicker
+                          color={settingsByKey[editingNamespace.namespaceKey]?.overrideColor}
+                          onChange={(newColor) =>
+                            onNamespaceOverrideColorChange(newColor, editingNamespace.namespaceKey)
+                          }
+                        />
+                      </Callout>
+                    )}
                   </Modal>
                 </RenderToBodyComponent>
               )}
