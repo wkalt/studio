@@ -13,7 +13,6 @@
 
 import { ColorPicker as Picker } from "@fluentui/react";
 import { Color } from "regl-worldview";
-import styled from "styled-components";
 
 import {
   getColorFromIRGB,
