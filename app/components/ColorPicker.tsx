@@ -17,7 +17,7 @@ import {
   DirectionalHint,
   IColor,
   IRGB,
-  ColorPicker,
+  ColorPicker as Picker,
   getColorFromRGBA,
 } from "@fluentui/react";
 import { useRef, useState } from "react";
@@ -71,9 +71,9 @@ type ColorPickerProps = {
 };
 
 // Returns a FluentUI ColorPicker that accepts our regl-worldview Color type.
-export function FGColorPicker({ color, onChange }: ColorPickerProps): JSX.Element {
+export function ColorPicker({ color, onChange }: ColorPickerProps): JSX.Element {
   return (
-    <ColorPicker
+    <Picker
       color={getIColorFromColor(color)}
       alphaType="none"
       onChange={(_event, newValue) => onChange(getColorFromIRGB(newValue))}
@@ -81,7 +81,7 @@ export function FGColorPicker({ color, onChange }: ColorPickerProps): JSX.Elemen
   );
 }
 
-// Returns a button that pops out an FGColorPicker in a fluent callout.
+// Returns a button that pops out an ColorPicker in a fluent callout.
 export default function ColorPickerButtonCallout({
   color,
   onChange,
@@ -107,7 +107,7 @@ export default function ColorPickerButtonCallout({
           target={colorButtonRef.current}
           onDismiss={() => setColorPickerShown(false)}
         >
-          <FGColorPicker color={color} onChange={onChange} />
+          <ColorPicker color={color} onChange={onChange} />
         </Callout>
       )}
     </div>

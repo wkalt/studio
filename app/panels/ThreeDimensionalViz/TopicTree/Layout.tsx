@@ -28,7 +28,7 @@ import { Time } from "rosbag";
 import { useDebouncedCallback } from "use-debounce";
 
 import useDataSourceInfo from "@foxglove/studio-base/PanelAPI/useDataSourceInfo";
-import { FGColorPicker } from "@foxglove/studio-base/components/ColorPicker";
+import { ColorPicker } from "@foxglove/studio-base/components/ColorPicker";
 import KeyListener from "@foxglove/studio-base/components/KeyListener";
 import Modal from "@foxglove/studio-base/components/Modal";
 import PanelToolbar from "@foxglove/studio-base/components/PanelToolbar";
@@ -893,7 +893,7 @@ export default function Layout({
                         target={containerRef.current}
                         onDismiss={() => setColorPickerShown(false)}
                       >
-                        <FGColorPicker
+                        <ColorPicker
                           color={settingsByKey[editingNamespace.namespaceKey]?.overrideColor}
                           onChange={(newColor) =>
                             onNamespaceOverrideColorChange(newColor, editingNamespace.namespaceKey)

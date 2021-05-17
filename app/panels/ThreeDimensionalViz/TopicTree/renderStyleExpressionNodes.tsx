@@ -19,7 +19,7 @@ import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
 import {
-  FGColorPicker,
+  ColorPicker,
   getDefaultedRGBStringFromColor,
 } from "@foxglove/studio-base/components/ColorPicker";
 import Icon from "@foxglove/studio-base/components/Icon";
@@ -334,7 +334,7 @@ function ColorPickerOverlay({
           flexDirection: "column",
         }}
       >
-        <FGColorPicker color={color} onChange={onChangeColor} />
+        <ColorPicker color={color} onChange={onChangeColor} />
       </Modal>
     </RenderToBodyComponent>
   );
