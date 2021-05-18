@@ -16,8 +16,8 @@ import { Color } from "regl-worldview";
 import styled from "styled-components";
 
 import AutoSizingCanvas from "@foxglove/studio-base/components/AutoSizingCanvas";
-import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker";
 import ColorPickerButtonCallout from "@foxglove/studio-base/components/ColorPicker/ColorPickerButtonCallout";
+import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
 import { colors } from "@foxglove/studio-base/util/sharedStyleConstants";
 
 const GRADIENT_BAR_INSET = 12;

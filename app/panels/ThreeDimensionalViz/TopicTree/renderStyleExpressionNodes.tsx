@@ -18,7 +18,7 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import styled from "styled-components";
 
 import ChildToggle from "@foxglove/studio-base/components/ChildToggle";
-import { ColorPicker } from "@foxglove/studio-base/components/ColorPicker";
+import ColorPicker from "@foxglove/studio-base/components/ColorPicker";
 import { getDefaultedRGBStringFromColor } from "@foxglove/studio-base/components/ColorPicker/utils";
 import Icon from "@foxglove/studio-base/components/Icon";
 import Menu, { Item } from "@foxglove/studio-base/components/Menu";
@@ -260,17 +260,19 @@ function StyleExpressionNode(props: any) {
                 <span style={{ paddingRight: 8 }}>Marker color</span>
                 <SColorPickerWrapper>
                   <SColorTrigger
-                    color={getDefaultedRGBStringFromColor(colorOverridesByColumnIdx[0].color)}
+                    color={getDefaultedRGBStringFromColor(
+                      (colorOverridesByColumnIdx[0] as any).color,
+                    )}
                   />
                 </SColorPickerWrapper>
                 {/* @ts-expect-error-error fix comparison operator */}
                 {editingColorForSourceIdx === 0 && (
                   <ColorPickerOverlay
-                    color={colorOverridesByColumnIdx[0].color}
+                    color={(colorOverridesByColumnIdx[0] as any).color}
                     onChangeColor={(color) => {
                       updateSettingsForGlobalVariable(
                         name,
-                        { color, active: colorOverridesByColumnIdx[0].active },
+                        { color, active: (colorOverridesByColumnIdx[0] as any).active },
                         0,
                       );
                     }}
@@ -288,15 +290,17 @@ function StyleExpressionNode(props: any) {
                   <span style={{ paddingRight: 8 }}>Feature marker color</span>
                   <SColorPickerWrapper>
                     <SColorTrigger
-                      color={getDefaultedRGBStringFromColor(colorOverridesByColumnIdx[1].color)}
+                      color={getDefaultedRGBStringFromColor(
+                        (colorOverridesByColumnIdx[1] as any).color,
+                      )}
                     />
                   </SColorPickerWrapper>
                   {/* @ts-expect-error-error fix comparison operator */}
                   {editingColorForSourceIdx === 1 && (
                     <ColorPickerOverlay
-                      color={colorOverridesByColumnIdx[1].color}
+                      color={(colorOverridesByColumnIdx[1] as any).color}
                       onChangeColor={(color) => {
-                        const active = colorOverridesByColumnIdx[1].active;
+                        const active = (colorOverridesByColumnIdx[1] as any).active;
                         updateSettingsForGlobalVariable(name, { color, active }, 1);
                       }}
                       onRequestClose={() => setEditingColorForSourceIdx(-1 as any)}

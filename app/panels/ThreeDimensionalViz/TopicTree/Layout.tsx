@@ -28,7 +28,7 @@ import { Time } from "rosbag";
 import { useDebouncedCallback } from "use-debounce";
 
 import useDataSourceInfo from "@foxglove/studio-base/PanelAPI/useDataSourceInfo";
-import { ColorPicker } from "@foxglove/studio-base/components/ColorPicker";
+import ColorPicker from "@foxglove/studio-base/components/ColorPicker";
 import KeyListener from "@foxglove/studio-base/components/KeyListener";
 import Modal from "@foxglove/studio-base/components/Modal";
 import PanelToolbar from "@foxglove/studio-base/components/PanelToolbar";
@@ -48,6 +48,7 @@ import GridBuilder from "@foxglove/studio-base/panels/ThreeDimensionalViz/GridBu
 import {
   InteractionContextMenu,
   OBJECT_TAB_TYPE,
+  TabType,
 } from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions";
 import useLinkedGlobalVariables from "@foxglove/studio-base/panels/ThreeDimensionalViz/Interactions/useLinkedGlobalVariables";
 import styles from "@foxglove/studio-base/panels/ThreeDimensionalViz/Layout.module.scss";
@@ -236,13 +237,14 @@ export default function Layout({
     measurePoints: { start: undefined, end: undefined },
   });
   const [currentEditingTopic, setCurrentEditingTopic] = useState<Topic | undefined>(undefined);
-  const [editingNamespace, setEditingNamespace] = useState<
-    | {
-        namespaceKey: string;
-        namespaceColor?: string;
-      }
-    | undefined
-  >();
+  const [editingNamespace, setEditingNamespace] =
+    useState<
+      | {
+          namespaceKey: string;
+          namespaceColor?: string;
+        }
+      | undefined
+    >();
 
   const searchTextProps = useSearchText();
   const {
@@ -256,9 +258,8 @@ export default function Layout({
   const [_, forceUpdate] = useReducer((x: number) => x + 1, 0);
   const measuringElRef = useRef<MeasuringTool>(ReactNull);
   const [drawingTabType, setDrawingTabType] = useState<DrawingTabType | undefined>(undefined);
-  const [interactionsTabType, setInteractionsTabType] = useState<DrawingTabType | undefined>(
-    undefined,
-  );
+  const [interactionsTabType, setInteractionsTabType] =
+    useState<DrawingTabType | undefined>(undefined);
 
   const [selectionState, setSelectionState] = useState<UserSelectionState>({
     clickedObjects: [],
@@ -340,14 +341,12 @@ export default function Layout({
     [],
   );
 
-  const {
-    availableNamespacesByTopic,
-    sceneErrorsByKey: sceneErrorsByTopicKey,
-  } = useSceneBuilderAndTransformsData({
-    sceneBuilder,
-    staticallyAvailableNamespacesByTopic,
-    transforms,
-  });
+  const { availableNamespacesByTopic, sceneErrorsByKey: sceneErrorsByTopicKey } =
+    useSceneBuilderAndTransformsData({
+      sceneBuilder,
+      staticallyAvailableNamespacesByTopic,
+      transforms,
+    });
 
   // Use deep compare so that we only regenerate rootTreeNode when topics change.
   const memoizedTopics = useShallowMemo(topics);
@@ -606,11 +605,9 @@ export default function Layout({
     if (!args) {
       return;
     }
-    const {
-      drawingTabType: currentDrawingTabType,
-      handleDrawPolygons: currentHandleDrawPolygons,
-    } = callbackInputsRef.current;
-    const measuringHandler = measuringElRef.current && measuringElRef.current[eventName];
+    const { drawingTabType: currentDrawingTabType, handleDrawPolygons: currentHandleDrawPolygons } =
+      callbackInputsRef.current;
+    const measuringHandler = measuringElRef.current && (measuringElRef.current as any)[eventName];
     const measureActive = measuringElRef.current?.measureActive ?? false;
     if (measuringHandler && measureActive) {
       return measuringHandler(ev, args);
@@ -711,10 +708,8 @@ export default function Layout({
       onSetPolygons: (polygons: Polygon[]) => setPolygonBuilder(new PolygonBuilder(polygons)),
       toggleDebug: () => setDebug(!callbackInputsRef.current.debug),
       toggleCameraMode: () => {
-        const {
-          cameraState: currentCameraState,
-          saveConfig: currentSaveConfig,
-        } = callbackInputsRef.current;
+        const { cameraState: currentCameraState, saveConfig: currentSaveConfig } =
+          callbackInputsRef.current;
         currentSaveConfig({
           cameraState: { ...currentCameraState, perspective: !currentCameraState.perspective },
         });
@@ -772,11 +767,10 @@ export default function Layout({
     return handlers;
   }, [pinTopics, saveConfig, searchTextProps, toggleCameraMode]);
 
-  const markerProviders = useMemo(() => [gridBuilder, sceneBuilder, transformsBuilder], [
-    gridBuilder,
-    sceneBuilder,
-    transformsBuilder,
-  ]);
+  const markerProviders = useMemo(
+    () => [gridBuilder, sceneBuilder, transformsBuilder],
+    [gridBuilder, sceneBuilder, transformsBuilder],
+  );
 
   const cursorType = isDrawing ? "crosshair" : "";
 
@@ -931,8 +925,12 @@ export default function Layout({
               <div style={videoRecordingStyle as React.CSSProperties}>
                 <LayoutToolbar
                   cameraState={cameraState}
-                  interactionsTabType={interactionsTabType}
-                  setInteractionsTabType={setInteractionsTabType}
+                  interactionsTabType={interactionsTabType as TabType | undefined}
+                  setInteractionsTabType={
+                    setInteractionsTabType as React.Dispatch<
+                      React.SetStateAction<TabType | undefined>
+                    >
+                  }
                   debug={debug}
                   followOrientation={followOrientation}
                   followTf={followTf}
